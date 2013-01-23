@@ -1,0 +1,247 @@
+<!--{{define "main"}} <!-- -->
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Grhungary</title>
+    <link href="http://fonts.googleapis.com/css?family=Great+Vibes|Didact+Gothic&subset=latin,latin-ext"
+        rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+
+    <div id="site-header">
+      <div class="site-title">{{.Messages.NamesHeader}}</div>
+      <div style="padding-bottom: 20px; font-weight: bold">July 27th, 2013</div>
+    </div>
+
+    <canvas id="decoration-canvas"></canvas>
+
+    <div id="main-content">
+
+      <div id="nav-bar" style="display: table-cell">
+        <ul id="page-links">
+          <li data-page-id="welcome-page">welcome</li>
+          <li data-page-id="travel-page">travel</li>
+          <li data-page-id="rsvp-page">respond</li>
+          <li data-page-id="gift-registry-page">gift registry</li>
+          <li data-page-id="photo-gallery-page">photo gallery</li>
+          <li data-page-id="our-story-page">our story</li>
+          <li data-page-id="bridal-party-page">bridal party</li>
+          <li data-page-id="contact-page">contact</li>
+          <li data-page-id="calendar-page">calendar</li>
+        </ul>
+      </div>
+
+      <div id="page-container" style="display: table-cell">
+
+        <div id="welcome-page" class="page transparent" hidden>
+          <h1>welcome</h1>
+          {{.Messages.WelcomeContent}}
+        </div>
+
+        <div id="travel-page" class="page transparent" hidden>
+          <h1>travel</h1>
+          <div class="subheader">airfare</div>
+          <p>Plane ticket prices to Budapest, Hungary for the
+          summer season start around $1100 and go up from there. You can use any
+          travel websites to book your flights. For example:
+          <ul>
+            <li><a href="http://www.bing.com/travel/">www.bing.com/travel</a>
+            <li><a href="http://www.kayak.com/">www.kayak.com</a>
+            <li><a href="http://www.orbitz.com/">www.orbitz.com</a>
+            <li>and many others.
+          </ul>
+
+          <div class="subheader">weather</div>
+          <p>The weather in Hungary is very warm during the summer. Temperatures
+          range between 80-100 Fahrenheit.
+
+          <div class="subheader">directions to venue</div>
+
+          <div class="subheader">accommodation</div>
+          <p>Since the wedding ceremony and the following reception is going to
+          be at the Savoyai Mansion Hotel, we recommend that you book your rooms
+          at this hotel:
+          <a href="http://www.savoyai.hu/eng/szalloda.html">http://www.savoyai.hu/eng/szalloda.html</a>.
+          We have asked the hotel to set aside 20 rooms for our guests to
+          reserve for July 26-28:
+          <ul>
+            <li>4 single-bedded
+            <li>9 double-bedded
+            <li>3 triple-bedded
+            <li>4 four-bedded rooms
+          </ul>
+          <p>are available for you to reserve. Please mention in your reservation
+          that your stay is for the Gózon-Toscano wedding. If you’d like to stay
+          at the hotel longer or shorter than the above mentioned three nights,
+          no problem. Additional hotels in Ráckeve are:
+          <ul>
+            <li><a href="http://termalhotelrackeve.hu/en/hotel.html">http://termalhotelrackeve.hu/en/hotel.html</a>
+            <li><a href="http://wellnesshotel.hu/">http://wellnesshotel.hu/</a>
+          </ul>
+          <p>It appears that the website of this hotel is only available in
+          Hungarian and German. However, you can also access it through Trip
+          Advisor:
+          <a href="http://www.tripadvisor.co.uk/Hotel_Review-g1202839-d1218801-Reviews-Kek_Duna_Wellness_Hotel-Rackeve_Pest_County_Central_Hungary.html">http://www.tripadvisor.co.uk/Hotel_Review-g1202839-d1218801-Reviews-Kek_Duna_Wellness_Hotel-Rackeve_Pest_County_Central_Hungary.html</a>
+
+          <div class="subheader">list of attractions</div>
+          <ol>
+            <li>
+              Gellért-hegy/Gellért Hill, Libegő/Budapest Chairlift,
+              Citadella/Citadel with gorgeous views of the city.<br/>
+              <img width="300px" src="images/gellert-hill.jpg" />
+            </li>
+            <li>
+              Budai Vár/ Buda Castle (there are several museums inside of the castle)<br/>
+              <img width="300px" src="images/budai.jpg" /><br/>
+              Halászbástya/Fisherman’s Bastion<br/>
+              <img width="300px" src="images/bastion.jpg" /><br/>
+              Mátyás-templom/Matthias Church<br/>
+              <img width="300px" src="images/temple.jpg" />
+            </li>
+            <li>
+              Parlament / The House of Parliament
+              <img width="300px" src="images/parlament.jpg"/>
+            </li>
+            <li>
+              Margitsziget/Margaret Island<br/>
+              <img width="300px" src="images/margaret-island.jpg"/>
+            </li>
+            <li>
+              Andrássy út/Andrássy Avenue<br/>
+              <img width="300px" src="images/andrassy.jpg"/><br/>
+              <a href="http://www.terrorhaza.hu/en/index_2.html">Háza/House of Terror</a><br/>
+              <img width="300px" src="images/house-of-terror.jpg"/><br/>
+              Magyar Állami Operaház/Hungarian State Opera House<br/>
+              <img width="300px" src="images/opera.jpg"/>
+            </li>
+            <li>
+              Hősök tere/Heroes’ Square<br/>
+              <img width="300px" src="images/heroes-square.jpg"/><br/>
+              There is a museum near the square: <a href="http://www.mucsarnok.hu/new_site/index.php?lang=en">Mucsarnok</a>
+            </li>
+            <li>
+              Városliget/City Park<br/>
+              <img width="300px" src="images/citypark.jpg"/>
+            </li>
+            <li>
+              Széchenyi Gyógyfürdő és Uszoda/Szechenyi Bath and Spa Budapest:
+              <a href="http://www.szechenyibath.com">http://www.szechenyibath.com</a><br/>
+              <img width="300px" src="images/baths.jpg"/>
+            </li>
+          </ol>
+
+          <div class="subheader">currency</div>
+          <p>Even though Hungary is a member of the European Union, the “forint”
+          remains the official currency in Hungary.
+        </div>
+
+        <div id="rsvp-page" class="page transparent" hidden>
+          <h1>respond</h1>
+          <table>
+            <tr>
+              <td class="rsvp-field-name">
+                Contact Email<br/>
+                <span style="font-size: 10pt">(or Phonenumber)</span>
+              </td>
+              <td class="rsvp-field-value">
+                <input id="rsvp-id" type="text" placeholder="myemail@example.com"/>
+              </td>
+            </tr>
+            <tr>
+              <td class="rsvp-field-name">
+                Names of Party Members<br/>
+                <span style="font-size: 10pt">(Including yourself)</td>
+              <td class="rsvp-field-value">
+                <div id="rsvp-names">
+                  <input class="rsvp-name" type="text" placeholder="ex. Robert Toscano"/>
+                </div>
+                <button id="rsvp-add-name-button">Add Another Member</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="rsvp-field-name">Dietary Restrictions</td>
+              <td class="rsvp-field-value">
+                <textarea id="rsvp-dietary-restrictions"></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td class="rsvp-field-name">Will you be staying at the mansion hotel overnight?</td>
+              <td class="rsvp-field-value">
+                <input type="checkbox" id="rsvp-is-staying-overnight"/>
+              </td>
+            </tr>
+            <tr>
+              <td class="rsvp-field-name">
+                How many days are you planning to stay in Hungary after the wedding?
+              </td>
+              <td class="rsvp-field-value">
+                <input type="text" id="rsvp-duration-days-count" placeholder="ex. 5"/>
+              </td>
+            </tr>
+          </table>
+
+          <button
+              id="rsvp-send-button"
+              data-label-send-in-progress="Responding..."
+              data-label-send="Respond">Respond</button>
+          <!--<a style="font-size: 10pt; margin-left: 12px;" id="rsvp-secure-link" href="javascript:void(0)">
+            Want to respond securely?
+          </a>-->
+
+          <div
+              id="rsvp-info-element"
+              data-success-message="Your response has been submitted and a copy has been sent to your email address."
+              data-fail-message="There was a problem submitting your response. Please email <a href=&quot;mailto:robert@grhungary.com&quot;>Robert</a> for further instructions.">
+          </div>
+        </div>
+
+        <div id="gift-registry-page" class="page transparent" hidden>
+          <h1>gift registry</h1>
+          <p>The best gift you could give us is to come to our wedding. However,
+          if this is not feasible, you can choose to contribute to our honeymoon
+          through this website. We do not have a gift registry, since, after
+          living together for more than three years, we have everything we need
+          (and some more) in our household.
+        </div>
+
+        <div id="photo-gallery-page" class="page transparent" hidden>
+          <h1>photo gallery</h1>
+        </div>
+
+        <div id="our-story-page" class="page transparent" hidden>
+          <h1>our story</h1>
+          <iframe width="560" height="315" src="http://www.youtube.com/embed/QHaVc5i-Dzs" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div id="bridal-party-page" class="page transparent" hidden>
+          <h1>bridal party</h1>
+          Party! Party! Party! Party! Party! Party! Party! Party! Party! Party! Party!
+          Party! Party! Party! Party! Party! Party! Party! Party! Party! Party! Party!
+          Party! Party! Party! Party! Party! Party! Party! Party! Party! Party! Party!
+          Party! Party! Party! Party! Party! Party! Party! Party! Party! Party! Party!
+          Party! Party! Party! Party! Party! Party! Party! Party! Party! Party! Party!
+        </div>
+
+        <div id="contact-page" class="page transparent" hidden>
+          <h1>contact</h1>
+          Robert Toscano (415 891 9661)
+          Gyongyi Goes on (415 231 9331)
+        </div>
+        <div id="calendar-page" class="page transparent" hidden>
+          <h1>calendar</h1>
+          <img width="300px" src="http://www.ideachampions.com/weblogs/Mayan%2BCalendar%2BEnd%2BOf%2BThe%2BWorld%2B2012%2B-%2B21.12.12%2Ba.jpg"/>
+        </div>
+
+      </div>
+
+    </div>
+
+    <script type="application/dart" src="main.dart"></script>
+    <script src="packages/browser/dart.js"></script>
+  </body>
+</html>
+
+<!--{{end}}-->

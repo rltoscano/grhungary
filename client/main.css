@@ -1,0 +1,157 @@
+
+body {
+  background-color: #FFFFF0;
+  font-family: 'Didact Gothic', sans-serif;
+  font-size: 14pt;
+  font-weight: normal;
+  line-height: 1.2em;
+  padding: 0;
+  margin: 0;
+  color: #727272;
+  overflow-y: scroll;
+}
+
+#decoration-canvas {
+  position: absolute;
+  z-index: 10;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+}
+
+#nav-bar li {
+  white-space: nowrap;
+  list-style-type: none;
+  color: #727272;
+  cursor: pointer;
+}
+
+#nav-bar li:hover {
+  color: black;
+}
+
+#nav-bar li.active {
+  color: #93242B;
+}
+
+#site-header {
+  background-color: #ffffff;
+  border-top: #93242B solid 2px;
+  border-bottom: #93242B solid 2px;
+  text-align: center;
+  padding-top: 20px;
+  margin-top: 24px;
+}
+
+#main-content {
+  display: table;
+  margin: auto;
+  margin-top: 40px;
+}
+
+#nav-bar {
+  padding-right: 40px;
+}
+
+#nav-bar ul {
+  margin-top: 69px;
+  vertical-align: top;
+  line-height: 28px;
+  text-align: right;
+}
+
+.site-title {
+  color: #93242B;
+  font-family: 'Great Vibes';
+  font-size: 36pt;
+  height: 48px;
+  margin-top: 30px;
+}
+
+h1 {
+  color: #93242B;
+}
+
+.subheader {
+  font-size: 16pt;
+  font-weight: bold;
+}
+
+#page-container {
+  vertical-align: top;
+  width: 600px;
+  padding-right: 40px;
+}
+
+.page {
+  position: absolute;
+  width: 600px;
+  opacity: 1;
+  transition: opacity 500ms;
+  -moz-transition: opacity 500ms; /* Firefox 4 */
+  -webkit-transition: opacity 500ms; /* Safari and Chrome */
+  -o-transition: opacity 500ms; /* Opera */
+}
+
+.page.transparent {
+  opacity: 0;
+}
+
+.rsvp-field-name {
+  width: 200px;
+  padding-bottom: 20px;
+  vertical-align: top;
+  padding-right: 20px;
+}
+
+.rsvp-field-value {
+  vertical-align: top;
+  padding-bottom: 20px;
+}
+
+#rsvp-info-element {
+  width: 400px;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin-top: 8px;
+  opacity: 0;
+  transition: opacity 500ms;
+  -moz-transition: opacity 500ms; /* Firefox 4 */
+  -webkit-transition: opacity 500ms; /* Safari and Chrome */
+  -o-transition: opacity 500ms; /* Opera */
+}
+
+#rsvp-info-element.shown {
+  opacity: 1;
+}
+
+#rsvp-info-element.info {
+  background-color: lightGreen;
+}
+
+#rsvp-info-element.error {
+  background-color: pink;
+}
+
+input[type="text"] {
+  border: #93242B 2px solid;
+  font-family: "Didact Gothic", sans-serif;
+  font-size: 14pt;
+  padding: 2px 8px;
+  width: 188px;
+}
+
+textarea {
+  border: #93242B 2px solid;
+  font-family: "Didact Gothic", sans-serif;
+  font-size: 12pt;
+  width: 200px;
+  height: 80px;
+  margin-left: 2px;
+}
+
+button {
+  font-family: "Didact Gothic", sans-serif;
+  font-size: 12pt;
+}
