@@ -3,6 +3,3 @@ description:  A sample application
 
 dependencies:
   browser: any
-  intl: any
-#  js: any
-#  unittest: any

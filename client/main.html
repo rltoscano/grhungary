@@ -23,14 +23,12 @@
       <div id="nav-bar" style="display: table-cell">
         <ul id="page-links">
           <li data-page-id="welcome-page">welcome</li>
+          <li data-page-id="our-story-page">our story</li>
+          <li data-page-id="photo-gallery-page">photo gallery</li>
           <li data-page-id="travel-page">travel</li>
           <li data-page-id="rsvp-page">respond</li>
           <li data-page-id="gift-registry-page">gift registry</li>
-          <li data-page-id="photo-gallery-page">photo gallery</li>
-          <li data-page-id="our-story-page">our story</li>
-          <li data-page-id="bridal-party-page">bridal party</li>
           <li data-page-id="contact-page">contact</li>
-          <li data-page-id="calendar-page">calendar</li>
         </ul>
       </div>
 
@@ -39,6 +37,109 @@
         <div id="welcome-page" class="page transparent" hidden>
           <h1>welcome</h1>
           {{.Messages.WelcomeContent}}
+        </div>
+        
+        <script type="application/dart" src="main.dart"></script>
+        <script src="packages/browser/dart.js"></script>
+
+        <div id="our-story-page" class="page transparent" hidden>
+          <h1>our story</h1>
+          <iframe width="560" height="315" src="http://www.youtube.com/embed/QHaVc5i-Dzs" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div id="photo-gallery-page" class="page transparent" hidden>
+          <h1>photo gallery</h1>
+          <div>
+            <div style="display: inline-block"><img src="images/01.jpg" width="271px"/></div>
+            <div style="display: inline-block">
+              <img src="images/02.jpg" width="157px" />
+              <img src="images/03.jpg" width="158px" />
+              <br/>
+              <img src="images/04.jpg" width="76px" />
+              <img src="images/05.jpg" width="117px" />
+              <img src="images/06.jpg" width="117px" />
+            </div>
+          </div>
+          <img src="images/07.jpg" height="123px" />
+          <img src="images/09.jpg" height="123px" />
+          <img src="images/10.jpg" height="123px" />
+          <img src="images/11.jpg" height="123px" />
+          <br/>
+          <img src="images/12.jpg" height="148px" />
+          <img src="images/13.jpg" height="148px" />
+          <img src="images/14.jpg" height="148px" />
+          <br/>
+          <img src="images/15.jpg" height="129px" />
+          <img src="images/16.jpg" height="129px" />
+          <img src="images/17.jpg" height="129px" />
+          <img src="images/18.jpg" height="129px" />
+          <br/>
+          <img src="images/19.jpg" height="152px" />
+          <img src="images/20.jpg" height="152px" />
+          <img src="images/21.jpg" height="152px" />
+          <br/>
+          <img src="images/22.jpg" height="148px" />
+          <img src="images/23.jpg" height="148px" />
+          <img src="images/24.jpg" height="148px" />
+          <br/>
+          <img src="images/25.jpg" height="132px" />
+          <img src="images/26.jpg" height="132px" />
+          <img src="images/27.jpg" height="132px" />
+          <br/>
+          <img src="images/28.jpg" height="148px" />
+          <img src="images/29.jpg" height="148px" />
+          <img src="images/30.jpg" height="148px" />
+          <br/>
+          <img src="images/31.jpg" height="141px" />
+          <img src="images/32.jpg" height="141px" />
+          <img src="images/33.jpg" height="141px" />
+          <img src="images/34.jpg" height="141px" />
+          <br/>
+          <img src="images/35.jpg" height="148px" />
+          <img src="images/36.jpg" height="148px" />
+          <img src="images/37.jpg" height="148px" />
+          <br/>
+          <img src="images/38.jpg" height="148px" />
+          <img src="images/39.jpg" height="148px" />
+          <img src="images/40.jpg" height="148px" />
+          <br/>
+          <img src="images/41.jpg" height="151px" />
+          <img src="images/42.jpg" height="151px" />
+          <img src="images/43.jpg" height="151px" />
+          <img src="images/44.jpg" height="151px" />
+          <br/>
+          <img src="images/45.jpg" height="148px" />
+          <img src="images/46.jpg" height="148px" />
+          <img src="images/47.jpg" height="148px" />
+          <br/>
+          <img src="images/48.jpg" height="147px" />
+          <img src="images/49.jpg" height="147px" />
+          <img src="images/50.jpg" height="147px" />
+          <img src="images/51.jpg" height="147px" />
+          <br/>
+          <img src="images/52.jpg" height="127px" />
+          <img src="images/53.jpg" height="127px" />
+          <img src="images/54.jpg" height="127px" />
+          <img src="images/55.jpg" height="127px" />
+          <br/>
+          <img src="images/56.jpg" height="123px" />
+          <img src="images/57.jpg" height="123px" />
+          <img src="images/58.jpg" height="123px" />
+          <img src="images/59.jpg" height="123px" />
+          <br/>
+          <img src="images/60.jpg" height="164px" />
+          <img src="images/61.jpg" height="164px" />
+          <img src="images/62.jpg" height="164px" />
+          <br/>
+          <img src="images/63.jpg" height="123px" />
+          <img src="images/64.jpg" height="123px" />
+          <img src="images/65.jpg" height="123px" />
+          <img src="images/66.jpg" height="123px" />
+          <br/>
+          <img src="images/67.jpg" height="128px" />
+          <img src="images/68.jpg" height="128px" />
+          <img src="images/69.jpg" height="128px" />
+          <img src="images/70.jpg" height="128px" />
         </div>
 
         <div id="travel-page" class="page transparent" hidden>
@@ -56,7 +157,7 @@
 
           <div class="subheader">weather</div>
           <p>The weather in Hungary is very warm during the summer. Temperatures
-          range between 80-100 Fahrenheit.
+          range between 80-100°F.
 
           <div class="subheader">directions to venue</div>
 
@@ -68,10 +169,10 @@
           We have asked the hotel to set aside 20 rooms for our guests to
           reserve for July 26-28:
           <ul>
-            <li>4 single-bedded
-            <li>9 double-bedded
-            <li>3 triple-bedded
-            <li>4 four-bedded rooms
+            <li>4 single-bed
+            <li>9 double-beds
+            <li>3 triple-beds
+            <li>4 four-beds
           </ul>
           <p>are available for you to reserve. Please mention in your reservation
           that your stay is for the Gózon-Toscano wedding. If you’d like to stay
@@ -153,7 +254,7 @@
             <tr>
               <td class="rsvp-field-name">
                 Names of Party Members<br/>
-                <span style="font-size: 10pt">(Including yourself)</td>
+                <span style="font-size: 10pt">(Including yourself)</span></td>
               <td class="rsvp-field-value">
                 <div id="rsvp-names">
                   <input class="rsvp-name" type="text" placeholder="ex. Robert Toscano"/>
@@ -205,42 +306,65 @@
           through this website. We do not have a gift registry, since, after
           living together for more than three years, we have everything we need
           (and some more) in our household.
-        </div>
+          
+          <p>We have chosen the beautiful Greek island, Kefalonia, as our
+          honeymoon destination. Kefalonia is the most westerly island of
+          Greece, lies in the Ionian Sea, in the channel leading into the Gulf
+          of Patras. With its circa 780 square kilometres, the island is the
+          largest of the Eptanissos (the Seven Islands). Turquoise seas, lush
+          green vegetation, wild and sheer mountain scenery and a fascinating
+          variegated geological profile have given Kefalonia a special
+          atmosphere and beauty. Broad sandy beaches, small coves, and steep
+          cliffs, steppe-like plains, fertile valleys, dense black forests of
+          fir, a unique complex of caves and the highest mountain in the Ionian
+          Islands, Mount. Aenos, standing at 1628 meters, are the most striking
+          features of the island. Kefalonia is characterized by the creative
+          forces of nature and three thousand years of cultural history.
 
-        <div id="photo-gallery-page" class="page transparent" hidden>
-          <h1>photo gallery</h1>
-        </div>
-
-        <div id="our-story-page" class="page transparent" hidden>
-          <h1>our story</h1>
-          <iframe width="560" height="315" src="http://www.youtube.com/embed/QHaVc5i-Dzs" frameborder="0" allowfullscreen></iframe>
-        </div>
-
-        <div id="bridal-party-page" class="page transparent" hidden>
-          <h1>bridal party</h1>
-          Party! Party! Party! Party! Party! Party! Party! Party! Party! Party! Party!
-          Party! Party! Party! Party! Party! Party! Party! Party! Party! Party! Party!
-          Party! Party! Party! Party! Party! Party! Party! Party! Party! Party! Party!
-          Party! Party! Party! Party! Party! Party! Party! Party! Party! Party! Party!
-          Party! Party! Party! Party! Party! Party! Party! Party! Party! Party! Party!
+          <p>We have been fortunate enough to travel to many beautiful places in
+          the world, but we have never had a beach vacation. We are very excited
+          about this vacation!
+          
+          <ul>
+            <li>Airplane tickets: From Budapest to Zakynthos</li>
+            <li>Ferry tickets from Zakynthos</li>
+            <li>Accommodation: Dionysos Village Resort Double blablabla suit
+                $1000 for 7 nights.</li>
+            <li>See Kayaking: 60 euros/person</li>
+            <li>Hiking Tour</li>
+            <li>Private Beach Access</li>
+            <li>Car rental: 240 euros for 7 days</li>
+          </ul>
+          
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="38XY6UKN22Z4E">
+            <button type="submit" name="submit" alt="PayPal - The safer, easier way to pay online!">Donate</button>
+          </form>
         </div>
 
         <div id="contact-page" class="page transparent" hidden>
           <h1>contact</h1>
-          Robert Toscano (415 891 9661)
-          Gyongyi Goes on (415 231 9331)
-        </div>
-        <div id="calendar-page" class="page transparent" hidden>
-          <h1>calendar</h1>
-          <img width="300px" src="http://www.ideachampions.com/weblogs/Mayan%2BCalendar%2BEnd%2BOf%2BThe%2BWorld%2B2012%2B-%2B21.12.12%2Ba.jpg"/>
+          <table>
+            <tr>
+              <td>Email</td>
+              <td><a href="mailto:contact@grhungary.com">contact@grhungary.com</a></td>
+            </tr>
+            <tr>
+              <td>Robert</td>
+              <td>415 891 9661</td>
+            </tr>
+            <tr>
+              <td>Gyöngyi</td>
+              <td>415 231 9331</td>
+            </tr>
+          </table>
         </div>
 
       </div>
 
     </div>
 
-    <script type="application/dart" src="main.dart"></script>
-    <script src="packages/browser/dart.js"></script>
   </body>
 </html>
 

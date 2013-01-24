@@ -3,7 +3,6 @@ library grhungary;
 import 'dart:html';
 import "dart:math";
 import 'dart:json';
-import 'packages/intl/intl.dart';
 
 part "decoration.dart";
 
