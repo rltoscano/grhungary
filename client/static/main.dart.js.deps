@@ -71,5 +71,8 @@ file:///home/robert/dev/dart/dart-sdk/lib/math/math.dart
 file:///home/robert/dev/dart/dart-sdk/lib/math/random.dart
 file:///home/robert/dev/dart/dart-sdk/lib/svg/dart2js/svg_dart2js.dart
 file:///home/robert/dev/dart/dart-sdk/lib/web_audio/dart2js/web_audio_dart2js.dart
-file:///home/robert/dev/grhungary/client/decoration.dart
-file:///home/robert/dev/grhungary/client/main.dart
+file:///home/robert/dev/grhungary/client/static/decoration.dart
+file:///home/robert/dev/grhungary/client/static/main.dart
+file:///home/robert/dev/grhungary/client/static/main_widget.dart
+file:///home/robert/dev/grhungary/client/static/photo_gallery_widget.dart
+file:///home/robert/dev/grhungary/client/static/rsvp_widget.dart

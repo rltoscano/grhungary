@@ -4,5 +4,19 @@ runtime: go
 api_version: go1
 
 handlers:
+- url: /client/static/
+  static_dir: client/static
 - url: /.*
   script: _go_app
+
+skip_files:
+- ^(.*/)?app\.yaml
+- ^(.*/)?app\.yml
+- ^(.*/)?index\.yaml
+- ^(.*/)?index\.yml
+- ^(.*/)?#.*#
+- ^(.*/)?.*~
+- ^(.*/)?.*\.py[co]
+- ^(.*/)?.*/RCS/.*
+- ^(.*/)?\..*
+- ^client/static/pubspec\..+

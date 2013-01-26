@@ -4,9 +4,8 @@ import (
   "appengine"
   "appengine/datastore"
   "appengine/mail"
-  "appengine/user"
+  "bytes"
   "encoding/json"
-  "fmt"
   "io/ioutil"
   "net/http"
   "regexp"
@@ -16,17 +15,13 @@ import (
 )
 
 var Messages = make(map[string]map[string]string)
+var EMAIL_REGEXP = "^[\\w\\.=-_]+@[\\w\\.-_]+\\.[\\w]{2,4}$"
 
 func init() {
   http.Handle(
-      "/",
-      http.RedirectHandler("/client/main.html", http.StatusMovedPermanently))
-  http.HandleFunc("/api/rsvp/upsert", handleApiRsvpUpsert);
-  http.HandleFunc("/client/main.html", handleClientMain)
-  http.HandleFunc("/client/login.html", handleClientLogin)
-  http.Handle(
-      "/client/",
-      http.StripPrefix("/client/", http.FileServer(http.Dir("client"))))
+      "/", http.RedirectHandler("/client/main", http.StatusMovedPermanently))
+  http.HandleFunc("/api/rsvp/create", handleApiRsvpCreate);
+  http.HandleFunc("/client/main", handleClientMain)
       
   messagesByIdBytes, err := ioutil.ReadFile("messages.json")
   if err != nil {
@@ -60,7 +55,12 @@ type Rsvp struct {
   Timestamp time.Time
 }
 
-func handleApiRsvpUpsert(w http.ResponseWriter, r *http.Request) {  
+type EmailBody struct {
+  Rsvp Rsvp
+  Messages map[string]string
+}
+
+func handleApiRsvpCreate(w http.ResponseWriter, r *http.Request) {  
   c := appengine.NewContext(r)
   
   buffer := make([]byte, r.ContentLength)
@@ -77,48 +77,36 @@ func handleApiRsvpUpsert(w http.ResponseWriter, r *http.Request) {
   c.Infof("Received RSVP")
   
   rsvp.Timestamp = time.Now()
-  _, err = datastore.Put(c, datastore.NewIncompleteKey(c, "Rsvp", nil), &rsvp)
-  if err != nil {
+  rsvpKey := datastore.NewIncompleteKey(c, "Rsvp", nil)
+  if _, err = datastore.Put(c, rsvpKey, &rsvp); err != nil {
     http.Error(w, err.Error(), http.StatusInternalServerError)
     return
   }
   c.Infof("Stored RSVP for %s", rsvp.Id)
   
-  if ok, _ := regexp.MatchString("^[\\w\\.=-_]+@[\\w\\.-_]+\\.[\\w]{2,4}$", rsvp.Id); ok {
+  if ok, _ := regexp.MatchString(EMAIL_REGEXP, rsvp.Id); ok {
+      localeMap := GetLocaleMap(r)
   
-	  partyMembers := ""
-	  for idx := range rsvp.PartyMembers {
-	    partyMembers += "<li>" + rsvp.PartyMembers[idx]
+	  var tpl *template.Template
+	  if tpl, err = template.ParseFiles("rsvp-email.html"); err != nil {
+	    http.Error(w, err.Error(), http.StatusInternalServerError)
+	    c.Errorf("Couldn't parse email template.", err.Error())
+	    return
 	  }
-	  
-	  body := fmt.Sprintf(`
-	      <p>Thank you for responding to our invitation!
-	      <p>Here's what we got:</p>
-	      <p>
-	        <b>Party Members</b>
-	        <ul>%s</ul>
-	      </p>
-	      <p>
-	        <b>Dietary Restrictions</b><br/>
-	        %s
-	      </p>
-	      <p>
-	        <b>Staying overnight at Mansion Hotel</b>: %t
-	      </p>
-	      <p>
-	        <b>Number of days staying after wedding</b>: %s
-	      </p>`,
-	      partyMembers,
-	      rsvp.DietaryRestrictions,
-	      rsvp.IsStayingOvernight,
-	      rsvp.DurationDaysCount)
+	  emailBodyBuf := bytes.Buffer{}
+	  tpl.ExecuteTemplate(&emailBodyBuf, "rsvp-email-body", EmailBody{
+	    Messages: localeMap,
+	    Rsvp: rsvp,
+	  })
+	  emailSubjectBuf := bytes.Buffer{}
+	  tpl.ExecuteTemplate(&emailSubjectBuf, "rsvp-email-subject", localeMap)
 	  
 	  msg := mail.Message{
 	    Sender: "Gyöngyi & Robert <contact@grhungary.com>",
 	    ReplyTo: "contact@grhungary.com",
 	    To: []string{rsvp.Id},
-	    Subject: "Wedding Response Received",
-	    HTMLBody: body,
+	    Subject: emailSubjectBuf.String(),
+	    HTMLBody: emailBodyBuf.String(),
 	  }
 	  if err = mail.Send(c, &msg); err != nil {
 	    c.Errorf("Couldn't send mail to %s: %s", rsvp.Id, err.Error());
@@ -127,7 +115,9 @@ func handleApiRsvpUpsert(w http.ResponseWriter, r *http.Request) {
 	  }
 	  
 	  msg.To = []string{"contact@grhungary.com"}
-	  mail.Send(c, &msg)
+	  if err = mail.Send(c, &msg); err != nil {
+	    c.Errorf("Failed to send duplicate mail to admins");
+	  }
 	  
 	  c.Infof("Sent mail to %s", rsvp.Id);
   }
@@ -137,39 +127,7 @@ func handleApiRsvpUpsert(w http.ResponseWriter, r *http.Request) {
   encoder.Encode(rsvp)
 }
 
-func GetRsvp(c appengine.Context, userId string) (
-    rsvp *Rsvp, rsvpKey *datastore.Key, err error) {
-  guestPartyKey := datastore.NewKey(c, "GuestParty", userId, 0, nil)
-  query := datastore.NewQuery("Rsvp").Ancestor(guestPartyKey).Limit(1)
-  count, err := query.Count(c)
-  if err != nil || count == 0 {
-    return
-  }
-  it := query.Run(c)
-  rsvp = new(Rsvp)
-  rsvpKey, err = it.Next(rsvp)
-  return
-}
-
-func GetUserIdAndEmail(c appengine.Context, r *http.Request) (
-    userId string, userEmail string) {
-  u := user.Current(c)
-  if u != nil {
-    userId = u.ID
-    userEmail = u.Email
-  } else if emailCookie, _ := r.Cookie("email"); emailCookie != nil {
-    userId = emailCookie.Value
-    userEmail = emailCookie.Value
-  }
-  return
-}
-
 type MainData struct {
-  Messages map[string]string
-}
-
-type LoginData struct {
-  LoginUrl string
   Messages map[string]string
 }
 
@@ -178,22 +136,8 @@ func handleClientMain(w http.ResponseWriter, r *http.Request) {
   mainData := MainData{
     Messages: GetLocaleMap(r),
   }
-  
   tpl, _ := template.ParseFiles("client/main.html")
   tpl.ExecuteTemplate(w, "main", mainData)
-}
-
-func handleClientLogin(w http.ResponseWriter, r *http.Request) {
-  w.Header().Set("Content-type", "text/html; charset=utf-8")
-  c := appengine.NewContext(r)
-  userId, _ := GetUserIdAndEmail(c, r)
-  if userId != "" {
-    http.Redirect(w, r, "/client/main.html", http.StatusFound)
-    return
-  }
-  url, _ := user.LoginURL(c, "/")
-  tpl, _ := template.ParseFiles("client/login.html")
-  tpl.ExecuteTemplate(w, "login", LoginData{LoginUrl: url})
 }
 
 func GetLocaleMap(r *http.Request) map[string]string {

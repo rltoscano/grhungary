@@ -41,5 +41,41 @@
   "Calendar": {
     "en_US": "calendar",
     "hu": "calendar"
+  },
+  "EmailSubject": {
+    "en_US": "Wedding Response Received",
+    "hu": "Visszajelzés Kézbesítve"
+  },
+  "EmailHeader": {
+    "en_US": "Thank you for responding to our invitation!",
+    "hu": "Thank you for responding to our invitation!"
+  },
+  "WhatWeveGot": {
+    "en_US": "Here's what we've got",
+    "hu": "Here's what we've got"
+  },
+  "PartyMembers": {
+    "en_US": "Party Members",
+    "hu": "Party Members"
+  },
+  "DietaryRestrictions": {
+    "en_US": "Dietary Restrictions",
+    "hu": "Dietary Restrictions"
+  },
+  "EmailStayingOvernight": {
+    "en_US": "Staying overnight at the Mansion Hotel",
+    "hu": "Staying overnight at the Mansion Hotel"
+  },
+  "Yes": {
+    "en_US": "Yes",
+    "hu": "Igen"
+  },
+  "No": {
+    "en_US": "No",
+    "hu": "Nem"
+  },
+  "NumDaysStaying": {
+    "en_US": "Number of days staying after the wedding",
+    "hu": "Number of days staying after the wedding"
   }
 }

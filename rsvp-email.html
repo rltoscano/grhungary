@@ -1,0 +1,28 @@
+{{define "rsvp-email-body"}}
+  <p>{{.Messages.EmailHeader}}</p>
+  <p>{{.Messages.WhatWeveGot}}:</p>
+  <p>
+    <b>{{.Messages.PartyMembers}}</b>
+    <ul>
+    {{range .Rsvp.PartyMembers}}
+      <li>{{js html .}}</li>
+    {{end}}
+    </ul>
+  </p>
+  <p>
+    <b>{{.Messages.DietaryRestrictions}}</b><br/>
+    {{js html .Rsvp.DietaryRestrictions}}
+  </p>
+  <p>
+    <b>{{.Messages.EmailStayingOvernight}}</b>:
+    {{if .Rsvp.IsStayingOvernight}}{{.Messages.Yes}}{{else}}{{.Messages.No}}{{end}}
+  </p>
+  <p>
+    <b>{{.Messages.NumDaysStaying}}</b>:
+    {{js html .Rsvp.DurationDaysCount}}
+  </p>
+{{end}}
+
+{{define "rsvp-email-subject"}}
+{{.EmailSubject}}
+{{end}}
