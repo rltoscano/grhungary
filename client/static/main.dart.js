@@ -2039,6 +2039,9 @@ $$.Object = {"": ";",
   get$parent: function() {
     return this.noSuchMethod$1($.createInvocationMirror("parent", "get$parent", 1, [], []));
   },
+  get$_onInfoElTransitionEnd: function() {
+    return this.noSuchMethod$1($.createInvocationMirror("_onInfoElTransitionEnd", "get$_onInfoElTransitionEnd", 1, [], []));
+  },
   get$value: function() {
     return this.noSuchMethod$1($.createInvocationMirror("value", "get$value", 1, [], []));
   },
@@ -2050,6 +2053,9 @@ $$.Object = {"": ";",
   },
   get$isMethod: function() {
     return this.noSuchMethod$1($.createInvocationMirror("isMethod", "get$isMethod", 1, [], []));
+  },
+  get$_infoEl: function() {
+    return this.noSuchMethod$1($.createInvocationMirror("_infoEl", "get$_infoEl", 1, [], []));
   },
   get$status: function() {
     return this.noSuchMethod$1($.createInvocationMirror("status", "get$status", 1, [], []));
@@ -2815,7 +2821,7 @@ $$.NonExtensibleListMixin = {"": "Iterable;",
     while (true) {
       t2 = t1.get$length(this);
       if (typeof t2 !== "number")
-        return this.indexOf$2$bailout(2, value, t2, i);
+        return this.indexOf$2$bailout(2, i, value, t2);
       if (!(i < t2))
         break;
       if ($.eqB(this.operator$index$1(i), value))
@@ -2831,9 +2837,9 @@ $$.NonExtensibleListMixin = {"": "Iterable;",
         value = env0;
         break;
       case 2:
-        i = env2;
-        t2 = env1;
-        value = env0;
+        t2 = env2;
+        value = env1;
+        i = env0;
         break;
     }
     switch (state0) {
@@ -4837,7 +4843,7 @@ $$.RsvpInsertRequest = {"": "Object;id=,partyMembers>,dietaryRestrictions,isStay
   }
 };
 
-$$.RsvpWidget = {"": "Object;_reqInProgress",
+$$.RsvpWidget = {"": "Object;_reqInProgress,_infoEl>",
   decorate$0: function() {
     var t1, t2;
     t1 = document.query$1("#rsvp-send-button").get$on().get$click();
@@ -4846,19 +4852,24 @@ $$.RsvpWidget = {"": "Object;_reqInProgress",
     t2 = document.query$1("#rsvp-add-name-button").get$on().get$click();
     t1 = this.get$_onAddNameClick();
     $.getInterceptor$JSArray(t2).add$1(t2, t1);
+    this._infoEl = document.query$1("#rsvp-info-element");
+    t1 = this._infoEl.get$on().get$transitionEnd();
+    t2 = this.get$_onInfoElTransitionEnd();
+    $.getInterceptor$JSArray(t1).add$1(t1, t2);
   },
   _showMessage$2: function(type, msg) {
-    var infoEl, t1;
-    infoEl = document.query$1("#rsvp-info-element");
-    infoEl.set$innerHtml(msg);
-    t1 = infoEl.get$classes();
-    $.getInterceptor$JSArray(t1).clear$0(t1);
-    t1 = infoEl.get$classes();
+    var t1;
+    this._infoEl.set$innerHtml(msg);
+    t1 = this._infoEl.get$classes();
+    $.getInterceptor$JSArray(t1).remove$1(t1, "info");
+    t1 = this._infoEl.get$classes();
+    $.getInterceptor$JSArray(t1).remove$1(t1, "error");
+    t1 = this._infoEl.get$classes();
     $.getInterceptor$JSArray(t1).add$1(t1, type);
-    t1 = infoEl.get$classes();
-    $.getInterceptor$JSArray(t1).add$1(t1, "shown");
+    this._infoEl.set$hidden(false);
+    window.setTimeout$2(new $.RsvpWidget__showMessage_anon(this), 0);
     if (type === "info")
-      window.setTimeout$2(new $.RsvpWidget__showMessage_anon(infoEl), 6000);
+      window.setTimeout$2(new $.RsvpWidget__showMessage_anon0(this), 6000);
   },
   _setSendButtonState$1: function(isInProgress) {
     var sendButton, t1, label;
@@ -4936,6 +4947,14 @@ $$.RsvpWidget = {"": "Object;_reqInProgress",
   },
   get$_onAddNameClick: function() {
     return new $.BoundClosure(this, "_onAddNameClick$1");
+  },
+  _onInfoElTransitionEnd$1: function(_) {
+    var t1 = this._infoEl.get$classes();
+    if ($.getInterceptor$JSStringJSArray(t1).contains$1(t1, "transparent") === true)
+      this._infoEl.set$hidden(true);
+  },
+  get$_onInfoElTransitionEnd: function() {
+    return new $.BoundClosure(this, "_onInfoElTransitionEnd$1");
   }
 };
 
@@ -9174,7 +9193,7 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"": "Closure;findSlot_
               t3.call$2(slot, copy0);
             }
             if (typeof copy0 !== "object" || copy0 === null || (copy0.constructor !== Array || !!copy0.immutable$list) && !copy0.is$JavaScriptIndexingBehavior())
-              return this.call$1$bailout(3, e, t3, elementCopy, $.CONSTANT0, length$, copy0, slot, t2, copy, i);
+              return this.call$1$bailout(3, e, t3, elementCopy, $.CONSTANT0, length$, copy0, slot, t2, i, copy);
             for (t1 = e.length, t2 = copy0.length, j = 0; j < i; ++j) {
               if (j >= t1)
                 throw $.ioore(j);
@@ -9201,7 +9220,7 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"": "Closure;findSlot_
         i = 0;
       }
       if (typeof copy !== "object" || copy === null || (copy.constructor !== Array || !!copy.immutable$list) && !copy.is$JavaScriptIndexingBehavior())
-        return this.call$1$bailout(4, e, length$, i, copy, $.CONSTANT0);
+        return this.call$1$bailout(4, e, length$, copy, i, $.CONSTANT0);
       for (; i < length$; ++i) {
         if (i >= e.length)
           throw $.ioore(i);
@@ -9225,8 +9244,8 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"": "Closure;findSlot_
         e = env0;
         break;
       case 3:
-        i = env9;
-        copy = env8;
+        copy = env9;
+        i = env8;
         t4 = env7;
         slot = env6;
         copy0 = env5;
@@ -9238,8 +9257,8 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"": "Closure;findSlot_
         break;
       case 4:
         t2 = env4;
-        copy = env3;
-        i = env2;
+        i = env3;
+        copy = env2;
         length$ = env1;
         e = env0;
         break;
@@ -10058,10 +10077,17 @@ $$.RsvpWidget__onRsvpUpsertFail_anon = {"": "Closure;",
   }
 };
 
-$$.RsvpWidget__showMessage_anon = {"": "Closure;infoEl_0",
+$$.RsvpWidget__showMessage_anon = {"": "Closure;this_0",
   call$0: function() {
-    var t1 = this.infoEl_0.get$classes();
-    $.getInterceptor$JSArray(t1).remove$1(t1, "shown");
+    var t1 = this.this_0.get$_infoEl().get$classes();
+    $.getInterceptor$JSArray(t1).remove$1(t1, "transparent");
+  }
+};
+
+$$.RsvpWidget__showMessage_anon0 = {"": "Closure;this_1",
+  call$0: function() {
+    var t1 = this.this_1.get$_infoEl().get$classes();
+    $.getInterceptor$JSArray(t1).add$1(t1, "transparent");
   }
 };
 
@@ -10784,9 +10810,9 @@ $.Primitives_newFixedList = function(length$) {
 };
 
 $.Primitives__fromCharCodeApply = function(array) {
-  var end, t1, result, i, subarray, t2;
+  var end, t1, i, result, subarray, t2;
   end = array.length;
-  for (t1 = end <= 500, result = "", i = 0; i < end; i += 500) {
+  for (t1 = end <= 500, i = 0, result = ""; i < end; i += 500) {
     if (t1)
       subarray = array;
     else {
@@ -12656,7 +12682,7 @@ $.RsvpInsertRequest$ = function() {
 };
 
 $.RsvpWidget$ = function() {
-  return new $.RsvpWidget(null);
+  return new $.RsvpWidget(null, null);
 };
 
 $._inject = function(code) {
@@ -12927,16 +12953,16 @@ $._deserializeElement = function(id) {
   return e;
 };
 
-$.Primitives__throwFormatException.call$1 = $.Primitives__throwFormatException;
-$.Primitives__throwFormatException.$name = "Primitives__throwFormatException";
 $.$$throw.call$1 = $.$$throw;
 $.$$throw.$name = "$$throw";
-$.DartError_toStringWrapper.call$0 = $.DartError_toStringWrapper;
-$.DartError_toStringWrapper.$name = "DartError_toStringWrapper";
+$.Primitives__throwFormatException.call$1 = $.Primitives__throwFormatException;
+$.Primitives__throwFormatException.$name = "Primitives__throwFormatException";
 $.dynamicBind.call$4 = $.dynamicBind;
 $.dynamicBind.$name = "dynamicBind";
 $.invokeClosure.call$5 = $.invokeClosure;
 $.invokeClosure.$name = "invokeClosure";
+$.DartError_toStringWrapper.call$0 = $.DartError_toStringWrapper;
+$.DartError_toStringWrapper.$name = "DartError_toStringWrapper";
 $.typeNameInChrome.call$1 = $.typeNameInChrome;
 $.typeNameInChrome.$name = "typeNameInChrome";
 $.typeNameInSafari.call$1 = $.typeNameInSafari;
@@ -12949,12 +12975,12 @@ $.typeNameInIE.call$1 = $.typeNameInIE;
 $.typeNameInIE.$name = "typeNameInIE";
 $.constructorNameFallback.call$1 = $.constructorNameFallback;
 $.constructorNameFallback.$name = "constructorNameFallback";
-$.IsolateNatives__processWorkerMessage.call$2 = $.IsolateNatives__processWorkerMessage;
-$.IsolateNatives__processWorkerMessage.$name = "IsolateNatives__processWorkerMessage";
 $._serialize.call$1 = $._serialize;
 $._serialize.$name = "_serialize";
 $._deserialize.call$1 = $._deserialize;
 $._deserialize.$name = "_deserialize";
+$.IsolateNatives__processWorkerMessage.call$2 = $.IsolateNatives__processWorkerMessage;
+$.IsolateNatives__processWorkerMessage.$name = "IsolateNatives__processWorkerMessage";
 Isolate.$finishClasses($$);
 $$ = {};
 $.List = {builtin$cls: 'List'};
@@ -12964,9 +12990,9 @@ $.Gamepad = {builtin$cls: 'Gamepad'};
 $.TextTrackCue = {builtin$cls: 'TextTrackCue'};
 $.Number = {builtin$cls: 'Number'};
 $.PathSeg = {builtin$cls: 'PathSeg'};
+$.ElementInstance = {builtin$cls: 'ElementInstance'};
 $.Touch = {builtin$cls: 'Touch'};
 $.num = {builtin$cls: 'num'};
-$.ElementInstance = {builtin$cls: 'ElementInstance'};
 $.MediaStream = {builtin$cls: 'MediaStream'};
 $.DomMimeType = {builtin$cls: 'DomMimeType'};
 $.DomPlugin = {builtin$cls: 'DomPlugin'};
@@ -13007,13 +13033,13 @@ $.CONSTANT0 = new Isolate.$isolateProperties.JSArray();
 $.CONSTANT5 = new Isolate.$isolateProperties.JSNumber();
 $.KeyCode_WIN_KEY_FF_LINUX = 0;
 $.KeyCode_ENTER = 13;
-$.KeyCode_CTRL = 17;
 $.KeyCode_ALT = 18;
 $.KeyCode_CAPS_LOCK = 20;
 $.KeyCode_ESC = 27;
 $.KeyCode_SPACE = 32;
 $.KeyCode_PAGE_UP = 33;
 $.KeyCode_PAGE_DOWN = 34;
+$.KeyCode_CTRL = 17;
 $.KeyCode_END = 35;
 $.KeyCode_LEFT = 37;
 $.KeyCode_HOME = 36;
@@ -13042,8 +13068,8 @@ $.KeyCode_META = 91;
 $.KeyCode_NUM_ZERO = 96;
 $.KeyCode_NUM_ONE = 97;
 $.KeyCode_NUM_TWO = 98;
-$.KeyCode_NUM_FOUR = 100;
 $.KeyCode_NUM_THREE = 99;
+$.KeyCode_NUM_FOUR = 100;
 $.KeyCode_NUM_FIVE = 101;
 $.KeyCode_NUM_SIX = 102;
 $.KeyCode_NUM_SEVEN = 103;
@@ -13108,51 +13134,51 @@ $.JsonParser_STATE_OBJECT_COLON = 19;
 $.JsonParser_STATE_OBJECT_VALUE = 31;
 $.JsonParser_STATE_OBJECT_COMMA = 22;
 $.JsonParser_BACKSPACE = 8;
+$._jsPortSync = null;
+$._jsPortCreate = null;
 $.JsonParser_NEWLINE = 10;
 $.JsonParser_TAB = 9;
-$._jsPortSync = null;
-$.JsonParser_CARRIAGE_RETURN = 13;
-$._jsPortCreate = null;
-$.JsonParser_FORM_FEED = 12;
-$.JsonParser_SPACE = 32;
 $._jsPortDebug = null;
+$.JsonParser_CARRIAGE_RETURN = 13;
 $._jsPortEquals = null;
-$.JsonParser_QUOTE = 34;
-$.JsonParser_PLUS = 43;
 $._jsPortInstanceof = null;
-$.JsonParser_COMMA = 44;
-$.JsonParser_MINUS = 45;
+$.JsonParser_SPACE = 32;
 $._jsPortConvert = null;
-$._jsExitJavaScriptScope = null;
+$.JsonParser_QUOTE = 34;
 $._jsEnterJavaScriptScope = null;
-$.JsonParser_SLASH = 47;
+$.JsonParser_FORM_FEED = 12;
+$.JsonParser_PLUS = 43;
+$.JsonParser_COMMA = 44;
 $._jsGlobalize = null;
+$.JsonParser_MINUS = 45;
+$._jsInvalidate = null;
+$.JsonParser_DECIMALPOINT = 46;
+$._dartEnterDartScope = null;
+$.JsonParser_SLASH = 47;
+$._dartExitDartScope = null;
 $.JsonParser_CHAR_0 = 48;
 $.JsonParser_CHAR_9 = 57;
-$._dartEnterDartScope = null;
 $.JsonParser_COLON = 58;
-$._dartExitDartScope = null;
 $.JsonParser_CHAR_E = 69;
 $.JsonParser_LBRACKET = 91;
 $.JsonParser_BACKSLASH = 92;
 $.JsonParser_RBRACKET = 93;
 $.JsonParser_CHAR_a = 97;
-$._jsInvalidate = null;
 $.JsonParser_CHAR_b = 98;
 $.JsonParser_CHAR_e = 101;
 $.JsonParser_CHAR_f = 102;
 $.JsonParser_CHAR_l = 108;
 $.JsonParser_CHAR_n = 110;
-$.JsonParser_CHAR_r = 114;
-$.JsonParser_CHAR_s = 115;
 $._localNextElementId = 0;
-$.JsonParser_CHAR_t = 116;
+$.JsonParser_CHAR_r = 114;
 $._DART_ID = "data-dart_id";
+$.JsonParser_CHAR_s = 115;
+$._DART_TEMPORARY_ATTACHED = "data-dart_temporary_attached";
+$.JsonParser_CHAR_t = 116;
 $.JsonParser_CHAR_u = 117;
 $.JsonParser_LBRACE = 123;
 $.JsonParser_RBRACE = 125;
-$._DART_TEMPORARY_ATTACHED = "data-dart_temporary_attached";
-$.JsonParser_DECIMALPOINT = 46;
+$._jsExitJavaScriptScope = null;
 $.ReceivePortImpl__nextFreeId = 1;
 $.JSInvocationMirror_METHOD = 0;
 $.JSInvocationMirror_GETTER = 1;
@@ -13214,17 +13240,17 @@ $.getInterceptor$JSArray = function(receiver) {
     return $.JSArray.prototype;
   return $.ObjectInterceptor.prototype;
 };
-Isolate.$lazy($, 'thisScript', 'IsolateNatives_thisScript', 'get$IsolateNatives_thisScript', function() {
-  return $.IsolateNatives_computeThisScript();
+Isolate.$lazy($, '_keyIdentifier', 'KeyboardEventController__keyIdentifier', 'get$KeyboardEventController__keyIdentifier', function() {
+  return $.makeLiteralMap(["Up", 38, "Down", 40, "Left", 37, "Right", 39, "Enter", 13, "F1", 112, "F2", 113, "F3", 114, "F4", 115, "F5", 116, "F6", 117, "F7", 118, "F8", 119, "F9", 120, "F10", 121, "F11", 122, "F12", 123, "U+007F", 46, "Home", 36, "End", 35, "PageUp", 33, "PageDown", 34, "Insert", 45]);
 });
 Isolate.$lazy($, 'quoteRegExp', 'quoteRegExp', 'get$quoteRegExp', function() {
   return $.JSSyntaxRegExp$("[-[\\]{}()*+?.,\\\\^$|#\\s]", true, false);
 });
-Isolate.$lazy($, '_IMAGE_IDX_REGEXP', 'PhotoGalleryWidget__IMAGE_IDX_REGEXP', 'get$PhotoGalleryWidget__IMAGE_IDX_REGEXP', function() {
-  return $.RegExp_RegExp("images/(\\d+)_original\\.jpg", true, false);
-});
 Isolate.$lazy($, 'globalThis', 'globalThis', 'get$globalThis', function() {
   return $.IsolateNatives_computeGlobalThis();
+});
+Isolate.$lazy($, 'thisScript', 'IsolateNatives_thisScript', 'get$IsolateNatives_thisScript', function() {
+  return $.IsolateNatives_computeThisScript();
 });
 Isolate.$lazy($, 'globalWindow', 'globalWindow', 'get$globalWindow', function() {
   return $.get$globalThis().window;
@@ -13232,14 +13258,14 @@ Isolate.$lazy($, 'globalWindow', 'globalWindow', 'get$globalWindow', function() 
 Isolate.$lazy($, '_proxiedObjectTable', '_proxiedObjectTable', 'get$_proxiedObjectTable', function() {
   return $._ProxiedObjectTable$();
 });
-Isolate.$lazy($, 'globalWorker', 'globalWorker', 'get$globalWorker', function() {
-  return $.get$globalThis().Worker;
+Isolate.$lazy($, '_IMAGE_IDX_REGEXP', 'PhotoGalleryWidget__IMAGE_IDX_REGEXP', 'get$PhotoGalleryWidget__IMAGE_IDX_REGEXP', function() {
+  return $.RegExp_RegExp("images/(\\d+)_original\\.jpg", true, false);
 });
 Isolate.$lazy($, 'globalPostMessageDefined', 'globalPostMessageDefined', 'get$globalPostMessageDefined', function() {
   return $.get$globalThis().postMessage !== (void 0);
 });
-Isolate.$lazy($, '_keyIdentifier', 'KeyboardEventController__keyIdentifier', 'get$KeyboardEventController__keyIdentifier', function() {
-  return $.makeLiteralMap(["Up", 38, "Down", 40, "Left", 37, "Right", 39, "Enter", 13, "F1", 112, "F2", 113, "F3", 114, "F4", 115, "F5", 116, "F6", 117, "F7", 118, "F8", 119, "F9", 120, "F10", 121, "F11", 122, "F12", 123, "U+007F", 46, "Home", 36, "End", 35, "PageUp", 33, "PageDown", 34, "Insert", 45]);
+Isolate.$lazy($, 'globalWorker', 'globalWorker', 'get$globalWorker', function() {
+  return $.get$globalThis().Worker;
 });
 var $ = null;
 Isolate.$finishClasses($$);
