@@ -28,149 +28,171 @@
 
     <div id="main-content" class="transparent" hidden>
 
-      <div id="nav-bar" style="display: table-cell">
-        <ul id="page-links">
-          <li data-page-id="welcome-page">welcome</li>
-          <li data-page-id="our-story-page">our story</li>
-          <li data-page-id="photo-gallery-page">photo gallery</li>
-          <li data-page-id="travel-page">travel</li>
-          <li data-page-id="rsvp-page">respond</li>
-          <li data-page-id="gift-registry-page">gift registry</li>
-          <li data-page-id="contact-page">contact</li>
-        </ul>
-      </div>
+      <ul id="nav-bar">
+        <li data-page-id="welcome-page">welcome</li>
+        <li data-page-id="our-story-page">our story</li>
+        <li data-page-id="photo-gallery-page">photo gallery</li>
+        <li data-page-id="travel-page">travel</li>
+        <li data-page-id="rsvp-page">respond</li>
+        <li data-page-id="gift-registry-page">gift registry</li>
+        <li data-page-id="contact-page">contact</li>
+      </ul>
 
-      <div id="page-container" style="display: table-cell">
+      <div id="page-container">
 
         <div id="welcome-page" class="page transparent" hidden>
           <h1>welcome</h1>
           {{.Messages.WelcomeContent}}
         </div>
-
         <div id="our-story-page" class="page transparent" hidden>
           <h1>our story</h1>
-          <iframe id="youtube-iframe" width="560" height="315" src="http://www.youtube.com/embed/QHaVc5i-Dzs?vmmode=opaque" frameborder="0" allowfullscreen></iframe>
+          Coming soon March 31st.
         </div>
 
         <div id="photo-gallery-page" class="page transparent" hidden>
           <h1>photo gallery</h1>
           <div>
-            <div style="display: inline-block">
-              <img src="static/images/00.jpg" width="271px"/>
-            </div>
-            <div style="display: inline-block">
-              <img src="static/images/01.jpg" width="157px" />
-              <img src="static/images/02.jpg" width="158px" />
-              <br/>
-              <img src="static/images/03.jpg" width="76px" />
-              <img src="static/images/04.jpg" width="117px" />
-              <img src="static/images/05.jpg" width="117px" />
-            </div>
-          </div>
-          <img src="static/images/06.jpg" height="123px" />
-          <img src="static/images/07.jpg" height="123px" />
-          <img src="static/images/08.jpg" height="123px" />
-          <img src="static/images/09.jpg" height="123px" />
-          <br/>
-          <img src="static/images/10.jpg" height="148px" />
-          <img src="static/images/11.jpg" height="148px" />
-          <img src="static/images/12.jpg" height="148px" />
-          <br/>
-          <img src="static/images/13.jpg" height="129px" />
-          <img src="static/images/14.jpg" height="129px" />
-          <img src="static/images/15.jpg" height="129px" />
-          <img src="static/images/16.jpg" height="129px" />
-          <br/>
-          <img src="static/images/17.jpg" height="152px" />
-          <img src="static/images/18.jpg" height="152px" />
-          <img src="static/images/19.jpg" height="152px" />
-          <br/>
-          <img src="static/images/20.jpg" height="148px" />
-          <img src="static/images/21.jpg" height="148px" />
-          <img src="static/images/22.jpg" height="148px" />
-          <br/>
-          <img src="static/images/23.jpg" height="132px" />
-          <img src="static/images/24.jpg" height="132px" />
-          <img src="static/images/25.jpg" height="132px" />
-          <br/>
-          <img src="static/images/26.jpg" height="148px" />
-          <img src="static/images/27.jpg" height="148px" />
-          <img src="static/images/28.jpg" height="148px" />
-          <br/>
-          <img src="static/images/29.jpg" height="141px" />
-          <img src="static/images/30.jpg" height="141px" />
-          <img src="static/images/31.jpg" height="141px" />
-          <img src="static/images/32.jpg" height="141px" />
-          <br/>
-          <img src="static/images/33.jpg" height="148px" />
-          <img src="static/images/34.jpg" height="148px" />
-          <img src="static/images/35.jpg" height="148px" />
-          <br/>
-          <img src="static/images/36.jpg" height="148px" />
-          <img src="static/images/37.jpg" height="148px" />
-          <img src="static/images/38.jpg" height="148px" />
-          <br/>
-          <img src="static/images/39.jpg" height="151px" />
-          <img src="static/images/40.jpg" height="151px" />
-          <img src="static/images/41.jpg" height="151px" />
-          <img src="static/images/42.jpg" height="151px" />
-          <br/>
-          <img src="static/images/43.jpg" height="148px" />
-          <img src="static/images/44.jpg" height="148px" />
-          <img src="static/images/45.jpg" height="148px" />
-          <br/>
-          <img src="static/images/46.jpg" height="147px" />
-          <img src="static/images/47.jpg" height="147px" />
-          <img src="static/images/48.jpg" height="147px" />
-          <img src="static/images/49.jpg" height="147px" />
-          <br/>
-          <img src="static/images/50.jpg" height="127px" />
-          <img src="static/images/51.jpg" height="127px" />
-          <img src="static/images/52.jpg" height="127px" />
-          <img src="static/images/53.jpg" height="127px" />
-          <br/>
-          <img src="static/images/54.jpg" height="123px" />
-          <img src="static/images/55.jpg" height="123px" />
-          <img src="static/images/56.jpg" height="123px" />
-          <img src="static/images/57.jpg" height="123px" />
-          <br/>
-          <img src="static/images/58.jpg" height="164px" />
-          <img src="static/images/59.jpg" height="164px" />
-          <img src="static/images/60.jpg" height="164px" />
-          <br/>
-          <img src="static/images/61.jpg" height="123px" />
-          <img src="static/images/62.jpg" height="123px" />
-          <img src="static/images/63.jpg" height="123px" />
-          <img src="static/images/64.jpg" height="123px" />
-          <br/>
-          <img src="static/images/65.jpg" height="128px" />
-          <img src="static/images/66.jpg" height="128px" />
-          <img src="static/images/67.jpg" height="128px" />
-          <img src="static/images/68.jpg" height="128px" />
+            <div style="display: inline-block"><img
+              src="static/images/00.jpg" width="271px"
+            /></div>
+            <div style="display: inline-block"><img
+              src="static/images/01.jpg" width="157px" /><img
+              src="static/images/02.jpg" width="158px" />
+              <br/><img
+              src="static/images/03.jpg" width="76px" /><img
+              src="static/images/04.jpg" width="117px" /><img
+              src="static/images/05.jpg" width="117px"
+            /></div>
+          </div><img
+          src="static/images/06.jpg" height="123px" /><img
+          src="static/images/07.jpg" height="123px" /><img
+          src="static/images/08.jpg" height="123px" /><img
+          src="static/images/09.jpg" height="123px" />
+          <br/><img
+          src="static/images/10.jpg" height="148px" /><img
+          src="static/images/11.jpg" height="148px" /><img
+          src="static/images/12.jpg" height="148px" />
+          <br/><img
+          src="static/images/13.jpg" height="129px" /><img
+          src="static/images/14.jpg" height="129px" /><img
+          src="static/images/15.jpg" height="129px" /><img
+          src="static/images/16.jpg" height="129px" />
+          <br/><img
+          src="static/images/17.jpg" height="152px" /><img
+          src="static/images/18.jpg" height="152px" /><img
+          src="static/images/19.jpg" height="152px" />
+          <br/><img
+          src="static/images/20.jpg" height="148px" /><img
+          src="static/images/21.jpg" height="148px" /><img
+          src="static/images/22.jpg" height="148px" />
+          <br/><img
+          src="static/images/23.jpg" height="132px" /><img
+          src="static/images/24.jpg" height="132px" /><img
+          src="static/images/25.jpg" height="132px" />
+          <br/><img
+          src="static/images/26.jpg" height="148px" /><img
+          src="static/images/27.jpg" height="148px" /><img
+          src="static/images/28.jpg" height="148px" />
+          <br/><img
+          src="static/images/29.jpg" height="141px" /><img
+          src="static/images/30.jpg" height="141px" /><img
+          src="static/images/31.jpg" height="141px" /><img
+          src="static/images/32.jpg" height="141px" />
+          <br/><img
+          src="static/images/33.jpg" height="148px" /><img
+          src="static/images/34.jpg" height="148px" /><img
+          src="static/images/35.jpg" height="148px" />
+          <br/><img
+          src="static/images/36.jpg" height="148px" /><img
+          src="static/images/37.jpg" height="148px" /><img
+          src="static/images/38.jpg" height="148px" />
+          <br/><img
+          src="static/images/39.jpg" height="151px" /><img
+          src="static/images/40.jpg" height="151px" /><img
+          src="static/images/41.jpg" height="151px" /><img
+          src="static/images/42.jpg" height="151px" />
+          <br/><img
+          src="static/images/43.jpg" height="148px" /><img
+          src="static/images/44.jpg" height="148px" /><img
+          src="static/images/45.jpg" height="148px" />
+          <br/><img
+          src="static/images/46.jpg" height="147px" /><img
+          src="static/images/47.jpg" height="147px" /><img
+          src="static/images/48.jpg" height="147px" /><img
+          src="static/images/49.jpg" height="147px" />
+          <br/><img
+          src="static/images/50.jpg" height="127px" /><img
+          src="static/images/51.jpg" height="127px" /><img
+          src="static/images/52.jpg" height="127px" /><img
+          src="static/images/53.jpg" height="127px" />
+          <br/><img
+          src="static/images/54.jpg" height="123px" /><img
+          src="static/images/55.jpg" height="123px" /><img
+          src="static/images/56.jpg" height="123px" /><img
+          src="static/images/57.jpg" height="123px" />
+          <br/><img
+          src="static/images/58.jpg" height="164px" /><img
+          src="static/images/59.jpg" height="164px" /><img
+          src="static/images/60.jpg" height="164px" />
+          <br/><img
+          src="static/images/61.jpg" height="123px" /><img
+          src="static/images/62.jpg" height="123px" /><img
+          src="static/images/63.jpg" height="123px" /><img
+          src="static/images/64.jpg" height="123px" />
+          <br/><img
+          src="static/images/65.jpg" height="128px" /><img
+          src="static/images/66.jpg" height="128px" /><img
+          src="static/images/67.jpg" height="128px" /><img
+          src="static/images/68.jpg" height="128px" />
         </div>
 
         <div id="travel-page" class="page transparent" hidden>
           <h1>travel</h1>
-          <div class="subheader">airfare</div>
-          <p>Plane ticket prices and travel length from the U.S. west coast to
+          <p>
+            <a href="http://goo.gl/ijCRJ">
+              <img class="map" id="mansion-map" src="http://maps.googleapis.com/maps/api/staticmap?center=Savoyai Kastély Szálló, Ráckeve, Kossuth Lajos Street, Hungary&language=en&zoom=5&size=600x300&sensor=false&maptype=terrain&markers=size:mid%7Ccolor:red%7CSavoyai Kastély Szálló, Ráckeve, Kossuth Lajos Street, Hungary">
+            </a>
+          </p>
+          <section>
+          <h2>airfare</h2>
+          <p>Plane ticket prices and travel lengths from the U.S. west coast to
           Budapest, Hungary depend on the number of stopovers you have. For the
           summer season, air travel costs average around $1300 round trip and
           the duration of the flight around 16 hours. You can use any travel
-          websites to book your flights. For example:
+          websites to book your flights. Here are a few examples:
           <ul>
-            <li><a href="http://goo.gl/B5H5B">www.bing.com/travel</a></li>
-            <li><a href="http://goo.gl/QmQyc">www.kayak.com</a></li>
-            <li><a href="http://goo.gl/LwkgJ">www.orbitz.com</a></li>
-            <li>and many others</li>
+            <li><a href="http://goo.gl/B5H5B">Bing Travel</a></li>
+            <li><a href="http://goo.gl/QmQyc">Kayak</a></li>
+            <li><a href="http://goo.gl/LwkgJ">Orbitz</a></li>
+            <li><a href="http://goo.gl/DmVSH">eDreams</a></li>
           </ul>
+          </section>
 
-          <div class="subheader">weather</div>
-          <p>Summers in Hungary are very hot and dry and daily temperatures in
-          July often reach above 86 Fahrenheit. Nighttime temperatures are
-          cooler, though still warm. Sandals and shorts are comfortable attire
-          both day and night.</p>
+          <section>
+          <h2>accommodation</h2>
+          <p>Since the wedding ceremony and the following reception are going to
+          be at the <a href="http://goo.gl/mPo0c">Savoyai Mansion Hotel</a>, we
+          recommend that you book your rooms there. We have asked the hotel to
+          set aside 19 rooms for our guests to reserve for July 26-28. The following rooms have been set aside:</p>
+          <ul>
+            <li>4 single beds</li>
+            <li>9 double beds</li>
+            <li>2 triple beds</li>
+            <li>4 four beds</li>
+          </ul>
+          <p>Please mention in your reservation that your stay is for the
+          Gózon-Toscano wedding. Prices range from $40 per night to $84. If
+          you would like to stay at the hotel longer or shorter than the above
+          mentioned three nights, you can do that as well. Additional hotels in
+          Ráckeve are:</p>
+          <ul>
+            <li><a href="http://goo.gl/rbncW">Hotel Termálkristály Aqualand</a></li>
+            <li><a href="http://goo.gl/MgOxp">Kék Duna Wellness Hotel</a></li>
+          </ul>
+          </section>
 
-          <div class="subheader">directions to venue</div>
+          <section>
+          <h2>directions to venue</h2>
           <p>If you plan to go straight to the location of the wedding from
           Ferenc Liszt International Airport, we will arrange transportation
           for you. If you arrive to Hungary a few days earlier and aim to visit
@@ -178,189 +200,147 @@
           you to the city centre. More information about transportation to and
           from the airport can be found <a href="http://goo.gl/9rT5S">here</a>.
           </p>
+          </section>
 
-          <div class="subheader">accommodation</div>
-          <p>Since the wedding ceremony and the following reception are going to
-          be at the <a href="http://goo.gl/mPo0c">Savoyai Mansion Hotel</a>, we
-          recommend that you book your rooms there. We have asked the hotel to
-          set aside 20 rooms for our guests to reserve for July 26-28:</p>
-          <ul>
-            <li>4 single beds</li>
-            <li>9 double-beds</li>
-            <li>3 triple-beds</li>
-            <li>4 four-beds</li>
-          </ul>
-          <p>Please mention in your reservation that your stay is for the
-          Gózon-Toscano wedding. Prices range from $40 per night to $84. If
-          you’d like to stay at the hotel longer or shorter than the above
-          mentioned three nights, you can do that as well. Additional hotels in
-          Ráckeve are:</p>
-          <ul>
-            <li><a href="http://goo.gl/rbncW">Hotel Termálkristály Aqualand</a></li>
-            <li><a href="http://goo.gl/MgOxp">Kék Duna Wellness Hotel</a></li>
-          </ul>
-
-          <div class="subheader">list of attractions</div>
+          <section>
+          <h2>attractions in budapest</h2>
           <div class="postcard">
             <img src="static/images/gellert-hill.jpg" />
             <p>
-              <b>Gellért-hegy</b><br/>
-              Gellért Hill<br/>
-              <b>Citadella</b><br/>
-              Citadel with gorgeous views of the city.
+              <a href="http://goo.gl/CRzYy">Gellért Hill</a>
+              and
+              <a href="http://goo.gl/vtQEy">Citadel</a>
             </p>
           </div>
           <div class="postcard">
             <img src="static/images/budai.jpg" />
-            <p>
-              <b>Budai Vár</b><br/>
-              Buda Castle<br/>
-              (there are several museums inside of the castle)
-              </p>
+            <p><a href="http://goo.gl/Jpmvn">Buda Castle</a></p>
           </div>
           <div class="postcard">
             <img src="static/images/bastion.jpg" />
-            <p>
-              <b>Halászbástya</b><br/>
-              Fisherman’s Bastion
-            </p>
+            <p><a href="http://goo.gl/2K31g">Fisherman’s Bastion</a></p>
           </div>
           <div class="postcard">
             <img src="static/images/temple.jpg" />
-            <p>
-              <b>Mátyás-templom</b><br/>
-              Matthias Church
-            </p>
+            <p><a href="http://goo.gl/fgbkb">Matthias Church</a></p>
           </div>
           <div class="postcard">
             <img src="static/images/parlament.jpg"/>
-            <p>
-              <b>Parlament</b><br/>
-              The House of Parliament
-            </p>
+            <p><a href="http://goo.gl/RVDKJ">The House of Parliament</a></p>
           </div>
           <div class="postcard">
             <img src="static/images/margaret-island.jpg"/>
-            <p>
-              <b>Margitsziget</b><br/>
-              Margaret Island
-            </p>
+            <p><a href="http://goo.gl/d4HS9">Margaret Island</a></p>
           </div>
           <div class="postcard">
             <img src="static/images/andrassy.jpg"/>
-            <p>
-              <b>Andrássy út</b><br/>
-              Andrássy Avenue
-            </p>
+            <p><a href="http://goo.gl/INYeV">Andrássy Avenue</a></p>
           </div>
           <div class="postcard">
             <img src="static/images/house-of-terror.jpg"/>
-            <p>
-              <a href="http://goo.gl/JsqIk"><b>Terror Háza</b><br/>
-              House of Terror</a>
-            </p>
+            <p><a href="http://goo.gl/051jz">House of Terror</a></p>
           </div>
           <div class="postcard">
             <img src="static/images/opera.jpg"/>
-            <p>
-              <b>Magyar Állami Operaház</b><br/>
-              Hungarian State Opera House
-            </p>
+            <p><a href="http://goo.gl/mkphZ">Hungarian State Opera House</a></p>
           </div>
           <div class="postcard">
             <img src="static/images/heroes-square.jpg"/>
-            <p>
-              <b>Hősök tere</b><br/>
-              Heroes’ Square<br/>
-              There is a museum near the square:
-              <a href="http://goo.gl/DOLKI">Mucsarnok</a>
-            </p>
+            <p><a href="http://goo.gl/A5ZEj">Heroes’ Square</a></p>
           </div>
           <div class="postcard">
             <img src="static/images/citypark.jpg"/>
-            <p>
-              <b>Városliget</b><br/>
-              City Park
-            </p>
+            <p><a href="http://goo.gl/JpnjD">City Park</a></p>
           </div>
           <div class="postcard">
             <img src="static/images/baths.jpg"/>
-            <p>
-              <a href="http://goo.gl/SYZ6V"><b>Széchenyi Gyógyfürdő és Uszoda</b><br/>
-              Szechenyi Bath and Spa Budapest</a>
-            </p>
+            <p><a href="http://goo.gl/SYZ6V">Széchenyi Bath and Spa</a></p>
           </div>
+          </section>
 
-          <div class="subheader">currency</div>
+          <section>
+          <h2>currency</h2>
           <p>Even though Hungary is a member of the European Union, the “forint”
           remains the official currency in Hungary. As of Jan 25 2013, the
           exchange rate is:</p>
 
           <p style="text-align: center"><b>1</b> USD = <b>220.95</b> Forint</p>
+          </section>
 
-          <div class="subheader">traveling to other european countries</div>
+          <section>
+          <h2>weather</h2>
+          <p>Summers in Hungary are very hot and dry and daily temperatures in
+          July often reach above 86 Fahrenheit. Nighttime temperatures are
+          cooler, though still warm. Sandals and shorts are comfortable attire
+          both day and night.</p>
+          </section>
+
+          <section>
+          <h2>traveling to other european countries</h2>
           <p>By plane:</p>
           <ul>
-            <li>Rynair</li>
-            <li>Wizzair</li>
-            <li>eDreams</li>
-            <li>bing travel</li>
+            <li><a href="http://goo.gl/Ys3tt">Wizzair</a></li>
+            <li><a href="http://goo.gl/mPhQI">Rynair</a></li>
+            <li><a href="http://goo.gl/bhT1z">bing travel</a></li>
+            <li><a href="http://goo.gl/dRTTA">eDreams</a></li>
           </ul>
+          <p>By train:<p/>
+          <ul>
+          <li><a href="http://goo.gl/qHEJ0">Eurostar</a></li>
+          </ul>
+          </section>
 
         </div>
 
         <div id="rsvp-page" class="page transparent" hidden>
           <h1>respond</h1>
-          <table>
-            <tr>
-              <td class="rsvp-field-name">
+          <div id="rsvp-form" class="table">
+            <div>
+              <div>
                 Contact Email<br/>
                 <span style="font-size: 10pt">(or Phonenumber)</span>
-              </td>
-              <td class="rsvp-field-value">
-                <input id="rsvp-id" type="text" placeholder="myemail@example.com"/>
-              </td>
-            </tr>
-            <tr>
-              <td class="rsvp-field-name">
+              </div>
+              <div>
+                <input id="rsvp-id" type="text"
+                  placeholder="myemail@example.com"/>
+              </div>
+            </div>
+            <div>
+              <div>
                 Names of Party Members<br/>
-                <span style="font-size: 10pt">(Including yourself)</span></td>
-              <td class="rsvp-field-value">
+                <span style="font-size: 10pt">(Including yourself)</span></div>
+              <div>
                 <div id="rsvp-names">
-                  <input class="rsvp-name" type="text" placeholder="ex. Robert Toscano"/>
+                  <input class="rsvp-name" type="text"
+                      placeholder="ex. Robert Toscano"/>
                 </div>
                 <button id="rsvp-add-name-button">Add Another Member</button>
-              </td>
-            </tr>
-            <tr>
-              <td class="rsvp-field-name">Dietary Restrictions</td>
-              <td class="rsvp-field-value">
-                <textarea id="rsvp-dietary-restrictions"></textarea>
-              </td>
-            </tr>
-            <tr>
-              <td class="rsvp-field-name">Will you be staying at the mansion hotel overnight?</td>
-              <td class="rsvp-field-value">
-                <input type="checkbox" id="rsvp-is-staying-overnight"/>
-              </td>
-            </tr>
-            <tr>
-              <td class="rsvp-field-name">
-                How many days are you planning to stay in Hungary after the wedding?
-              </td>
-              <td class="rsvp-field-value">
-                <input type="text" id="rsvp-duration-days-count" placeholder="ex. 5"/>
-              </td>
-            </tr>
-          </table>
+              </div>
+            </div>
+            <div>
+              <div>Dietary Restrictions</div>
+              <div><textarea id="rsvp-dietary-restrictions"></textarea></div>
+            </div>
+            <div>
+              <div>Will you be staying at the mansion hotel overnight?</div>
+              <div><input type="checkbox" id="rsvp-is-staying-overnight"/></div>
+            </div>
+            <div>
+              <div>
+                How many days are you planning on staying in Hungary after the
+                wedding?
+              </div>
+              <div>
+                <input type="text" id="rsvp-duration-days-count"
+                    placeholder="ex. 5"/>
+              </div>
+            </div>
+          </div>
 
           <button
               id="rsvp-send-button"
               data-label-send-in-progress="Responding..."
               data-label-send="Respond">Respond</button>
-          <!--<a style="font-size: 10pt; margin-left: 12px;" id="rsvp-secure-link" href="javascript:void(0)">
-            Want to respond securely?
-          </a>-->
 
           <div
               id="rsvp-info-element"
@@ -373,74 +353,85 @@
           <h1>gift registry</h1>
           <p>The best gift you could give us is to come to our wedding. However,
           if this is not feasible, you can choose to contribute to our honeymoon
-          through this website. We do not have a gift registry, since, after
+          fund through this website. We do not have a gift registry, since after
           living together for more than three years, we have everything we need
-          (and some more) in our household.</p>
-
-          <p>We have chosen the beautiful Greek island, Kefalonia, as our
-          honeymoon destination. Kefalonia is the most westerly island of
-          Greece, lies in the Ionian Sea, in the channel leading into the Gulf
-          of Patras. With its circa 780 square kilometres, the island is the
-          largest of the Eptanissos (the Seven Islands). Turquoise seas, lush
-          green vegetation, wild and sheer mountain scenery and a fascinating
-          variegated geological profile have given Kefalonia a special
-          atmosphere and beauty. Broad sandy beaches, small coves, and steep
-          cliffs, steppe-like plains, fertile valleys, dense black forests of
-          fir, a unique complex of caves and the highest mountain in the Ionian
-          Islands, Mount. Aenos, standing at 1628 meters, are the most striking
-          features of the island. Kefalonia is characterized by the creative
-          forces of nature and three thousand years of cultural history.</p>
+          in our household.</p>
 
           <p>We have been fortunate enough to travel to many beautiful places in
           the world, but we have never been on a beach vacation. We are very
-          excited about going to a beautiful Greek island!</p>
+          excited about going to the beautiful Greek island of Kefalonia!</p>
 
-          <table id="honey-moon-expense-table">
-            <tr>
-              <td>Two roundtrip airplane tickets from Budapest to Zakynthos</td>
-              <td>$600</td>
-            </tr>
-            <tr>
-              <td>Two round trip ferry tickets from Zakynthos to Killini</td>
-              <td>$36</td>
-            </tr>
-            <tr>
-              <td>Two round trip ferry tickets from Killini to Argostoli</td>
-              <td>$50</td>
-            </tr>
-            <tr>
-              <td>Car rental for seven days</td>
-              <td>$320</td>
-            </tr>
-            <tr>
-              <td>Accommodation at Dionysos Village Resort for seven nights</td>
-              <td>$1200</td>
-            </tr>
-            <tr>
-              <td>Food and drinks for seven days</td>
-              <td>$600</td>
-            </tr>
-            <tr>
-              <td>Sea Kayaking</td>
-              <td>$160</td>
-            </tr>
-            <tr>
-              <td>Guided hiking tour</td>
-              <td>$160</td>
-            </tr>
-            <tr>
-              <td>Horseback riding tour for two</td>
-              <td>$200</td>
-            </tr>
-            <tr>
-              <td>Ice-cream, cocktails, baklava, and the rest</td>
-              <td>$200</td>
-            </tr>
-            <tr>
-              <td>Total</td>
-              <td>$3526</td>
-            </tr>
-          </table>
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="38XY6UKN22Z4E">
+            <button type="submit" name="submit" alt="PayPal - The safer, easier way to pay online!">Donate</button>
+          </form>
+          
+          <p>
+            <a href="http://goo.gl/qA58H">
+              <img id="greece-map" class="map" src="http://maps.googleapis.com/maps/api/staticmap?center=Patra, Greece&language=en&zoom=6&size=600x300&sensor=false&maptype=terrain&style=feature:all%7Celement:labels%7Cvisibility:off&style=feature:administrative.country%7Celement:labels%7Cvisibility:on&markers=size:mid%7Ccolor:red%7CCephalonia, Kefallonia, Greece">
+            </a>
+          </p>
+          
+          <p>Kefalonia is the most westerly island of
+          Greece lies in the Ionian Sea, in the channel leading into the Gulf
+          of Patras. With its circa 780 square kilometres, the island is the
+          largest of the Eptanissos (the Seven Islands). Turquoise seas, lush
+          green vegetation, wild and sheer mountain scenery and a fascinating
+          variety of geological profiles have given Kefalonia a special
+          atmosphere and beauty. Kefalonia is characterized by the creative
+          forces of nature and three thousand years of cultural history.</p>
+
+          <div id="honey-moon-expense-table" class="table">
+            <div>
+              <div>
+                Two roundtrip airplane tickets from Budapest to Zakynthos
+              </div>
+              <div>$600</div>
+            </div>
+            <div>
+              <div>Two round trip ferry tickets from Zakynthos to Killini</div>
+              <div>$36</div>
+            </div>
+            <div>
+              <div>Two round trip ferry tickets from Killini to Argostoli</div>
+              <div>$50</div>
+            </div>
+            <div>
+              <div>Car rental for seven days</div>
+              <div>$320</div>
+            </div>
+            <div>
+              <div>
+                Accommodation at Dionysos Village Resort for seven nights
+              </div>
+              <div>$1200</div>
+            </div>
+            <div>
+              <div>Food and drinks for seven days</div>
+              <div>$600</div>
+            </div>
+            <div>
+              <div>Sea Kayaking</div>
+              <div>$160</div>
+            </div>
+            <div>
+              <div>Guided hiking tour</div>
+              <div>$160</div>
+            </div>
+            <div>
+              <div>Horseback riding tour</div>
+              <div>$200</div>
+            </div>
+            <div>
+              <div>Ice-cream, cocktails, baklava, and the rest</div>
+              <div>$200</div>
+            </div>
+            <div>
+              <div>Total</div>
+              <div>$3526</div>
+            </div>
+          </div>
 
           <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
             <input type="hidden" name="cmd" value="_s-xclick">
@@ -449,22 +440,24 @@
           </form>
         </div>
 
-        <div id="contact-page" class="page transparent" hidden>
+        <div id="contact-page" class="page transparent table" hidden>
           <h1>contact</h1>
-          <table>
-            <tr>
-              <td>Email</td>
-              <td><a href="mailto:contact@grhungary.com">contact@grhungary.com</a></td>
-            </tr>
-            <tr>
-              <td>Robert</td>
-              <td>415 891 9661</td>
-            </tr>
-            <tr>
-              <td>Gyöngyi</td>
-              <td>415 231 9331</td>
-            </tr>
-          </table>
+          <div id="contact-table">
+            <div>
+              <div>Email</div>
+              <div>
+                <a href="mailto:contact@grhungary.com">contact@grhungary.com</a>
+              </div>
+            </div>
+            <div>
+              <div>Robert</div>
+              <div>415 891 9661</div>
+            </div>
+            <div>
+              <div>Gyöngyi</div>
+              <div>415 231 9331</div>
+            </div>
+          </div>
         </div>
 
       </div>

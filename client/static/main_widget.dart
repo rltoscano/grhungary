@@ -2,7 +2,7 @@ part of grhungary;
 
 class MainWidget {
   void decorate() {
-    queryAll("#page-links li").forEach((Element el) {
+    queryAll("#nav-bar li").forEach((Element el) {
       el.on.click.add(_onLinkClick);
     });
 
@@ -27,7 +27,7 @@ class MainWidget {
 
   void _navigateToHash(Event _) {
     String hash = window.location.hash.replaceAll("#", "");
-    bool alreadySelected = queryAll("#page-links li").some((Element el) {
+    bool alreadySelected = queryAll("#nav-bar li").some((Element el) {
       return el.dataAttributes["page-id"] == hash &&
              el.classes.contains("active");
     });
@@ -38,7 +38,7 @@ class MainWidget {
       _showPage(hash);
     } else {
       String defaultPageSelector =
-          query("#page-links").children[0].dataAttributes["page-id"];
+          query("#nav-bar").children[0].dataAttributes["page-id"];
       window.location.hash = defaultPageSelector;
     }
   }
@@ -50,7 +50,7 @@ class MainWidget {
    */
   void _showPage(String pageSelector) {
     // Deactivate previously active link.
-    Element activeEl = query("#page-links li.active");
+    Element activeEl = query("#nav-bar li.active");
     if (activeEl != null) {
       activeEl.classes.remove("active");
     }
@@ -63,7 +63,7 @@ class MainWidget {
     });
 
     // Activate selected link and page.
-    queryAll("#page-links li").forEach((Element el) {
+    queryAll("#nav-bar li").forEach((Element el) {
       if (el.dataAttributes["page-id"] == pageSelector) {
         el.classes.add("active");
       }

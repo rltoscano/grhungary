@@ -1871,7 +1871,7 @@ $$.PhotoGalleryWidget = {"":"Object;_lightBox>,_keyboardEventController,_prevImg
 $$.MainWidget = {"":"Object;",
  decorate$0: function() {
   var t1, mainContent;
-  t1 = $.queryAll("#page-links li");
+  t1 = $.queryAll("#nav-bar li");
   $.getInterceptor$JSArray(t1).forEach$1(t1, new $.MainWidget_decorate_anon(this));
   t1 = $.queryAll(".page");
   $.getInterceptor$JSArray(t1).forEach$1(t1, new $.MainWidget_decorate_anon0());
@@ -1887,13 +1887,13 @@ $$.MainWidget = {"":"Object;",
   var t1, hash, t2, defaultPageSelector;
   t1 = $.window().get$location().get$hash();
   hash = $.getInterceptor$JSString(t1).replaceAll$2(t1, "#", "");
-  t1 = $.queryAll("#page-links li");
+  t1 = $.queryAll("#nav-bar li");
   if ($.getInterceptor$JSArray(t1).some$1(t1, new $.MainWidget__navigateToHash_anon(hash)) === true)
     return;
   if ($.getInterceptor$JSStringJSArray(hash).get$isEmpty(hash) !== true && !($.query("#" + $.S(hash)) == null))
     this._showPage$1(hash);
   else {
-    t1 = $.query("#page-links").get$children();
+    t1 = $.query("#nav-bar").get$children();
     t2 = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, 0).get$dataAttributes();
     defaultPageSelector = $.getInterceptor$JSStringJSArray(t2).operator$index$1(t2, "page-id");
     $.window().get$location().set$hash(defaultPageSelector);
@@ -1904,12 +1904,12 @@ $$.MainWidget = {"":"Object;",
 },
  _showPage$1: function(pageSelector) {
   var activeEl, t1, shownPage;
-  activeEl = $.query("#page-links li.active");
+  activeEl = $.query("#nav-bar li.active");
   if (!(activeEl == null))
     activeEl.get$classes().remove$1("active");
   t1 = $.queryAll(".page");
   $.getInterceptor$JSArray(t1).forEach$1(t1, new $.MainWidget__showPage_anon());
-  t1 = $.queryAll("#page-links li");
+  t1 = $.queryAll("#nav-bar li");
   $.getInterceptor$JSArray(t1).forEach$1(t1, new $.MainWidget__showPage_anon0(pageSelector));
   shownPage = $.query("#" + $.S(pageSelector));
   shownPage.set$hidden(false);
