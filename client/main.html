@@ -13,13 +13,13 @@
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-38007964-1']);
       _gaq.push(['_trackPageview']);
-    
+
       (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
-    
+
     </script>
   </head>
   <body>
@@ -31,7 +31,8 @@
     </div>
 
     <div id="site-header">
-      <div class="site-title">{{.Messages.NamesHeader}}</div>
+      <img id="bird" src="static/images/bird.png"/>
+      <div id="site-title">{{.Messages.NamesHeader}}</div>
       <div style="padding-bottom: 20px; font-weight: bold">July 27th, 2013</div>
     </div>
 
@@ -56,10 +57,13 @@
         <div id="welcome-page" class="page transparent" hidden>
           <h1>welcome</h1>
           {{.Messages.WelcomeContent}}
+          <img class="humotif" src="static/images/humotif.png" />
         </div>
+
         <div id="our-story-page" class="page transparent" hidden>
           <h1>our story</h1>
           Coming soon March 31st.
+          <img class="humotif" src="static/images/humotif.png" />
         </div>
 
         <div id="photo-gallery-page" class="page transparent" hidden>
@@ -157,6 +161,7 @@
           src="static/images/66.jpg" height="128px" /><img
           src="static/images/67.jpg" height="128px" /><img
           src="static/images/68.jpg" height="128px" />
+          <img class="humotif" src="static/images/humotif.png" />
         </div>
 
         <div id="travel-page" class="page transparent" hidden>
@@ -303,6 +308,7 @@
           </ul>
           </section>
 
+          <img class="humotif" src="static/images/humotif.png" />
         </div>
 
         <div id="rsvp-page" class="page transparent" hidden>
@@ -357,9 +363,12 @@
 
           <div
               id="rsvp-info-element"
+              class="transparent"
+              hidden
               data-success-message="Your response has been submitted and a copy has been sent to your email address."
-              data-fail-message="There was a problem submitting your response. Please email <a href=&quot;mailto:robert@grhungary.com&quot;>Robert</a> for further instructions.">
+              data-fail-message="There was a problem submitting your response. Please <a href=&quot;mailto:contact@grhungary.com&quot;>email us</a> for further instructions.">
           </div>
+          <img class="humotif" src="static/images/humotif.png" />
         </div>
 
         <div id="gift-registry-page" class="page transparent" hidden>
@@ -379,13 +388,13 @@
             <input type="hidden" name="hosted_button_id" value="38XY6UKN22Z4E">
             <button type="submit" name="submit" alt="PayPal - The safer, easier way to pay online!">Donate</button>
           </form>
-          
+
           <p>
             <a href="http://goo.gl/qA58H">
               <img id="greece-map" class="map" src="http://maps.googleapis.com/maps/api/staticmap?center=Patra, Greece&language=en&zoom=6&size=600x300&sensor=false&maptype=terrain&style=feature:all%7Celement:labels%7Cvisibility:off&style=feature:administrative.country%7Celement:labels%7Cvisibility:on&markers=size:mid%7Ccolor:red%7CCephalonia, Kefallonia, Greece">
             </a>
           </p>
-          
+
           <p>Kefalonia is the most westerly island of
           Greece lies in the Ionian Sea, in the channel leading into the Gulf
           of Patras. With its circa 780 square kilometres, the island is the
@@ -451,6 +460,7 @@
             <input type="hidden" name="hosted_button_id" value="38XY6UKN22Z4E">
             <button type="submit" name="submit" alt="PayPal - The safer, easier way to pay online!">Donate</button>
           </form>
+          <img class="humotif" src="static/images/humotif.png" />
         </div>
 
         <div id="contact-page" class="page transparent table" hidden>
@@ -471,6 +481,7 @@
               <div>415 231 9331</div>
             </div>
           </div>
+          <img class="humotif" src="static/images/humotif.png" />
         </div>
 
       </div>

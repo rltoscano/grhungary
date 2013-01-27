@@ -20,21 +20,25 @@ class RsvpInsertRequest {
 
 class RsvpWidget {
   HttpRequest _reqInProgress;
+  Element _infoEl;
 
   void decorate() {
     query("#rsvp-send-button").on.click.add(_onSendClick);
     query("#rsvp-add-name-button").on.click.add(_onAddNameClick);
+    _infoEl = query("#rsvp-info-element");
+    _infoEl.on.transitionEnd.add(_onInfoElTransitionEnd);
   }
 
   void _showMessage(String type, String msg) {
-    Element infoEl = query("#rsvp-info-element");
-    infoEl.innerHtml = msg;
-    infoEl.classes.clear();
-    infoEl.classes.add(type);
-    infoEl.classes.add("shown");
+    _infoEl.innerHtml = msg;
+    _infoEl.classes.remove("info");
+    _infoEl.classes.remove("error");
+    _infoEl.classes.add(type);
+    _infoEl.hidden = false;
+    window.setTimeout(() { _infoEl.classes.remove("transparent"); }, 0);
     if (type == "info") {
       window.setTimeout(() {
-        infoEl.classes.remove("shown");
+        _infoEl.classes.add("transparent");
       }, 6000);
     }
   }
@@ -109,5 +113,11 @@ class RsvpWidget {
     Element rsvpNames = query("#rsvp-names");
     rsvpNames.children.add(new BRElement());
     rsvpNames.children.add(child);
+  }
+
+  void _onInfoElTransitionEnd(Event _) {
+    if (_infoEl.classes.contains("transparent")) {
+      _infoEl.hidden = true;
+    }
   }
 }
