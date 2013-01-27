@@ -74,7 +74,10 @@ class RsvpWidget {
     _reqInProgress.on.load.add(_onRsvpUpsertSuccess);
     _reqInProgress.on.error.add(_onRsvpUpsertFail);
     _reqInProgress.open("POST", "/api/rsvp/create");
-    _reqInProgress.send(JSON.stringify(rsvp));
+    _reqInProgress.send(json.stringify(rsvp));
+    js.scoped(() {
+      js.context["_gaq"].push(js.array(["_trackEvent", "Rsvp", "start"]));
+    });
   }
 
   void _onRsvpUpsertSuccess(Event e) {
@@ -83,12 +86,18 @@ class RsvpWidget {
           "info",
           query("#rsvp-info-element").dataAttributes["success-message"]);
       _setSendButtonState(false);
+      js.scoped(() {
+        js.context["_gaq"].push(js.array(["_trackEvent", "Rsvp", "success"]));
+      });
     } else {
       _onRsvpUpsertFail(e);
     }
   }
 
   void _onRsvpUpsertFail(Event e) {
+    js.scoped(() {
+      js.context["_gaq"].push(js.array(["_trackEvent", "Rsvp", "error"]));
+    });
     _showMessage(
         "error", query("#rsvp-info-element").dataAttributes["fail-message"]);
     _setSendButtonState(false);

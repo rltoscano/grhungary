@@ -27,7 +27,7 @@ class MainWidget {
 
   void _navigateToHash(Event _) {
     String hash = window.location.hash.replaceAll("#", "");
-    bool alreadySelected = queryAll("#nav-bar li").some((Element el) {
+    bool alreadySelected = queryAll("#nav-bar li").any((Element el) {
       return el.dataAttributes["page-id"] == hash &&
              el.classes.contains("active");
     });
@@ -49,6 +49,10 @@ class MainWidget {
    * @param pageSelector CSS selector of the page to show
    */
   void _showPage(String pageSelector) {
+    js.scoped(() {
+      js.context["_gaq"].push(js.array(['_trackEvent', 'PageView', pageSelector]));
+    });
+
     // Deactivate previously active link.
     Element activeEl = query("#nav-bar li.active");
     if (activeEl != null) {

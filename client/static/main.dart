@@ -1,8 +1,9 @@
 library grhungary;
 
-import 'dart:html';
+import "dart:html";
 import "dart:math";
-import 'dart:json';
+import "dart:json" as json;
+import "package:js/js.dart" as js;
 
 part "decoration.dart";
 part "rsvp_widget.dart";

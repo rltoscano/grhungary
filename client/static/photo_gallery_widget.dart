@@ -12,8 +12,10 @@ class PhotoGalleryWidget {
   ImageElement _nextImg;
 
   static String _getImageUrl(String currentUrl, int offset) {
-    Iterable<Match> matches = _IMAGE_IDX_REGEXP.allMatches(currentUrl);
-    int currentIdx = int.parse(matches.iterator().next().group(1));
+    Iterator<Match> matchesIt =
+        _IMAGE_IDX_REGEXP.allMatches(currentUrl).iterator;
+    matchesIt.moveNext();
+    int currentIdx = int.parse(matchesIt.current.group(1));
     int newIdx = (currentIdx+ offset) % 69;
     String newIdxStr = "$newIdx";
     if (newIdxStr.length < 2) {
@@ -51,6 +53,9 @@ class PhotoGalleryWidget {
   }
 
   ImageElement _createLightBoxImage(String src) {
+    js.scoped(() {
+      js.context["_gaq"].push(js.array(["_trackEvent", "Gallery", "LoadOriginal", src]));
+    });
     ImageElement img = new ImageElement(src: src);
     img.hidden = true;
     img.classes.add("light-box-image");
@@ -63,12 +68,10 @@ class PhotoGalleryWidget {
     String nextUrl = _getImageUrl(_currImg.src, 1);
     String prevUrl = _getImageUrl(_currImg.src, -1);
     if (_nextImg == null) {
-      print("Loading next image: $nextUrl");
       _nextImg = _createLightBoxImage(nextUrl);
       _nextImg.style.left = "${_lightBox.offsetWidth - 10}px";
     }
     if (_prevImg == null) {
-      print("Loading prev image: $prevUrl");
       _prevImg = _createLightBoxImage(prevUrl);
       _prevImg.style.left = "${10 - _lightBox.offsetWidth + _ORIGINAL_IMAGE_PADDING * 2}px";
     }
@@ -96,9 +99,11 @@ class PhotoGalleryWidget {
     originalSrc = originalSrc.replaceAll("\.jpg", "_original.jpg");
     _clearCache();
     _setLightBoxVisible(true);
-    print("Loading curr image: $originalSrc");
     _currImg = _createLightBoxImage(originalSrc);
-    _currImg.style.left = "40px";
+    js.scoped(() {
+      js.context["_gaq"].push(
+          js.array(["_trackEvent", "Gallery", "ThumbnailClick", originalSrc]));
+    });
   }
 
   void _onImgLoad(Event e) {
