@@ -18,9 +18,38 @@
     {{if .Rsvp.IsStayingOvernight}}{{.Messages.Yes}}{{else}}{{.Messages.No}}{{end}}
   </p>
   <p>
-    <b>{{.Messages.NumDaysStaying}}</b>:
-    {{js html .Rsvp.DurationDaysCount}}
+    <b>{{.Messages.InterestedInSightseeing}}</b>:
+    {{js html .Rsvp.InterestedInSightseeing}}
   </p>
+  <p><b>Important details to keep in mind:</b></p>
+  <ul>
+    <li>Wedding Date: Saturday, July 27th, 2013</li>
+    <li>Please book your plane ticket to arrive to Hungary by no later than
+        Friday, in case there are any delays in your flight schedule. Also, you
+        might want to allow yourself enough time to adjust to the time
+        difference.</li>
+    <li>Make sure your passport is up to date!</li>
+    <li>Reserve your accommodation as soon as possible.</li>
+    <li>Keep in mind that we are leaving for our honeymoon on Wednesday, July
+        31st.</li>
+  </ul>
+{{end}}
+
+{{define "rsvp-feedback-accept-email"}}
+  <p>Received RSVP from {{js html .Id}}</p>
+  <p>Party Members:<p>
+  <ul>
+    {{range .PartyMembers}}
+      <li>{{js html .}}</li>
+    {{end}}
+  </ul>
+  <p>Dietary Restrictions: {{js html .DietaryRestrictions}}</p>
+  <p>Staying overnight at hotel: {{if .IsStayingOvernight}}Yes{{else}}No{{end}}</p>
+  <p>Interested in daytrip: {{js html .InterestedInSightseeing}}</p>  
+{{end}}
+
+{{define "rsvp-feedback-reject-email"}}
+  <p>{{.Id}} declined the wedding invitation.</p>
 {{end}}
 
 {{define "rsvp-email-subject"}}

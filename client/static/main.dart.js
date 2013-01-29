@@ -1448,11 +1448,14 @@ $$.Object = {"": ";",
   _computeCurrentFromIndex$3: function($0, $1, $2) {
     return this.noSuchMethod$1($.createInvocationMirror("_computeCurrentFromIndex", "_computeCurrentFromIndex$3", 0, [$0, $1, $2], []));
   },
-  complete$1: function($0) {
-    return this.noSuchMethod$1($.createInvocationMirror("complete", "complete$1", 0, [$0], []));
+  _sendRsvp$0: function() {
+    return this.noSuchMethod$1($.createInvocationMirror("_sendRsvp", "_sendRsvp$0", 0, [], []));
   },
   _createLightBoxImage$1: function($0) {
     return this.noSuchMethod$1($.createInvocationMirror("_createLightBoxImage", "_createLightBoxImage$1", 0, [$0], []));
+  },
+  complete$1: function($0) {
+    return this.noSuchMethod$1($.createInvocationMirror("complete", "complete$1", 0, [$0], []));
   },
   _throwUnmodifiable$0: function() {
     return this.noSuchMethod$1($.createInvocationMirror("_throwUnmodifiable", "_throwUnmodifiable$0", 0, [], []));
@@ -1483,6 +1486,9 @@ $$.Object = {"": ";",
   },
   _showMessage$2: function($0, $1) {
     return this.noSuchMethod$1($.createInvocationMirror("_showMessage", "_showMessage$2", 0, [$0, $1], []));
+  },
+  _showMessage$3: function($0, $1, $2) {
+    return this.noSuchMethod$1($.createInvocationMirror("_showMessage", "_showMessage$3", 0, [$0, $1, $2], []));
   },
   _determineKeyCodeForKeypress$1: function($0) {
     return this.noSuchMethod$1($.createInvocationMirror("_determineKeyCodeForKeypress", "_determineKeyCodeForKeypress$1", 0, [$0], []));
@@ -1919,6 +1925,9 @@ $$.Object = {"": ";",
   removeLast$0: function() {
     return this.noSuchMethod$1($.createInvocationMirror("removeLast", "removeLast$0", 0, [], []));
   },
+  get$selected: function() {
+    return this.noSuchMethod$1($.createInvocationMirror("selected", "get$selected", 1, [], []));
+  },
   get$keyCode: function() {
     return this.noSuchMethod$1($.createInvocationMirror("keyCode", "get$keyCode", 1, [], []));
   },
@@ -1942,6 +1951,9 @@ $$.Object = {"": ";",
   },
   get$_hasUnhandledError: function() {
     return this.noSuchMethod$1($.createInvocationMirror("_hasUnhandledError", "get$_hasUnhandledError", 1, [], []));
+  },
+  get$_workerId: function() {
+    return this.noSuchMethod$1($.createInvocationMirror("_workerId", "get$_workerId", 1, [], []));
   },
   get$_values: function() {
     return this.noSuchMethod$1($.createInvocationMirror("_values", "get$_values", 1, [], []));
@@ -2021,8 +2033,8 @@ $$.Object = {"": ";",
   get$mainManager: function() {
     return this.noSuchMethod$1($.createInvocationMirror("mainManager", "get$mainManager", 1, [], []));
   },
-  get$future: function() {
-    return this.noSuchMethod$1($.createInvocationMirror("future", "get$future", 1, [], []));
+  get$_moreInfo: function() {
+    return this.noSuchMethod$1($.createInvocationMirror("_moreInfo", "get$_moreInfo", 1, [], []));
   },
   get$iterator: function() {
     return this.noSuchMethod$1($.createInvocationMirror("iterator", "get$iterator", 1, [], []));
@@ -2047,6 +2059,9 @@ $$.Object = {"": ";",
   },
   get$partyMembers: function() {
     return this.noSuchMethod$1($.createInvocationMirror("partyMembers", "get$partyMembers", 1, [], []));
+  },
+  get$future: function() {
+    return this.noSuchMethod$1($.createInvocationMirror("future", "get$future", 1, [], []));
   },
   get$type: function() {
     return this.noSuchMethod$1($.createInvocationMirror("type", "get$type", 1, [], []));
@@ -2108,8 +2123,8 @@ $$.Object = {"": ";",
   get$_hasValue: function() {
     return this.noSuchMethod$1($.createInvocationMirror("_hasValue", "get$_hasValue", 1, [], []));
   },
-  get$fromCommandLine: function() {
-    return this.noSuchMethod$1($.createInvocationMirror("fromCommandLine", "get$fromCommandLine", 1, [], []));
+  get$_onAcceptClick: function() {
+    return this.noSuchMethod$1($.createInvocationMirror("_onAcceptClick", "get$_onAcceptClick", 1, [], []));
   },
   get$_futurePort: function() {
     return this.noSuchMethod$1($.createInvocationMirror("_futurePort", "get$_futurePort", 1, [], []));
@@ -2122,6 +2137,9 @@ $$.Object = {"": ";",
   },
   get$on: function() {
     return this.noSuchMethod$1($.createInvocationMirror("on", "get$on", 1, [], []));
+  },
+  get$fromCommandLine: function() {
+    return this.noSuchMethod$1($.createInvocationMirror("fromCommandLine", "get$fromCommandLine", 1, [], []));
   },
   get$_onLightBoxTransitionEnd: function() {
     return this.noSuchMethod$1($.createInvocationMirror("_onLightBoxTransitionEnd", "get$_onLightBoxTransitionEnd", 1, [], []));
@@ -2330,6 +2348,9 @@ $$.Object = {"": ";",
   get$offsetWidth: function() {
     return this.noSuchMethod$1($.createInvocationMirror("offsetWidth", "get$offsetWidth", 1, [], []));
   },
+  get$_onCancelClick: function() {
+    return this.noSuchMethod$1($.createInvocationMirror("_onCancelClick", "get$_onCancelClick", 1, [], []));
+  },
   get$isolates: function() {
     return this.noSuchMethod$1($.createInvocationMirror("isolates", "get$isolates", 1, [], []));
   },
@@ -2348,8 +2369,11 @@ $$.Object = {"": ";",
   get$keyLocation: function() {
     return this.noSuchMethod$1($.createInvocationMirror("keyLocation", "get$keyLocation", 1, [], []));
   },
-  get$_workerId: function() {
-    return this.noSuchMethod$1($.createInvocationMirror("_workerId", "get$_workerId", 1, [], []));
+  get$_onRejectClick: function() {
+    return this.noSuchMethod$1($.createInvocationMirror("_onRejectClick", "get$_onRejectClick", 1, [], []));
+  },
+  get$_onMoreInfoTransitionEnd: function() {
+    return this.noSuchMethod$1($.createInvocationMirror("_onMoreInfoTransitionEnd", "get$_onMoreInfoTransitionEnd", 1, [], []));
   },
   get$_onWindowKeyPress: function() {
     return this.noSuchMethod$1($.createInvocationMirror("_onWindowKeyPress", "get$_onWindowKeyPress", 1, [], []));
@@ -3013,6 +3037,132 @@ $$.MappedList = {"": "NonExtensibleListMixin;_liblib3$_list,_f",
   get$length: function() {
     var t1 = this._liblib3$_list;
     return $.getInterceptor$JSStringJSArray(t1).get$length(t1);
+  }
+};
+
+$$.ListView = {"": "NonExtensibleListMixin;_liblib3$_list,_offset,_liblib3$_length",
+  get$length: function() {
+    var t1, originalLength, skipLength;
+    t1 = this._liblib3$_list;
+    originalLength = $.getInterceptor$JSStringJSArray(t1).get$length(t1);
+    t1 = this._offset;
+    skipLength = $.getInterceptor$JSNumber(originalLength).operator$sub$1(originalLength, t1);
+    if ($.ltB(skipLength, 0))
+      return 0;
+    t1 = this._liblib3$_length;
+    if (t1 == null || $.gtB(t1, skipLength))
+      return skipLength;
+    return t1;
+  },
+  operator$index$1: function(index) {
+    var t1, skipIndex, t2;
+    if (typeof index !== "number")
+      return this.operator$index$1$bailout6(1, index);
+    t1 = this._offset;
+    skipIndex = index + t1;
+    if (!(index < 0)) {
+      t2 = this._liblib3$_length;
+      if (typeof t2 !== "number")
+        return this.operator$index$1$bailout6(2, index, $.CONSTANT5, t1, t2);
+      if (!(index >= t2)) {
+        t2 = this._liblib3$_list;
+        t2 = $.getInterceptor$JSStringJSArray(t2).get$length(t2);
+        if (typeof t2 !== "number")
+          return this.operator$index$1$bailout6(3, index, skipIndex, t2, $.CONSTANT5, t1);
+        t2 = skipIndex >= t2;
+      } else
+        t2 = true;
+    } else
+      t2 = true;
+    if (t2)
+      throw $.$$throw($.RangeError$value(index));
+    t2 = this._liblib3$_list;
+    if (typeof t2 !== "string" && (typeof t2 !== "object" || t2 === null || t2.constructor !== Array && !t2.is$JavaScriptIndexingBehavior()))
+      return this.operator$index$1$bailout6(4, index, $.CONSTANT5, t1, t2);
+    if (skipIndex !== (skipIndex | 0))
+      throw $.iae(skipIndex);
+    if (skipIndex < 0 || skipIndex >= t2.length)
+      throw $.ioore(skipIndex);
+    return t2[skipIndex];
+  },
+  operator$index$1$bailout6: function(state0, env0, env1, env2, env3, env4) {
+    switch (state0) {
+      case 1:
+        index = env0;
+        break;
+      case 2:
+        t3 = env3;
+        t1 = env2;
+        t2 = env1;
+        index = env0;
+        break;
+      case 3:
+        t1 = env4;
+        t2 = env3;
+        t4 = env2;
+        t3 = env1;
+        index = env0;
+        break;
+      case 4:
+        t3 = env3;
+        t1 = env2;
+        t2 = env1;
+        index = env0;
+        break;
+    }
+    switch (state0) {
+      case 0:
+      case 1:
+        state0 = 0;
+        t1 = this._offset;
+        t2 = $.getInterceptor$JSNumber(index);
+        t2.operator$add$1(index, t1);
+      default:
+        if (state0 === 3 || state0 === 2 || state0 === 0 && !$.ltB(index, 0))
+          switch (state0) {
+            case 0:
+              t3 = this._liblib3$_length;
+            case 2:
+              state0 = 0;
+            case 3:
+              if (state0 === 3 || state0 === 0 && !(!(t3 == null) && $.geB(index, t3)))
+                switch (state0) {
+                  case 0:
+                    t3 = t2.operator$add$1(index, t1);
+                    t4 = this._liblib3$_list;
+                    t4 = $.getInterceptor$JSStringJSArray(t4).get$length(t4);
+                  case 3:
+                    state0 = 0;
+                    t4 = $.geB(t3, t4);
+                    t3 = t4;
+                }
+              else
+                t3 = true;
+          }
+        else
+          t3 = true;
+        if (t3)
+          throw $.$$throw($.RangeError$value(index));
+        t3 = this._liblib3$_list;
+      case 4:
+        var index, t1, t2, t3, t4;
+        state0 = 0;
+        t1 = t2.operator$add$1(index, t1);
+        return $.getInterceptor$JSStringJSArray(t3).operator$index$1(t3, t1);
+    }
+  },
+  ListView$3: function(list, _offset, _length) {
+    var t1, t2;
+    t1 = this._offset;
+    if (t1 < 0)
+      throw $.$$throw($.ArgumentError$(t1));
+    t1 = this._liblib3$_length;
+    if (!(t1 == null))
+      t2 = !(typeof t1 === "number" && Math.floor(t1) === t1) || $.ltB(t1, 0);
+    else
+      t2 = false;
+    if (t2)
+      throw $.$$throw($.ArgumentError$(t1));
   }
 };
 
@@ -4828,7 +4978,7 @@ $$._FutureWrapper = {"": "Object;_future",
   is$Future: true
 };
 
-$$.RsvpInsertRequest = {"": "Object;id=,partyMembers>,dietaryRestrictions,isStayingOvernight,durationDaysCount",
+$$.RsvpInsertRequest = {"": "Object;id=,partyMembers>,dietaryRestrictions,isStayingOvernight,interestedInSightseeing,isAccepted",
   toJson$0: function() {
     var map, t1, t2;
     map = $.Map_Map();
@@ -4838,12 +4988,13 @@ $$.RsvpInsertRequest = {"": "Object;id=,partyMembers>,dietaryRestrictions,isStay
     t2.operator$indexSet$2(map, "PartyMembers", this.partyMembers);
     t2.operator$indexSet$2(map, "DietaryRestrictions", this.dietaryRestrictions);
     t2.operator$indexSet$2(map, "IsStayingOvernight", this.isStayingOvernight);
-    t2.operator$indexSet$2(map, "DurationDaysCount", this.durationDaysCount);
+    t2.operator$indexSet$2(map, "InterestedInSightseeing", this.interestedInSightseeing);
+    t2.operator$indexSet$2(map, "IsAccepted", this.isAccepted);
     return map;
   }
 };
 
-$$.RsvpWidget = {"": "Object;_reqInProgress,_infoEl>",
+$$.RsvpWidget = {"": "Object;_reqInProgress,_infoEl>,_moreInfo>",
   decorate$0: function() {
     var t1, t2;
     t1 = document.query$1("#rsvp-send-button").get$on().get$click();
@@ -4852,12 +5003,25 @@ $$.RsvpWidget = {"": "Object;_reqInProgress,_infoEl>",
     t2 = document.query$1("#rsvp-add-name-button").get$on().get$click();
     t1 = this.get$_onAddNameClick();
     $.getInterceptor$JSArray(t2).add$1(t2, t1);
+    t1 = document.query$1("#accept-button").get$on().get$click();
+    t2 = this.get$_onAcceptClick();
+    $.getInterceptor$JSArray(t1).add$1(t1, t2);
+    t2 = document.query$1("#reject-button").get$on().get$click();
+    t1 = this.get$_onRejectClick();
+    $.getInterceptor$JSArray(t2).add$1(t2, t1);
+    t1 = document.query$1("#rsvp-cancel-button").get$on().get$click();
+    t2 = this.get$_onCancelClick();
+    $.getInterceptor$JSArray(t1).add$1(t1, t2);
+    this._moreInfo = document.query$1("#rsvp-more-info");
+    t2 = this._moreInfo.get$on().get$transitionEnd();
+    t1 = this.get$_onMoreInfoTransitionEnd();
+    $.getInterceptor$JSArray(t2).add$1(t2, t1);
     this._infoEl = document.query$1("#rsvp-info-element");
     t1 = this._infoEl.get$on().get$transitionEnd();
     t2 = this.get$_onInfoElTransitionEnd();
     $.getInterceptor$JSArray(t1).add$1(t1, t2);
   },
-  _showMessage$2: function(type, msg) {
+  _showMessage$3: function(type, msg, duration) {
     var t1;
     this._infoEl.set$innerHtml(msg);
     t1 = this._infoEl.get$classes();
@@ -4868,44 +5032,63 @@ $$.RsvpWidget = {"": "Object;_reqInProgress,_infoEl>",
     $.getInterceptor$JSArray(t1).add$1(t1, type);
     this._infoEl.set$hidden(false);
     window.setTimeout$2(new $.RsvpWidget__showMessage_anon(this), 0);
-    if (type === "info")
-      window.setTimeout$2(new $.RsvpWidget__showMessage_anon0(this), 6000);
+    if ($.eqB(type, "info"))
+      window.setTimeout$2(new $.RsvpWidget__showMessage_anon0(this), duration);
+  },
+  _showMessage$2: function(type, msg) {
+    return this._showMessage$3(type, msg, 10000);
   },
   _setSendButtonState$1: function(isInProgress) {
-    var sendButton, t1, label;
+    var sendButton, t1, rejectButton;
     sendButton = document.query$1("#rsvp-send-button");
     if (isInProgress) {
       t1 = sendButton.get$dataAttributes();
-      label = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, "label-send-in-progress");
+      sendButton.set$text($.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, "label-in-progress"));
     } else {
       t1 = sendButton.get$dataAttributes();
-      label = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, "label-send");
+      sendButton.set$text($.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, "label"));
     }
-    sendButton.set$text(label);
+    rejectButton = document.query$1("#reject-button");
+    if (isInProgress) {
+      t1 = rejectButton.get$dataAttributes();
+      rejectButton.set$text($.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, "label-in-progress"));
+    } else {
+      t1 = rejectButton.get$dataAttributes();
+      rejectButton.set$text($.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, "label"));
+    }
     sendButton.set$disabled(isInProgress);
+    rejectButton.set$disabled(isInProgress);
+    $.callTypeCast(document.query$1("#rsvp-cancel-button"), "is$ButtonElement").set$disabled(isInProgress);
+    $.callTypeCast(document.query$1("#accept-button"), "is$ButtonElement").set$disabled(isInProgress);
   },
-  _onSendClick$1: function(e) {
-    var rsvp, t1, t2;
-    this._setSendButtonState$1(true);
+  _sendRsvp$0: function() {
+    var rsvp, t1, t2, t3, t4;
     rsvp = $.RsvpInsertRequest$();
     rsvp.id = $.callTypeCast(document.query$1("#rsvp-id"), "is$TextInputElement").get$value();
     rsvp.partyMembers = $.List_List(0);
     t1 = document.queryAll$1("#rsvp-names > .rsvp-name");
-    t2 = new $.RsvpWidget__onSendClick_anon(rsvp);
+    t2 = new $.RsvpWidget__sendRsvp_anon(rsvp);
     $.getInterceptor$JSArray(t1).forEach$1(t1, t2);
     rsvp.dietaryRestrictions = $.callTypeCast(document.query$1("#rsvp-dietary-restrictions"), "is$TextAreaElement").get$value();
     rsvp.isStayingOvernight = $.callTypeCast(document.query$1("#rsvp-is-staying-overnight"), "is$CheckboxInputElement").get$checked();
-    rsvp.durationDaysCount = $.callTypeCast(document.query$1("#rsvp-duration-days-count"), "is$TextInputElement").get$value();
+    t2 = $.callTypeCast(document.query$1("#rsvp-interested-in-sightseeing"), "is$SelectElement").get$selectedOptions();
+    t1 = $.getInterceptor$JSStringJSArray(t2).operator$index$1(t2, 0).get$dataAttributes();
+    rsvp.interestedInSightseeing = $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, "value");
+    rsvp.isAccepted = document.query$1("#reject-button").get$hidden();
     this._reqInProgress = $.HttpRequest_HttpRequest();
-    t2 = this._reqInProgress.get$on().get$load();
-    t1 = this.get$_onRsvpUpsertSuccess();
-    $.getInterceptor$JSArray(t2).add$1(t2, t1);
-    t1 = this._reqInProgress.get$on().get$error();
-    t2 = this.get$_onRsvpUpsertFail();
-    $.getInterceptor$JSArray(t1).add$1(t1, t2);
+    t3 = this._reqInProgress.get$on().get$load();
+    t4 = this.get$_onRsvpUpsertSuccess();
+    $.getInterceptor$JSArray(t3).add$1(t3, t4);
+    t4 = this._reqInProgress.get$on().get$error();
+    t3 = this.get$_onRsvpUpsertFail();
+    $.getInterceptor$JSArray(t4).add$1(t4, t3);
     this._reqInProgress.open$2("POST", "/api/rsvp/create");
     this._reqInProgress.send$1($._JsonStringifier_stringify(rsvp));
-    $.scoped(new $.RsvpWidget__onSendClick_anon0());
+    $.scoped(new $.RsvpWidget__sendRsvp_anon0());
+  },
+  _onSendClick$1: function(e) {
+    this._setSendButtonState$1(true);
+    this._sendRsvp$0();
   },
   get$_onSendClick: function() {
     return new $.BoundClosure(this, "_onSendClick$1");
@@ -4913,12 +5096,17 @@ $$.RsvpWidget = {"": "Object;_reqInProgress,_infoEl>",
   _onRsvpUpsertSuccess$1: function(e) {
     var t1;
     if ($.eqB(this._reqInProgress.get$status(), 200)) {
-      t1 = document.query$1("#rsvp-info-element").get$dataAttributes();
-      this._showMessage$2("info", $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, "success-message"));
-      this._setSendButtonState$1(false);
+      if (document.query$1("#reject-button").get$hidden() === true) {
+        t1 = document.query$1("#rsvp-info-element").get$dataAttributes();
+        this._showMessage$2("info", $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, "success-message"));
+      } else {
+        t1 = document.query$1("#rsvp-info-element").get$dataAttributes();
+        this._showMessage$3("info", $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, "success-reject-message"), 12000);
+      }
       $.scoped(new $.RsvpWidget__onRsvpUpsertSuccess_anon());
     } else
       this._onRsvpUpsertFail$1(e);
+    this._setSendButtonState$1(false);
   },
   get$_onRsvpUpsertSuccess: function() {
     return new $.BoundClosure(this, "_onRsvpUpsertSuccess$1");
@@ -4955,6 +5143,53 @@ $$.RsvpWidget = {"": "Object;_reqInProgress,_infoEl>",
   },
   get$_onInfoElTransitionEnd: function() {
     return new $.BoundClosure(this, "_onInfoElTransitionEnd$1");
+  },
+  _onAcceptClick$1: function(_) {
+    var t1;
+    this._moreInfo.set$hidden(false);
+    t1 = $.S(document.query$1("#rsvp-more-info-height-wrapper").get$offsetHeight()) + "px";
+    this._moreInfo.get$style().set$height(t1);
+    document.query$1("#accept-button").set$hidden(true);
+    document.query$1("#reject-button").set$hidden(true);
+    document.query$1("#rsvp-send-button").set$hidden(false);
+    document.query$1("#rsvp-cancel-button").set$hidden(false);
+  },
+  get$_onAcceptClick: function() {
+    return new $.BoundClosure(this, "_onAcceptClick$1");
+  },
+  _onRejectClick$1: function(_) {
+    this._setSendButtonState$1(true);
+    this._sendRsvp$0();
+  },
+  get$_onRejectClick: function() {
+    return new $.BoundClosure(this, "_onRejectClick$1");
+  },
+  _onCancelClick$1: function(_) {
+    var t1 = $.S(document.query$1("#rsvp-more-info-height-wrapper").get$offsetHeight()) + "px";
+    this._moreInfo.get$style().set$height(t1);
+    window.setTimeout$2(new $.RsvpWidget__onCancelClick_anon(this), 0);
+    document.query$1("#accept-button").set$hidden(false);
+    document.query$1("#reject-button").set$hidden(false);
+    document.query$1("#rsvp-send-button").set$hidden(true);
+    document.query$1("#rsvp-cancel-button").set$hidden(true);
+  },
+  get$_onCancelClick: function() {
+    return new $.BoundClosure(this, "_onCancelClick$1");
+  },
+  _onMoreInfoTransitionEnd$1: function(_) {
+    var t1, t2;
+    t1 = $.eqB(this._moreInfo.get$offsetHeight(), 0);
+    t2 = this._moreInfo;
+    if (t1)
+      t2.set$hidden(true);
+    else {
+      t1 = t2.get$classes();
+      $.getInterceptor$JSArray(t1).remove$1(t1, "height-transition");
+      this._moreInfo.get$style().set$height("auto");
+    }
+  },
+  get$_onMoreInfoTransitionEnd: function() {
+    return new $.BoundClosure(this, "_onMoreInfoTransitionEnd$1");
   }
 };
 
@@ -7685,11 +7920,11 @@ $$.ReviverJsonListener = {"": "BuildJsonListener;reviver,stack,currentContainer,
 
 $$.JsonParser = {"": "Object;source>,listener>",
   parse$0: function() {
-    var states, t1, length$, t2, t3, state, position, char$, t4, position0;
+    var states, t1, length$, t2, t3, position, state, char$, t4, position0;
     states = [];
     t1 = this.source;
     length$ = $.getInterceptor$JSStringJSArray(t1).get$length(t1);
-    for (t2 = $.getInterceptor$JSString(t1), t3 = this.listener, state = 0, position = 0; $.ltB(position, length$);) {
+    for (t2 = $.getInterceptor$JSString(t1), t3 = this.listener, position = 0, state = 0; $.ltB(position, length$);) {
       char$ = t2.charCodeAt$1(t1, position);
       switch (char$) {
         case 32:
@@ -9193,7 +9428,7 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"": "Closure;findSlot_
               t3.call$2(slot, copy0);
             }
             if (typeof copy0 !== "object" || copy0 === null || (copy0.constructor !== Array || !!copy0.immutable$list) && !copy0.is$JavaScriptIndexingBehavior())
-              return this.call$1$bailout(3, e, t3, elementCopy, $.CONSTANT0, length$, copy0, slot, t2, i, copy);
+              return this.call$1$bailout(3, e, t3, elementCopy, $.CONSTANT0, length$, copy0, slot, i, copy, t2);
             for (t1 = e.length, t2 = copy0.length, j = 0; j < i; ++j) {
               if (j >= t1)
                 throw $.ioore(j);
@@ -9244,9 +9479,9 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"": "Closure;findSlot_
         e = env0;
         break;
       case 3:
-        copy = env9;
-        i = env8;
-        t4 = env7;
+        t4 = env9;
+        copy = env8;
+        i = env7;
         slot = env6;
         copy0 = env5;
         length$ = env4;
@@ -10052,7 +10287,17 @@ $$.PhotoGalleryWidget__onWindowResize_anon = {"": "Closure;buttonTop_0",
   }
 };
 
-$$.RsvpWidget__onSendClick_anon = {"": "Closure;rsvp_0",
+$$.RsvpWidget__onCancelClick_anon = {"": "Closure;this_0",
+  call$0: function() {
+    var t1, t2;
+    t1 = this.this_0;
+    t2 = t1.get$_moreInfo().get$classes();
+    $.getInterceptor$JSArray(t2).add$1(t2, "height-transition");
+    t1.get$_moreInfo().get$style().set$height("0");
+  }
+};
+
+$$.RsvpWidget__sendRsvp_anon = {"": "Closure;rsvp_0",
   call$1: function(nameEl) {
     var name$, t1;
     name$ = $.callTypeCast(nameEl, "is$TextInputElement").get$value();
@@ -10063,7 +10308,7 @@ $$.RsvpWidget__onSendClick_anon = {"": "Closure;rsvp_0",
   }
 };
 
-$$.RsvpWidget__onSendClick_anon0 = {"": "Closure;",
+$$.RsvpWidget__sendRsvp_anon0 = {"": "Closure;",
   call$0: function() {
     var t1 = $.context();
     $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, "_gaq").push$1($.Proxy_Proxy$_json(["_trackEvent", "Rsvp", "start"]));
@@ -10095,6 +10340,18 @@ $$.RsvpWidget__onRsvpUpsertSuccess_anon = {"": "Closure;",
   call$0: function() {
     var t1 = $.context();
     $.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, "_gaq").push$1($.Proxy_Proxy$_json(["_trackEvent", "Rsvp", "success"]));
+  }
+};
+
+$$.SelectElement_selectedOptions_anon = {"": "Closure;",
+  call$1: function(o) {
+    return o.get$selected();
+  }
+};
+
+$$.SelectElement_options_anon = {"": "Closure;",
+  call$1: function(e) {
+    return typeof e === "object" && e !== null && e.is$OptionElement();
   }
 };
 
@@ -11721,6 +11978,12 @@ $.MappedList$ = function(_list, _f) {
   return new $.MappedList(_list, _f);
 };
 
+$.ListView$ = function(list, _offset, _length) {
+  var t1 = new $.ListView(list, _offset, _length);
+  t1.ListView$3(list, _offset, _length);
+  return t1;
+};
+
 $.double_parse = function(source, handleError) {
   return $.Primitives_parseDouble(source, handleError);
 };
@@ -12524,11 +12787,11 @@ $._JsonStringifier_stringify = function(object) {
 };
 
 $._JsonStringifier_escape = function(sb, s) {
-  var t1, length$, charCodes, needsEscape, i, charCode, t2, t3;
+  var t1, length$, charCodes, i, needsEscape, charCode, t2, t3;
   t1 = $.getInterceptor$JSStringJSArray(s);
   length$ = t1.get$length(s);
   charCodes = $.List_List(0);
-  for (needsEscape = false, i = 0; $.ltB(i, length$); ++i) {
+  for (i = 0, needsEscape = false; $.ltB(i, length$); ++i) {
     charCode = t1.charCodeAt$1(s, i);
     if ($.ltB(charCode, 32)) {
       charCodes.push(92);
@@ -12678,11 +12941,11 @@ $.PhotoGalleryWidget__getImageUrl = function(currentUrl, offset) {
 };
 
 $.RsvpInsertRequest$ = function() {
-  return new $.RsvpInsertRequest(null, null, null, null, null);
+  return new $.RsvpInsertRequest(null, null, null, null, null, null);
 };
 
 $.RsvpWidget$ = function() {
-  return new $.RsvpWidget(null, null);
+  return new $.RsvpWidget(null, null, null);
 };
 
 $._inject = function(code) {
@@ -12955,14 +13218,14 @@ $._deserializeElement = function(id) {
 
 $.$$throw.call$1 = $.$$throw;
 $.$$throw.$name = "$$throw";
-$.Primitives__throwFormatException.call$1 = $.Primitives__throwFormatException;
-$.Primitives__throwFormatException.$name = "Primitives__throwFormatException";
 $.dynamicBind.call$4 = $.dynamicBind;
 $.dynamicBind.$name = "dynamicBind";
 $.invokeClosure.call$5 = $.invokeClosure;
 $.invokeClosure.$name = "invokeClosure";
 $.DartError_toStringWrapper.call$0 = $.DartError_toStringWrapper;
 $.DartError_toStringWrapper.$name = "DartError_toStringWrapper";
+$.IsolateNatives__processWorkerMessage.call$2 = $.IsolateNatives__processWorkerMessage;
+$.IsolateNatives__processWorkerMessage.$name = "IsolateNatives__processWorkerMessage";
 $.typeNameInChrome.call$1 = $.typeNameInChrome;
 $.typeNameInChrome.$name = "typeNameInChrome";
 $.typeNameInSafari.call$1 = $.typeNameInSafari;
@@ -12971,6 +13234,8 @@ $.typeNameInOpera.call$1 = $.typeNameInOpera;
 $.typeNameInOpera.$name = "typeNameInOpera";
 $.typeNameInFirefox.call$1 = $.typeNameInFirefox;
 $.typeNameInFirefox.$name = "typeNameInFirefox";
+$.Primitives__throwFormatException.call$1 = $.Primitives__throwFormatException;
+$.Primitives__throwFormatException.$name = "Primitives__throwFormatException";
 $.typeNameInIE.call$1 = $.typeNameInIE;
 $.typeNameInIE.$name = "typeNameInIE";
 $.constructorNameFallback.call$1 = $.constructorNameFallback;
@@ -12979,8 +13244,6 @@ $._serialize.call$1 = $._serialize;
 $._serialize.$name = "_serialize";
 $._deserialize.call$1 = $._deserialize;
 $._deserialize.$name = "_deserialize";
-$.IsolateNatives__processWorkerMessage.call$2 = $.IsolateNatives__processWorkerMessage;
-$.IsolateNatives__processWorkerMessage.$name = "IsolateNatives__processWorkerMessage";
 Isolate.$finishClasses($$);
 $$ = {};
 $.List = {builtin$cls: 'List'};
@@ -12990,9 +13253,9 @@ $.Gamepad = {builtin$cls: 'Gamepad'};
 $.TextTrackCue = {builtin$cls: 'TextTrackCue'};
 $.Number = {builtin$cls: 'Number'};
 $.PathSeg = {builtin$cls: 'PathSeg'};
-$.ElementInstance = {builtin$cls: 'ElementInstance'};
 $.Touch = {builtin$cls: 'Touch'};
 $.num = {builtin$cls: 'num'};
+$.ElementInstance = {builtin$cls: 'ElementInstance'};
 $.MediaStream = {builtin$cls: 'MediaStream'};
 $.DomMimeType = {builtin$cls: 'DomMimeType'};
 $.DomPlugin = {builtin$cls: 'DomPlugin'};
@@ -13033,13 +13296,13 @@ $.CONSTANT0 = new Isolate.$isolateProperties.JSArray();
 $.CONSTANT5 = new Isolate.$isolateProperties.JSNumber();
 $.KeyCode_WIN_KEY_FF_LINUX = 0;
 $.KeyCode_ENTER = 13;
+$.KeyCode_CTRL = 17;
 $.KeyCode_ALT = 18;
 $.KeyCode_CAPS_LOCK = 20;
 $.KeyCode_ESC = 27;
 $.KeyCode_SPACE = 32;
 $.KeyCode_PAGE_UP = 33;
 $.KeyCode_PAGE_DOWN = 34;
-$.KeyCode_CTRL = 17;
 $.KeyCode_END = 35;
 $.KeyCode_LEFT = 37;
 $.KeyCode_HOME = 36;
@@ -13125,60 +13388,60 @@ $.JsonParser_EMPTY = 0;
 $.JsonParser_VALUE_READ_BITS = 28;
 $.JsonParser_STATE_INITIAL = 0;
 $.JsonParser_STATE_END = 28;
+$._jsPortSync = null;
 $.JsonParser_STATE_ARRAY_EMPTY = 1;
 $.JsonParser_STATE_ARRAY_VALUE = 29;
+$._jsPortCreate = null;
+$._jsPortDebug = null;
 $.JsonParser_STATE_ARRAY_COMMA = 17;
 $.JsonParser_STATE_OBJECT_EMPTY = 6;
-$.JsonParser_STATE_OBJECT_KEY = 30;
-$.JsonParser_STATE_OBJECT_COLON = 19;
-$.JsonParser_STATE_OBJECT_VALUE = 31;
-$.JsonParser_STATE_OBJECT_COMMA = 22;
-$.JsonParser_BACKSPACE = 8;
-$._jsPortSync = null;
-$._jsPortCreate = null;
-$.JsonParser_NEWLINE = 10;
-$.JsonParser_TAB = 9;
-$._jsPortDebug = null;
-$.JsonParser_CARRIAGE_RETURN = 13;
-$._jsPortEquals = null;
 $._jsPortInstanceof = null;
-$.JsonParser_SPACE = 32;
+$._jsPortEquals = null;
 $._jsPortConvert = null;
-$.JsonParser_QUOTE = 34;
-$._jsEnterJavaScriptScope = null;
+$.JsonParser_STATE_OBJECT_VALUE = 31;
+$.JsonParser_STATE_OBJECT_COLON = 19;
+$.JsonParser_STATE_OBJECT_COMMA = 22;
+$._jsExitJavaScriptScope = null;
+$.JsonParser_BACKSPACE = 8;
+$._jsGlobalize = null;
+$.JsonParser_TAB = 9;
+$.JsonParser_NEWLINE = 10;
+$._dartEnterDartScope = null;
+$.JsonParser_CARRIAGE_RETURN = 13;
+$._dartExitDartScope = null;
 $.JsonParser_FORM_FEED = 12;
+$.JsonParser_SPACE = 32;
+$._jsEnterJavaScriptScope = null;
+$.JsonParser_QUOTE = 34;
+$.JsonParser_STATE_OBJECT_KEY = 30;
 $.JsonParser_PLUS = 43;
 $.JsonParser_COMMA = 44;
-$._jsGlobalize = null;
-$.JsonParser_MINUS = 45;
 $._jsInvalidate = null;
+$.JsonParser_MINUS = 45;
 $.JsonParser_DECIMALPOINT = 46;
-$._dartEnterDartScope = null;
 $.JsonParser_SLASH = 47;
-$._dartExitDartScope = null;
 $.JsonParser_CHAR_0 = 48;
 $.JsonParser_CHAR_9 = 57;
 $.JsonParser_COLON = 58;
-$.JsonParser_CHAR_E = 69;
+$._localNextElementId = 0;
 $.JsonParser_LBRACKET = 91;
+$._DART_ID = "data-dart_id";
 $.JsonParser_BACKSLASH = 92;
+$._DART_TEMPORARY_ATTACHED = "data-dart_temporary_attached";
 $.JsonParser_RBRACKET = 93;
 $.JsonParser_CHAR_a = 97;
 $.JsonParser_CHAR_b = 98;
 $.JsonParser_CHAR_e = 101;
 $.JsonParser_CHAR_f = 102;
+$.JsonParser_CHAR_E = 69;
 $.JsonParser_CHAR_l = 108;
 $.JsonParser_CHAR_n = 110;
-$._localNextElementId = 0;
 $.JsonParser_CHAR_r = 114;
-$._DART_ID = "data-dart_id";
 $.JsonParser_CHAR_s = 115;
-$._DART_TEMPORARY_ATTACHED = "data-dart_temporary_attached";
 $.JsonParser_CHAR_t = 116;
 $.JsonParser_CHAR_u = 117;
 $.JsonParser_LBRACE = 123;
 $.JsonParser_RBRACE = 125;
-$._jsExitJavaScriptScope = null;
 $.ReceivePortImpl__nextFreeId = 1;
 $.JSInvocationMirror_METHOD = 0;
 $.JSInvocationMirror_GETTER = 1;
@@ -13258,14 +13521,14 @@ Isolate.$lazy($, 'globalWindow', 'globalWindow', 'get$globalWindow', function() 
 Isolate.$lazy($, '_proxiedObjectTable', '_proxiedObjectTable', 'get$_proxiedObjectTable', function() {
   return $._ProxiedObjectTable$();
 });
+Isolate.$lazy($, 'globalWorker', 'globalWorker', 'get$globalWorker', function() {
+  return $.get$globalThis().Worker;
+});
 Isolate.$lazy($, '_IMAGE_IDX_REGEXP', 'PhotoGalleryWidget__IMAGE_IDX_REGEXP', 'get$PhotoGalleryWidget__IMAGE_IDX_REGEXP', function() {
   return $.RegExp_RegExp("images/(\\d+)_original\\.jpg", true, false);
 });
 Isolate.$lazy($, 'globalPostMessageDefined', 'globalPostMessageDefined', 'get$globalPostMessageDefined', function() {
   return $.get$globalThis().postMessage !== (void 0);
-});
-Isolate.$lazy($, 'globalWorker', 'globalWorker', 'get$globalWorker', function() {
-  return $.get$globalThis().Worker;
 });
 var $ = null;
 Isolate.$finishClasses($$);
@@ -13312,6 +13575,9 @@ $.$defineNativeClass = function(cls, desc) {
   is$Blob: function() {
     return false;
   },
+  is$ButtonElement: function() {
+    return false;
+  },
   is$Element: function() {
     return false;
   },
@@ -13337,6 +13603,12 @@ $.$defineNativeClass = function(cls, desc) {
     return false;
   },
   is$Node: function() {
+    return false;
+  },
+  is$OptionElement: function() {
+    return false;
+  },
+  is$SelectElement: function() {
     return false;
   },
   is$TextAreaElement: function() {
@@ -13453,7 +13725,11 @@ $.$defineNativeClass("HTMLBodyElement", {
   }
 });
 
-$.$defineNativeClass("HTMLButtonElement", {"": "disabled<,type=,value="});
+$.$defineNativeClass("HTMLButtonElement", {"": "disabled<,type=,value=",
+  is$ButtonElement: function() {
+    return true;
+  }
+});
 
 $.$defineNativeClass("HTMLCanvasElement", {"": "height<,width="});
 
@@ -15552,7 +15828,11 @@ $.$defineNativeClass("HTMLObjectElement", {"": "height<,type=,width="});
 
 $.$defineNativeClass("HTMLOptGroupElement", {"": "disabled<"});
 
-$.$defineNativeClass("HTMLOptionElement", {"": "disabled<,value="});
+$.$defineNativeClass("HTMLOptionElement", {"": "disabled<,selected>,value=",
+  is$OptionElement: function() {
+    return true;
+  }
+});
 
 $.$defineNativeClass("HTMLOutputElement", {"": "type>,value="});
 
@@ -15641,7 +15921,33 @@ $.$defineNativeClass("ScriptProfileNode", {
   }
 });
 
-$.$defineNativeClass("HTMLSelectElement", {"": "disabled<,length=,type>,value="});
+$.$defineNativeClass("HTMLSelectElement", {"": "disabled<,length=,type>,value=",
+  get$options: function() {
+    var t1, t2, options;
+    t1 = this.get$children();
+    t2 = new $.SelectElement_options_anon();
+    t2 = $.getInterceptor$JSArray(t1).where$1(t1, t2);
+    options = $.getInterceptor$JSArray(t2).toList$0(t2);
+    return $.ListView$(options, 0, $.getInterceptor$JSStringJSArray(options).get$length(options));
+  },
+  get$selectedOptions: function() {
+    var t1, t2, options;
+    if (this.multiple === true) {
+      t1 = this.get$options();
+      t2 = new $.SelectElement_selectedOptions_anon();
+      t2 = $.getInterceptor$JSArray(t1).where$1(t1, t2);
+      options = $.getInterceptor$JSArray(t2).toList$0(t2);
+      return $.ListView$(options, 0, $.getInterceptor$JSStringJSArray(options).get$length(options));
+    } else {
+      t1 = this.get$options();
+      t2 = this.selectedIndex;
+      return [$.getInterceptor$JSStringJSArray(t1).operator$index$1(t1, t2)];
+    }
+  },
+  is$SelectElement: function() {
+    return true;
+  }
+});
 
 $.$defineNativeClass("ShadowRoot", {"": "innerHtml:innerHTML|"});
 

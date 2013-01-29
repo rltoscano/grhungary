@@ -51,8 +51,9 @@ type Rsvp struct {
   PartyMembers []string
   DietaryRestrictions string
   IsStayingOvernight bool
-  DurationDaysCount string
+  InterestedInSightseeing string
   Timestamp time.Time
+  IsAccepted bool
 }
 
 type EmailBody struct {
@@ -62,7 +63,7 @@ type EmailBody struct {
 
 func handleApiRsvpCreate(w http.ResponseWriter, r *http.Request) {  
   c := appengine.NewContext(r)
-  
+
   buffer := make([]byte, r.ContentLength)
   if _, err := r.Body.Read(buffer); err != nil {
     http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -75,51 +76,68 @@ func handleApiRsvpCreate(w http.ResponseWriter, r *http.Request) {
     return
   }
   c.Infof("Received RSVP")
-  
+
   rsvp.Timestamp = time.Now()
   rsvpKey := datastore.NewIncompleteKey(c, "Rsvp", nil)
   if _, err = datastore.Put(c, rsvpKey, &rsvp); err != nil {
     http.Error(w, err.Error(), http.StatusInternalServerError)
+    c.Errorf("Error storing RSVP for %s", rsvp.Id)
     return
   }
   c.Infof("Stored RSVP for %s", rsvp.Id)
-  
-  if ok, _ := regexp.MatchString(EMAIL_REGEXP, rsvp.Id); ok {
-      localeMap := GetLocaleMap(r)
-  
-	  var tpl *template.Template
-	  if tpl, err = template.ParseFiles("rsvp-email.html"); err != nil {
-	    http.Error(w, err.Error(), http.StatusInternalServerError)
-	    c.Errorf("Couldn't parse email template.", err.Error())
-	    return
-	  }
-	  emailBodyBuf := bytes.Buffer{}
-	  tpl.ExecuteTemplate(&emailBodyBuf, "rsvp-email-body", EmailBody{
-	    Messages: localeMap,
-	    Rsvp: rsvp,
-	  })
-	  emailSubjectBuf := bytes.Buffer{}
-	  tpl.ExecuteTemplate(&emailSubjectBuf, "rsvp-email-subject", localeMap)
-	  
-	  msg := mail.Message{
-	    Sender: "Gyöngyi & Robert <contact@grhungary.com>",
-	    ReplyTo: "contact@grhungary.com",
-	    To: []string{rsvp.Id},
-	    Subject: emailSubjectBuf.String(),
-	    HTMLBody: emailBodyBuf.String(),
-	  }
-	  if err = mail.Send(c, &msg); err != nil {
-	    c.Errorf("Couldn't send mail to %s: %s", rsvp.Id, err.Error());
-	    http.Error(w, err.Error(), http.StatusInternalServerError)
-	    return
-	  }
-	  
-	  msg.To = []string{"contact@grhungary.com"}
-	  if err = mail.Send(c, &msg); err != nil {
-	    c.Errorf("Failed to send duplicate mail to admins");
-	  }
-	  
-	  c.Infof("Sent mail to %s", rsvp.Id);
+
+  var tpl *template.Template
+  if tpl, err = template.ParseFiles("rsvp-email.html"); err != nil {
+    http.Error(w, err.Error(), http.StatusInternalServerError)
+    c.Errorf("Couldn't parse email template.", err.Error())
+    return
+  }
+
+  isEmail, _ := regexp.MatchString(EMAIL_REGEXP, rsvp.Id);  
+  if rsvp.IsAccepted && isEmail {
+    localeMap := GetLocaleMap(r)
+
+    emailBodyBuf := bytes.Buffer{}
+    tpl.ExecuteTemplate(&emailBodyBuf, "rsvp-email-body", EmailBody{
+      Messages: localeMap,
+      Rsvp: rsvp,
+    })
+    emailSubjectBuf := bytes.Buffer{}
+    tpl.ExecuteTemplate(&emailSubjectBuf, "rsvp-email-subject", localeMap)
+
+    msg := mail.Message{
+      Sender: "Gyöngyi & Robert <contact@grhungary.com>",
+      ReplyTo: "contact@grhungary.com",
+      To: []string{rsvp.Id},
+      Subject: emailSubjectBuf.String(),
+      HTMLBody: emailBodyBuf.String(),
+    }
+    if err = mail.Send(c, &msg); err != nil {
+      c.Errorf("Couldn't send mail to %s: %s", rsvp.Id, err.Error());
+      http.Error(w, err.Error(), http.StatusInternalServerError)
+      return
+    }
+
+    c.Infof("Sent mail to %s", rsvp.Id);
+  }
+
+  // Send feedback email.
+  emailBodyBuf := bytes.Buffer{}
+  if rsvp.IsAccepted {
+    tpl.ExecuteTemplate(&emailBodyBuf, "rsvp-feedback-accept-email", rsvp)
+  } else {
+    tpl.ExecuteTemplate(&emailBodyBuf, "rsvp-feedback-reject-email", rsvp)
+  }
+  msg := mail.Message{
+    Sender: "Gyöngyi & Robert <contact@grhungary.com>",
+    To: []string{"contact@grhungary.com"},
+    Subject: "RSVP Received",
+    HTMLBody: emailBodyBuf.String(),
+  }
+  if err = mail.Send(c, &msg); err != nil {
+    c.Errorf("Couldn't send feedback mail: %s", err.Error());
+    http.Error(w, err.Error(), http.StatusInternalServerError)
+    return
   }
 
   w.Header().Set("Content-type", "text/json; charset=utf-8")

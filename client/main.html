@@ -4,6 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="icon" href="static/images/bird-face-right.png" type="image/png"/>
     <title>Grhungary</title>
     <link href="http://fonts.googleapis.com/css?family=Great+Vibes|Didact+Gothic&subset=latin,latin-ext"
         rel="stylesheet" type="text/css">
@@ -69,14 +70,14 @@
         <div id="photo-gallery-page" class="page transparent" hidden>
           <h1>photo gallery</h1>
           <div>
-            <div style="display: inline-block"><img
+            <div style="display: inline-block"><img width="276px" height="208px"
               src="static/images/00.jpg" width="271px"
-            /></div>
-            <div style="display: inline-block"><img
+            /></div
+            ><div style="display: inline-block"><img
               src="static/images/01.jpg" width="157px" /><img
               src="static/images/02.jpg" width="158px" />
               <br/><img
-              src="static/images/03.jpg" width="76px" /><img
+              src="static/images/03.jpg" width="78px" height="87px" /><img
               src="static/images/04.jpg" width="117px" /><img
               src="static/images/05.jpg" width="117px"
             /></div>
@@ -184,6 +185,11 @@
             <li><a href="http://goo.gl/LwkgJ">Orbitz</a></li>
             <li><a href="http://goo.gl/DmVSH">eDreams</a></li>
           </ul>
+          <p>Please plan on arriving to Hungary no later than Friday, in case
+          there are any delays in your flight schedule. If you would like to
+          allow yourself enough time to adjust to the time difference and
+          perhaps visit some sightseeing destinations, you might want to arrive
+          a few days earlier.
           </section>
 
           <section>
@@ -313,61 +319,79 @@
 
         <div id="rsvp-page" class="page transparent" hidden>
           <h1>respond</h1>
-          <div id="rsvp-form" class="table">
+          <div class="table">
             <div>
               <div>
                 Contact Email<br/>
-                <span style="font-size: 10pt">(or Phonenumber)</span>
+                <span style="font-size: 10pt">(or phone number)</span>
               </div>
               <div>
                 <input id="rsvp-id" type="text"
                   placeholder="myemail@example.com"/>
               </div>
             </div>
-            <div>
-              <div>
-                Names of Party Members<br/>
-                <span style="font-size: 10pt">(Including yourself)</span></div>
-              <div>
-                <div id="rsvp-names">
-                  <input class="rsvp-name" type="text"
-                      placeholder="ex. Robert Toscano"/>
+          </div>
+          <div id="rsvp-more-info" class="height-transition" hidden>
+            <div id="rsvp-more-info-height-wrapper">
+              <div class="table">
+                <div>
+                  <div>
+                    Names of Party Members<br/>
+                    <span style="font-size: 10pt">(including yourself)</span></div>
+                  <div>
+                    <div id="rsvp-names">
+                      <input class="rsvp-name" type="text"
+                          placeholder="ex. Robert Toscano"/>
+                    </div>
+                    <button id="rsvp-add-name-button">Add Another Member</button>
+                  </div>
                 </div>
-                <button id="rsvp-add-name-button">Add Another Member</button>
+                <div>
+                  <div>Dietary Restrictions</div>
+                  <div><textarea id="rsvp-dietary-restrictions"></textarea></div>
+                </div>
+                <div>
+                  <div>Will you be staying at the mansion hotel overnight?</div>
+                  <div><input type="checkbox" id="rsvp-is-staying-overnight"/></div>
+                </div>
+                <div>
+                  <div>
+                    Are you interested in a daytrip in Hungary on Sunday, the 28th?
+                  </div>
+                  <div>
+                    <select id="rsvp-interested-in-sightseeing">
+                      <option selected data-value="No">No</option>
+                      <option data-value="Maybe">Maybe</option>
+                      <option data-value="Yes">Yes</option>
+                    </select>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div>
-              <div>Dietary Restrictions</div>
-              <div><textarea id="rsvp-dietary-restrictions"></textarea></div>
-            </div>
-            <div>
-              <div>Will you be staying at the mansion hotel overnight?</div>
-              <div><input type="checkbox" id="rsvp-is-staying-overnight"/></div>
-            </div>
-            <div>
-              <div>
-                How many days are you planning on staying in Hungary after the
-                wedding?
-              </div>
-              <div>
-                <input type="text" id="rsvp-duration-days-count"
-                    placeholder="ex. 5"/>
-              </div>
+
             </div>
           </div>
-
-          <button
-              id="rsvp-send-button"
-              data-label-send-in-progress="Responding..."
-              data-label-send="Respond">Respond</button>
-
+          <div>
+            <button id="accept-button">Happily Accept</button>
+            <button
+                id="reject-button"
+                data-label-in-progress="Declining..."
+                data-label="Regretfully Decline">Regretfully Decline</button>
+            <button
+                hidden
+                id="rsvp-send-button"
+                data-label-in-progress="Responding..."
+                data-label="Respond">Respond</button>
+            <button class="cancel-button" hidden id="rsvp-cancel-button">Cancel</button>
+          </div>
           <div
               id="rsvp-info-element"
               class="transparent"
               hidden
-              data-success-message="Your response has been submitted and a copy has been sent to your email address."
-              data-fail-message="There was a problem submitting your response. Please <a href=&quot;mailto:contact@grhungary.com&quot;>email us</a> for further instructions.">
+              data-success-message="Your response has been submitted and a confirmation has been sent to your email address."
+              data-fail-message="There was a problem submitting your response. Please <a href=&quot;mailto:contact@grhungary.com&quot;>email us</a> for further assistance."
+              data-success-reject-message="We're sorry you can't make it. We'll keep you updated when we add new photos and videos of the wedding.">
           </div>
+
           <img class="humotif" src="static/images/humotif.png" />
         </div>
 
