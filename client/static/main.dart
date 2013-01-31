@@ -7,6 +7,7 @@ import "package:js/js.dart" as js;
 
 part "decoration.dart";
 part "rsvp_widget.dart";
+part "gallery_image.dart";
 part "photo_gallery_widget.dart";
 part "main_widget.dart";
 

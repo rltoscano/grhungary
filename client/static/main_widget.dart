@@ -16,6 +16,8 @@ class MainWidget {
 
     Element loadingOverlay = query("#loading-overlay");
     loadingOverlay.hidden = true;
+    // Stop loading dots animation to preserve CPU.
+    loadingOverlay.query(".dots").classes.remove("dots");
 
     Element mainContent = query("#main-content");
     mainContent.hidden = false;

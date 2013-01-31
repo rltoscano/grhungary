@@ -293,12 +293,41 @@ textarea {
   margin-right: 3px;
 }
 
+.gallery-image {
+  position: absolute;
+  transition: left 500ms;
+  -moz-transition: left 500ms; /* Firefox 4 */
+  -webkit-transition: left 500ms; /* Safari and Chrome */
+  -o-transition: left 500ms; /* Opera */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.gallery-image-img {
+  position: absolute;
+  transition: opacity 500ms;
+  -moz-transition: opacity 500ms; /* Firefox 4 */
+  -webkit-transition: opacity 500ms; /* Safari and Chrome */
+  -o-transition: opacity 500ms; /* Opera */
+  background-color: rgba(0,0,0,0.8);
+}
+
+.gallery-image-loading-message {
+  position: absolute;
+  color: ivory;
+}
+
 #light-box-close-button {
   font-size: 30pt;
   position:absolute;
   right: 0;
   top: 0;
   padding: 12px;
+  z-index: 3;
   cursor: pointer;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -418,4 +447,28 @@ textarea {
 
 #contact-table div div:last-child {
   padding-right: 0;
+}
+
+@-webkit-keyframes loading-dots {
+  0% { top: 0; }
+  55% { top: 0; }
+  60% { top: -10px; }
+  80% { top: 3px; }
+  90% { top: -2px; }
+  95% { top: 1px; }
+  100% { top: 0; }
+}
+
+.dots > span {
+  -webkit-animation: loading-dots 1800ms infinite;
+  padding: 1px;
+  position: relative;
+}
+
+.dots > span:nth-child(2) {
+  -webkit-animation-delay: 100ms;
+}
+
+.dots > span:nth-child(3) {
+  -webkit-animation-delay: 300ms;
 }
