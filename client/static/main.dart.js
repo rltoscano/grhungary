@@ -639,14 +639,14 @@ $$.Iterator = {"": "Object;"};
 
 $$._HashMapImpl = {"": "Object;_liblib0$_keys>,_values>,_loadLimit,_numberOfEntries,_numberOfDeleted",
   _probeForAdding$1: function(key) {
-    var t1, hash, insertionIndex, numberOfProbes, existingKey, numberOfProbes0;
+    var t1, hash, numberOfProbes, insertionIndex, existingKey, numberOfProbes0;
     if (key == null)
       throw $.$$throw($.ArgumentError$(null));
     t1 = $.getInterceptor(key).get$hashCode(key);
     if (t1 !== (t1 | 0))
       return this._probeForAdding$1$bailout(1, key, t1);
     hash = (t1 & this._liblib0$_keys.length - 1) >>> 0;
-    for (insertionIndex = -1, numberOfProbes = 1; true; numberOfProbes = numberOfProbes0) {
+    for (numberOfProbes = 1, insertionIndex = -1; true; numberOfProbes = numberOfProbes0) {
       t1 = this._liblib0$_keys;
       if (hash < 0 || hash >= t1.length)
         throw $.ioore(hash);
@@ -687,10 +687,10 @@ $$._HashMapImpl = {"": "Object;_liblib0$_keys>,_values>,_loadLimit,_numberOfEntr
         state0 = 0;
         t3 = this._liblib0$_keys.length - 1;
         hash = $.getInterceptor$JSNumber(t1).operator$and$1(t1, t3);
-        insertionIndex = -1;
         numberOfProbes = 1;
+        insertionIndex = -1;
       case 2:
-        var t1, key, t3, hash, insertionIndex, numberOfProbes, existingKey, numberOfProbes0;
+        var t1, key, t3, hash, numberOfProbes, insertionIndex, existingKey, numberOfProbes0;
         L0:
           while (true)
             switch (state0) {
@@ -1952,9 +1952,6 @@ $$.Object = {"": ";",
   get$_previous: function() {
     return this.noSuchMethod$1($.createInvocationMirror("_previous", "get$_previous", 1, [], []));
   },
-  get$_onWindowScroll: function() {
-    return this.noSuchMethod$1($.createInvocationMirror("_onWindowScroll", "get$_onWindowScroll", 1, [], []));
-  },
   get$key: function() {
     return this.noSuchMethod$1($.createInvocationMirror("key", "get$key", 1, [], []));
   },
@@ -2192,8 +2189,8 @@ $$.Object = {"": ";",
   get$$$dom_namespaceUri: function() {
     return this.noSuchMethod$1($.createInvocationMirror("$dom_namespaceUri", "get$$$dom_namespaceUri", 1, [], []));
   },
-  get$scroll: function() {
-    return this.noSuchMethod$1($.createInvocationMirror("scroll", "get$scroll", 1, [], []));
+  get$width: function() {
+    return this.noSuchMethod$1($.createInvocationMirror("width", "get$width", 1, [], []));
   },
   get$keyPress: function() {
     return this.noSuchMethod$1($.createInvocationMirror("keyPress", "get$keyPress", 1, [], []));
@@ -2206,9 +2203,6 @@ $$.Object = {"": ";",
   },
   get$topEventLoop: function() {
     return this.noSuchMethod$1($.createInvocationMirror("topEventLoop", "get$topEventLoop", 1, [], []));
-  },
-  get$width: function() {
-    return this.noSuchMethod$1($.createInvocationMirror("width", "get$width", 1, [], []));
   },
   get$error: function() {
     return this.noSuchMethod$1($.createInvocationMirror("error", "get$error", 1, [], []));
@@ -2279,17 +2273,11 @@ $$.Object = {"": ";",
   get$_onRsvpUpsertSuccess: function() {
     return this.noSuchMethod$1($.createInvocationMirror("_onRsvpUpsertSuccess", "get$_onRsvpUpsertSuccess", 1, [], []));
   },
-  get$scrollLeft: function() {
-    return this.noSuchMethod$1($.createInvocationMirror("scrollLeft", "get$scrollLeft", 1, [], []));
-  },
-  get$scrollY: function() {
-    return this.noSuchMethod$1($.createInvocationMirror("scrollY", "get$scrollY", 1, [], []));
+  get$_setValue: function() {
+    return this.noSuchMethod$1($.createInvocationMirror("_setValue", "get$_setValue", 1, [], []));
   },
   get$needSerialization: function() {
     return this.noSuchMethod$1($.createInvocationMirror("needSerialization", "get$needSerialization", 1, [], []));
-  },
-  get$_setValue: function() {
-    return this.noSuchMethod$1($.createInvocationMirror("_setValue", "get$_setValue", 1, [], []));
   },
   get$activeTimerCount: function() {
     return this.noSuchMethod$1($.createInvocationMirror("activeTimerCount", "get$activeTimerCount", 1, [], []));
@@ -2378,6 +2366,9 @@ $$.Object = {"": ";",
   get$_onLinkClick: function() {
     return this.noSuchMethod$1($.createInvocationMirror("_onLinkClick", "get$_onLinkClick", 1, [], []));
   },
+  get$keyLocation: function() {
+    return this.noSuchMethod$1($.createInvocationMirror("keyLocation", "get$keyLocation", 1, [], []));
+  },
   get$_shadowCharCode: function() {
     return this.noSuchMethod$1($.createInvocationMirror("_shadowCharCode", "get$_shadowCharCode", 1, [], []));
   },
@@ -2386,9 +2377,6 @@ $$.Object = {"": ";",
   },
   get$_serialized: function() {
     return this.noSuchMethod$1($.createInvocationMirror("_serialized", "get$_serialized", 1, [], []));
-  },
-  get$keyLocation: function() {
-    return this.noSuchMethod$1($.createInvocationMirror("keyLocation", "get$keyLocation", 1, [], []));
   },
   get$_onRejectClick: function() {
     return this.noSuchMethod$1($.createInvocationMirror("_onRejectClick", "get$_onRejectClick", 1, [], []));
@@ -3835,8 +3823,8 @@ $$.JSString = {"": "Object;",
     return receiver;
   },
   get$hashCode: function(receiver) {
-    var i, hash, hash0, hash1;
-    for (i = 0, hash = 0; i < receiver.length; ++i, hash = hash1) {
+    var hash, i, hash0, hash1;
+    for (hash = 0, i = 0; i < receiver.length; ++i, hash = hash1) {
       hash0 = 536870911 & hash + receiver.charCodeAt(i);
       hash1 = 536870911 & hash0 + ((524287 & hash0) << 10 >>> 0);
       hash1 = hash1 ^ (hash1 >> 6);
@@ -5368,7 +5356,6 @@ $$.PhotoGalleryWidget = {"": "Object;_lightBox>,_keyboardEventController,_prevIm
     t2 = window.get$on().get$resize();
     t1 = this.get$_onWindowResize();
     $.getInterceptor$JSArray(t2).add$1(t2, t1);
-    window.get$on().get$scroll().add$2(this.get$_onWindowScroll(), true);
     this._onWindowResize$1(null);
     this._keyboardEventController = $.KeyboardEventController$keydown(window);
     t1 = this._keyboardEventController;
@@ -5491,17 +5478,6 @@ $$.PhotoGalleryWidget = {"": "Object;_lightBox>,_keyboardEventController,_prevIm
   },
   get$_onWindowResize: function() {
     return new $.BoundClosure(this, "_onWindowResize$1");
-  },
-  _onWindowScroll$1: function(_) {
-    var html, t1;
-    html = document.query$1("html");
-    t1 = $.S(window.get$scrollY()) + "px";
-    this._lightBox.get$style().set$top(t1);
-    t1 = $.S(html.get$scrollLeft()) + "px";
-    this._lightBox.get$style().set$left(t1);
-  },
-  get$_onWindowScroll: function() {
-    return new $.BoundClosure(this, "_onWindowScroll$1");
   },
   _onWindowKeyPress$1: function(e) {
     if (this._lightBox.get$hidden() === true)
@@ -6057,9 +6033,6 @@ $$.ElementEvents = {"": "Events;_ptr",
   reset$0: function() {
     return this.get$reset().call$0();
   },
-  get$scroll: function() {
-    return this.operator$index$1("scroll");
-  },
   get$transitionEnd: function() {
     return this.operator$index$1("webkitTransitionEnd");
   }
@@ -6367,9 +6340,6 @@ $$.WindowEvents = {"": "Events;_ptr",
   },
   resize$2: function(arg0, arg1) {
     return this.get$resize().call$2(arg0, arg1);
-  },
-  get$scroll: function() {
-    return this.operator$index$1("scroll");
   },
   get$transitionEnd: function() {
     return this.operator$index$1("webkitTransitionEnd");
@@ -8044,11 +8014,11 @@ $$.ReviverJsonListener = {"": "BuildJsonListener;reviver,stack,currentContainer,
 
 $$.JsonParser = {"": "Object;source>,listener>",
   parse$0: function() {
-    var states, t1, length$, t2, t3, state, position, char$, t4, position0;
+    var states, t1, length$, t2, t3, position, state, char$, t4, position0;
     states = [];
     t1 = this.source;
     length$ = $.getInterceptor$JSStringJSArray(t1).get$length(t1);
-    for (t2 = $.getInterceptor$JSString(t1), t3 = this.listener, state = 0, position = 0; $.ltB(position, length$);) {
+    for (t2 = $.getInterceptor$JSString(t1), t3 = this.listener, position = 0, state = 0; $.ltB(position, length$);) {
       char$ = t2.charCodeAt$1(t1, position);
       switch (char$) {
         case 32:
@@ -9190,9 +9160,6 @@ $$.ElementInstanceEvents = {"": "Events;_ptr",
   },
   resize$2: function(arg0, arg1) {
     return this.get$resize().call$2(arg0, arg1);
-  },
-  get$scroll: function() {
-    return this.operator$index$1("scroll");
   }
 };
 
@@ -11195,9 +11162,9 @@ $.Primitives_newFixedList = function(length$) {
 };
 
 $.Primitives__fromCharCodeApply = function(array) {
-  var end, t1, i, result, subarray, t2;
+  var end, t1, result, i, subarray, t2;
   end = array.length;
-  for (t1 = end <= 500, i = 0, result = ""; i < end; i += 500) {
+  for (t1 = end <= 500, result = "", i = 0; i < end; i += 500) {
     if (t1)
       subarray = array;
     else {
@@ -12919,11 +12886,11 @@ $._JsonStringifier_stringify = function(object) {
 };
 
 $._JsonStringifier_escape = function(sb, s) {
-  var t1, length$, charCodes, needsEscape, i, charCode, t2, t3;
+  var t1, length$, charCodes, i, needsEscape, charCode, t2, t3;
   t1 = $.getInterceptor$JSStringJSArray(s);
   length$ = t1.get$length(s);
   charCodes = $.List_List(0);
-  for (needsEscape = false, i = 0; $.ltB(i, length$); ++i) {
+  for (i = 0, needsEscape = false; $.ltB(i, length$); ++i) {
     charCode = t1.charCodeAt$1(s, i);
     if ($.ltB(charCode, 32)) {
       charCodes.push(92);
@@ -13358,14 +13325,14 @@ $._deserialize.call$1 = $._deserialize;
 $._deserialize.$name = "_deserialize";
 $.IsolateNatives__processWorkerMessage.call$2 = $.IsolateNatives__processWorkerMessage;
 $.IsolateNatives__processWorkerMessage.$name = "IsolateNatives__processWorkerMessage";
+$._serialize.call$1 = $._serialize;
+$._serialize.$name = "_serialize";
 $.$$throw.call$1 = $.$$throw;
 $.$$throw.$name = "$$throw";
-$.DartError_toStringWrapper.call$0 = $.DartError_toStringWrapper;
-$.DartError_toStringWrapper.$name = "DartError_toStringWrapper";
-$.dynamicBind.call$4 = $.dynamicBind;
-$.dynamicBind.$name = "dynamicBind";
 $.Primitives__throwFormatException.call$1 = $.Primitives__throwFormatException;
 $.Primitives__throwFormatException.$name = "Primitives__throwFormatException";
+$.dynamicBind.call$4 = $.dynamicBind;
+$.dynamicBind.$name = "dynamicBind";
 $.invokeClosure.call$5 = $.invokeClosure;
 $.invokeClosure.$name = "invokeClosure";
 $.typeNameInChrome.call$1 = $.typeNameInChrome;
@@ -13380,8 +13347,8 @@ $.typeNameInIE.call$1 = $.typeNameInIE;
 $.typeNameInIE.$name = "typeNameInIE";
 $.constructorNameFallback.call$1 = $.constructorNameFallback;
 $.constructorNameFallback.$name = "constructorNameFallback";
-$._serialize.call$1 = $._serialize;
-$._serialize.$name = "_serialize";
+$.DartError_toStringWrapper.call$0 = $.DartError_toStringWrapper;
+$.DartError_toStringWrapper.$name = "DartError_toStringWrapper";
 Isolate.$finishClasses($$);
 $$ = {};
 $.List = {builtin$cls: 'List'};
@@ -13437,13 +13404,13 @@ $.ReceivePortSync__portIdCount = null;
 $.ReceivePortSync__cachedIsolateId = null;
 $.KeyCode_WIN_KEY_FF_LINUX = 0;
 $.KeyCode_ENTER = 13;
+$.KeyCode_CTRL = 17;
 $.KeyCode_ALT = 18;
 $.KeyCode_CAPS_LOCK = 20;
 $.KeyCode_ESC = 27;
 $.KeyCode_SPACE = 32;
 $.KeyCode_PAGE_UP = 33;
 $.KeyCode_PAGE_DOWN = 34;
-$.KeyCode_CTRL = 17;
 $.KeyCode_END = 35;
 $.KeyCode_LEFT = 37;
 $.KeyCode_HOME = 36;
@@ -13520,54 +13487,54 @@ $.JsonParser_INSIDE_OBJECT = 2;
 $.JsonParser_AFTER_COLON = 3;
 $.JsonParser_ALLOW_STRING_MASK = 8;
 $.JsonParser_ALLOW_VALUE_MASK = 4;
-$._jsPortSync = null;
 $.JsonParser_ALLOW_VALUE = 0;
-$._jsPortCreate = null;
-$._jsPortDebug = null;
+$._jsPortSync = null;
+$.JsonParser_NO_VALUES = 12;
 $.JsonParser_STRING_ONLY = 4;
 $.JsonParser_EMPTY = 0;
+$._jsPortCreate = null;
+$._jsPortDebug = null;
+$.JsonParser_NON_EMPTY = 16;
+$._jsPortEquals = null;
 $._jsPortConvert = null;
-$._jsPortInstanceof = null;
-$.JsonParser_VALUE_READ_BITS = 28;
-$._jsEnterJavaScriptScope = null;
-$._jsExitJavaScriptScope = null;
 $.JsonParser_STATE_INITIAL = 0;
+$._jsEnterJavaScriptScope = null;
 $.JsonParser_STATE_END = 28;
-$._jsGlobalize = null;
+$._jsExitJavaScriptScope = null;
 $.JsonParser_STATE_ARRAY_EMPTY = 1;
-$._jsInvalidate = null;
+$._jsGlobalize = null;
 $.JsonParser_STATE_ARRAY_VALUE = 29;
-$._dartEnterDartScope = null;
+$._jsInvalidate = null;
 $.JsonParser_STATE_ARRAY_COMMA = 17;
 $.JsonParser_STATE_OBJECT_EMPTY = 6;
 $._dartExitDartScope = null;
 $.JsonParser_STATE_OBJECT_KEY = 30;
-$._jsPortEquals = null;
 $.JsonParser_STATE_OBJECT_COLON = 19;
 $.JsonParser_STATE_OBJECT_VALUE = 31;
 $.JsonParser_STATE_OBJECT_COMMA = 22;
+$._dartEnterDartScope = null;
 $.JsonParser_BACKSPACE = 8;
 $.JsonParser_TAB = 9;
 $.JsonParser_NEWLINE = 10;
+$._jsPortInstanceof = null;
 $.JsonParser_CARRIAGE_RETURN = 13;
 $.JsonParser_FORM_FEED = 12;
 $.JsonParser_SPACE = 32;
 $.JsonParser_QUOTE = 34;
-$._localNextElementId = 0;
 $.JsonParser_PLUS = 43;
-$._DART_ID = "data-dart_id";
 $.JsonParser_COMMA = 44;
-$._DART_TEMPORARY_ATTACHED = "data-dart_temporary_attached";
+$._localNextElementId = 0;
 $.JsonParser_MINUS = 45;
+$._DART_ID = "data-dart_id";
 $.JsonParser_DECIMALPOINT = 46;
+$._DART_TEMPORARY_ATTACHED = "data-dart_temporary_attached";
 $.JsonParser_SLASH = 47;
 $.JsonParser_CHAR_0 = 48;
-$.JsonParser_NO_VALUES = 12;
 $.JsonParser_CHAR_9 = 57;
 $.JsonParser_COLON = 58;
-$.JsonParser_NON_EMPTY = 16;
 $.JsonParser_CHAR_E = 69;
 $.JsonParser_LBRACKET = 91;
+$.JsonParser_VALUE_READ_BITS = 28;
 $.JsonParser_BACKSLASH = 92;
 $.JsonParser_RBRACKET = 93;
 $.JsonParser_CHAR_a = 97;
@@ -13640,14 +13607,11 @@ $.getInterceptor$JSArray = function(receiver) {
     return $.JSArray.prototype;
   return $.ObjectInterceptor.prototype;
 };
-Isolate.$lazy($, 'thisScript', 'IsolateNatives_thisScript', 'get$IsolateNatives_thisScript', function() {
-  return $.IsolateNatives_computeThisScript();
+Isolate.$lazy($, 'globalPostMessageDefined', 'globalPostMessageDefined', 'get$globalPostMessageDefined', function() {
+  return $.get$globalThis().postMessage !== (void 0);
 });
 Isolate.$lazy($, '_keyIdentifier', 'KeyboardEventController__keyIdentifier', 'get$KeyboardEventController__keyIdentifier', function() {
   return $.makeLiteralMap(["Up", 38, "Down", 40, "Left", 37, "Right", 39, "Enter", 13, "F1", 112, "F2", 113, "F3", 114, "F4", 115, "F5", 116, "F6", 117, "F7", 118, "F8", 119, "F9", 120, "F10", 121, "F11", 122, "F12", 123, "U+007F", 46, "Home", 36, "End", 35, "PageUp", 33, "PageDown", 34, "Insert", 45]);
-});
-Isolate.$lazy($, 'globalPostMessageDefined', 'globalPostMessageDefined', 'get$globalPostMessageDefined', function() {
-  return $.get$globalThis().postMessage !== (void 0);
 });
 Isolate.$lazy($, 'quoteRegExp', 'quoteRegExp', 'get$quoteRegExp', function() {
   return $.JSSyntaxRegExp$("[-[\\]{}()*+?.,\\\\^$|#\\s]", true, false);
@@ -13657,6 +13621,9 @@ Isolate.$lazy($, 'globalThis', 'globalThis', 'get$globalThis', function() {
 });
 Isolate.$lazy($, 'globalWindow', 'globalWindow', 'get$globalWindow', function() {
   return $.get$globalThis().window;
+});
+Isolate.$lazy($, 'thisScript', 'IsolateNatives_thisScript', 'get$IsolateNatives_thisScript', function() {
+  return $.IsolateNatives_computeThisScript();
 });
 Isolate.$lazy($, 'globalWorker', 'globalWorker', 'get$globalWorker', function() {
   return $.get$globalThis().Worker;
@@ -14511,7 +14478,7 @@ $.$defineNativeClass("DOMTokenList", {"": "length>",
   }
 });
 
-$.$defineNativeClass("Element", {"": "$$dom_children:children~,hidden=,id=,innerHtml:innerHTML|,$$dom_className:className},$$dom_firstElementChild:firstElementChild~,$$dom_lastElementChild:lastElementChild~,offsetHeight>,offsetWidth>,scrollLeft>,style>",
+$.$defineNativeClass("Element", {"": "$$dom_children:children~,hidden=,id=,innerHtml:innerHTML|,$$dom_className:className},$$dom_firstElementChild:firstElementChild~,$$dom_lastElementChild:lastElementChild~,offsetHeight>,offsetWidth>,style>",
   get$attributes: function() {
     return $._ElementAttributeMap$(this);
   },
@@ -17344,7 +17311,7 @@ $.$defineNativeClass("WebSocket", {
   }
 });
 
-$.$defineNativeClass("DOMWindow", {"": "innerHeight>,navigator>,scrollY>,status>",
+$.$defineNativeClass("DOMWindow", {"": "innerHeight>,navigator>,status>",
   get$document: function() {
     return this.document;
   },
@@ -17403,12 +17370,6 @@ $.$defineNativeClass("DOMWindow", {"": "innerHeight>,navigator>,scrollY>,status>
   },
   $$dom_removeEventListener$3: function(type, listener, useCapture) {
     return this.removeEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture);
-  },
-  scroll$2: function(x, y) {
-    return this.scroll(x,y);
-  },
-  get$scroll: function() {
-    return new $.BoundClosure0(this, "scroll$2");
   },
   scrollTo$2: function(x, y) {
     return this.scrollTo(x,y);

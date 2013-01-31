@@ -32,7 +32,7 @@ h2 {
 button {
   font-family: "Didact Gothic", sans-serif;
   font-size: 12pt;
-  color: ivory;
+  color: #FFFFF0;
   background-color: #93242B;
   padding: 4px 8px;
   margin: 0;
@@ -228,7 +228,7 @@ div.table > div > div:last-child {
 #rsvp-info-element {
   width: 398px;
   padding: .4em .8em;
-  color: ivory;
+  color: #FFFFF0;
   transition: opacity 500ms;
   -moz-transition: opacity 500ms; /* Firefox 4 */
   -webkit-transition: opacity 500ms; /* Safari and Chrome */
@@ -276,7 +276,7 @@ textarea {
 }
 
 #photo-gallery-light-box {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   transition: opacity 500ms;
@@ -318,68 +318,47 @@ textarea {
 
 .gallery-image-loading-message {
   position: absolute;
-  color: ivory;
+  color: #FFFFF0;
+}
+
+#light-box-close-button, .light-box-nav-button {
+  font-size: 30pt;
+  position: absolute;
+  z-index: 3;
+  background-color: rgba(0,0,0,0.4);
+  cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 #light-box-close-button {
-  font-size: 30pt;
-  position:absolute;
-  right: 0;
-  top: 0;
-  padding: 12px;
-  z-index: 3;
-  cursor: pointer;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-#light-box-close-button:hover {
-  color: ivory;
-}
-
-.light-box-image {
-  position: absolute;
-  background-color: rgba(0,0,0,0.8);
-  transition: left 500ms;
-  -moz-transition: left 500ms; /* Firefox 4 */
-  -webkit-transition: left 500ms; /* Safari and Chrome */
-  -o-transition: left 500ms; /* Opera */
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  padding: .3em .5em .6em;
+  right: .2em;
+  top: .2em;
 }
 
 .light-box-nav-button {
-  position: absolute;
-  padding: 12px;
-  z-index: 3;
-  font-size: 30pt;
-  cursor: pointer;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  padding: 1em .5em 1.2em;
+}
+
+#light-box-close-button:hover {
+  color: #FFFFF0;
 }
 
 .light-box-nav-button:hover {
-  color: ivory;
+  color: #FFFFF0;
 }
 
 #light-box-left-button {
-  left: 10px;
+  left: .2em;
 }
 
 #light-box-right-button {
-  right: 10px;
+  right: .2em;
 }
 
 .transparent {

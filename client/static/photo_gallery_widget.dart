@@ -36,7 +36,6 @@ class PhotoGalleryWidget {
     query("#light-box-right-button").on.click.add((Event _) { _navNext(); });
     query("#light-box-left-button").on.click.add((Event _) { _navPrev(); });
     window.on.resize.add(_onWindowResize);
-    window.on.scroll.add(_onWindowScroll, true);
     _onWindowResize(null);
     _keyboardEventController = new KeyboardEventController.keydown(window);
     _keyboardEventController.add(_onWindowKeyPress);
@@ -131,12 +130,6 @@ class PhotoGalleryWidget {
       _prevImg.resize(_lightBox.offsetWidth, _lightBox.offsetHeight);
       _prevImg.setLeftPosition(-_lightBox.offsetWidth);
     }
-  }
-
-  void _onWindowScroll(Event _) {
-    Element html = query("html");
-    _lightBox.style.top = "${window.scrollY}px";
-    _lightBox.style.left = "${html.scrollLeft}px";
   }
 
   void _onWindowKeyPress(KeyboardEvent e) {
