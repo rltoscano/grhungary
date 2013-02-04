@@ -208,16 +208,16 @@ div.table > div > div:last-child {
   margin-right: 0;
 }
 
-#rsvp-page .table {
+#rsvp .table {
   width: 100%;
 }
 
-#rsvp-page .table > div > div {
+#rsvp .table > div > div {
   vertical-align: top;
   padding-bottom: 1em;
 }
 
-#rsvp-page .table > div > div:first-child {
+#rsvp .table > div > div:first-child {
   width: 300px;
 }
 
@@ -279,7 +279,7 @@ textarea {
   height: 80px;
 }
 
-#contact-page td:first-child {
+#contact td:first-child {
   padding-right: 12px;
 }
 
@@ -296,7 +296,7 @@ textarea {
   overflow: hidden;
 }
 
-#photo-gallery-page img {
+#photo-gallery img {
   cursor: pointer;
   margin-right: 3px;
 }
