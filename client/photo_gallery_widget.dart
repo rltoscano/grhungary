@@ -27,7 +27,7 @@ class PhotoGalleryWidget {
   void decorate() {
     _lightBox = query("#photo-gallery-light-box");
     _lightBox.on.transitionEnd.add(_onLightBoxTransitionEnd);
-    queryAll("#photo-gallery img").forEach((Element img) {
+    queryAll(".gallery-thumb > div").forEach((Element img) {
       img.on.click.add(_onThumbClick);
     });
     query("#light-box-close-button").on.click.add((Event _) {
@@ -88,8 +88,8 @@ class PhotoGalleryWidget {
   }
 
   void _onThumbClick(Event e) {
-    String originalSrc = (e.target as ImageElement).src;
-    originalSrc = originalSrc.replaceAll("\.jpg", "_original.jpg");
+    String originalSrc = (e.target as Element).dataAttributes["gallery-id"];
+    originalSrc = "/static/images/${originalSrc}_original.jpg";
     _setLightBoxVisible(true);
     _currImg = _createLightBoxImage(originalSrc, 0);
     js.scoped(() {

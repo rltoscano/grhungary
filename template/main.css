@@ -319,6 +319,32 @@ textarea {
   margin-right: 3px;
 }
 
+#gallery-thumb-container div {
+  vertical-align: top;
+}
+
+#gallery-thumb-container > div {
+  padding-bottom: 4px;
+}
+
+#gallery-thumb-container > div:last-child {
+  padding-bottom 0;
+}
+
+.gallery-thumb {
+  display: table-cell;
+  padding-right: 4px;
+}
+
+.gallery-thumb:last-child  {
+  padding-right: 0;
+}
+
+.gallery-thumb > div {
+  background-image: url('/static/images/photo-gallery-sprite.jpg');
+  cursor: pointer;
+}
+
 .gallery-image {
   position: absolute;
   transition: left 500ms;

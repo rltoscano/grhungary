@@ -5096,7 +5096,7 @@ $$.PhotoGalleryWidget = {"": "Object;_lightBox>,_keyboardEventController,_prevIm
   decorate$0: function() {
     this._lightBox = document.query$1("#photo-gallery-light-box");
     $.add(this._lightBox.get$on().get$transitionEnd(), this.get$_onLightBoxTransitionEnd());
-    $.forEach(document.queryAll$1("#photo-gallery img"), new $.PhotoGalleryWidget_decorate_anon(this));
+    $.forEach(document.queryAll$1(".gallery-thumb > div"), new $.PhotoGalleryWidget_decorate_anon(this));
     $.add(document.query$1("#light-box-close-button").get$on().get$click(), new $.PhotoGalleryWidget_decorate_anon0(this));
     $.add(document.query$1("#light-box-right-button").get$on().get$click(), new $.PhotoGalleryWidget_decorate_anon1(this));
     $.add(document.query$1("#light-box-left-button").get$on().get$click(), new $.PhotoGalleryWidget_decorate_anon2(this));
@@ -5151,8 +5151,8 @@ $$.PhotoGalleryWidget = {"": "Object;_lightBox>,_keyboardEventController,_prevIm
   },
   _onThumbClick$1: function(e) {
     var t1 = {};
-    t1.originalSrc_0 = $.callTypeCast(e.get$target(), "$isImageElement").get$src();
-    t1.originalSrc_0 = $.replaceAll(t1.originalSrc_0, ".jpg", "_original.jpg");
+    t1.originalSrc_0 = $.$$index($.callTypeCast(e.get$target(), "$isElement").get$dataAttributes(), "gallery-id");
+    t1.originalSrc_0 = "/static/images/" + $.S(t1.originalSrc_0) + "_original.jpg";
     this._setLightBoxVisible$1(true);
     this._currImg = this._createLightBoxImage$2(t1.originalSrc_0, 0);
     $.scoped(new $.PhotoGalleryWidget__onThumbClick_anon(t1));
