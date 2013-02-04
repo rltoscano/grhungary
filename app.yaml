@@ -20,3 +20,4 @@ skip_files:
 - ^(.*/)?.*/RCS/.*
 - ^(.*/)?\..*
 - ^client/static/pubspec\..+
+- ^client/static/main\.dart\.js\..+

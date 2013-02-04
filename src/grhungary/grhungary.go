@@ -61,7 +61,7 @@ type EmailBody struct {
   Messages map[string]string
 }
 
-func handleApiRsvpCreate(w http.ResponseWriter, r *http.Request) {  
+func handleApiRsvpCreate(w http.ResponseWriter, r *http.Request) {
   c := appengine.NewContext(r)
 
   buffer := make([]byte, r.ContentLength)
@@ -151,11 +151,22 @@ type MainData struct {
 
 func handleClientMain(w http.ResponseWriter, r *http.Request) {
   w.Header().Set("Content-type", "text/html; charset=utf-8")
+  c := appengine.NewContext(r)
   mainData := MainData{
     Messages: GetLocaleMap(r),
   }
-  tpl, _ := template.ParseFiles("client/main.html")
-  tpl.ExecuteTemplate(w, "main", mainData)
+  if strings.Contains(r.Header.Get("User-Agent"), "MSIE") {
+    tpl, err := template.ParseFiles("ie.html", "main.css")
+    if err != nil {
+      c.Errorf("Couldn't parse ie.html template: %s", err.Error());
+      http.Error(w, err.Error(), http.StatusInternalServerError)
+      return
+    }
+    tpl.ExecuteTemplate(w, "ie", mainData)
+  } else {
+    tpl, _ := template.ParseFiles("client/main.html", "main.css")
+    tpl.ExecuteTemplate(w, "main", mainData)
+  }
 }
 
 func GetLocaleMap(r *http.Request) map[string]string {

@@ -1,4 +1,4 @@
-
+{{define "main-css"}}
 body {
   background-color: #FFFFF0;
   font-family: 'Didact Gothic', sans-serif;
@@ -451,3 +451,4 @@ textarea {
 .dots > span:nth-child(3) {
   -webkit-animation-delay: 300ms;
 }
+{{end}}

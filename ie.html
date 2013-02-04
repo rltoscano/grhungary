@@ -1,0 +1,37 @@
+{{define "ie"}}
+<html>
+  <head>
+    <style type="text/css">
+      {{template "main-css"}}
+    </style>
+    <style type="text/css">
+      #ie-info-el {
+        width: 600px;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="site-header">
+      <img id="bird" src="static/images/bird.png"/>
+      <div id="site-title">{{.Messages.NamesHeader}}</div>
+      <div style="padding-bottom: 20px; font-weight: bold">July 27th, 2013</div>
+    </div>
+
+
+    <div id="main-content">
+      <div id="ie-info-el">
+        <p>This website doesn't work on Internet Explorer. Please download a modern, standards-compliant browser. Here are a few:</p>
+        <ul>
+          <li><a href="https://www.google.com/chrome">Google Chrome</a></li>
+          <li><a href="https://www.mozilla.org/firefox">Firefox</a></li>
+          <li><a href="http://www.opera.com">Opera</a></li>
+        </ul>
+        <img class="humotif" src="static/images/humotif.png" />
+      </div>
+    </div>
+
+  </body>
+</html>
+{{end}}
