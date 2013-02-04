@@ -1,26 +1,39 @@
+{{define "no-user-select"}}
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+{{end}}
+
+{{define "ivory"}}#FFFFF0{{end}}
+{{define "silver"}}#727272{{end}}
+{{define "red"}}#93242B{{end}}
+
 {{define "main-css"}}
 body {
-  background-color: #FFFFF0;
+  background-color: {{template "ivory"}};
   font-family: 'Didact Gothic', sans-serif;
   font-size: 14pt;
   font-weight: normal;
   line-height: 1.2em;
   padding: 0;
   margin: 0;
-  color: #727272;
+  color: {{template "silver"}};
   overflow-y: scroll;
 }
 
 a {
-  color: #93242B;
+  color: {{template "red"}};
 }
 
 a:visited {
-  color: #93242B;
+  color: {{template "red"}};
 }
 
 h1 {
-  color: #93242B;
+  color: {{template "red"}};
 }
 
 h2 {
@@ -32,8 +45,8 @@ h2 {
 button {
   font-family: "Didact Gothic", sans-serif;
   font-size: 12pt;
-  color: #FFFFF0;
-  background-color: #93242B;
+  color: {{template "ivory"}};
+  background-color: {{template "red"}};
   padding: 4px 8px;
   margin: 0;
   border-radius: 2px;
@@ -41,12 +54,7 @@ button {
   -moz-box-shadow: 0px 1px 3px rgba(0,0,0,.5);
   -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,.5);
   box-shadow: 0px 1px 3px rgba(0,0,0,.5);
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  {{template "no-user-select"}}
 }
 
 button:active {
@@ -94,8 +102,8 @@ div.table > div > div:last-child {
 
 #site-header {
   background-color: #ffffff;
-  border-top: #93242B solid 2px;
-  border-bottom: #93242B solid 2px;
+  border-top: {{template "red"}} solid 2px;
+  border-bottom: {{template "red"}} solid 2px;
   text-align: center;
   padding-top: 20px;
   margin-top: 24px;
@@ -114,7 +122,7 @@ div.table > div > div:last-child {
 }
 
 #site-title {
-  color: #93242B;
+  color: {{template "red"}};
   font-family: 'Great Vibes';
   font-size: 36pt;
   height: 48px;
@@ -147,7 +155,7 @@ div.table > div > div:last-child {
 #nav-bar li {
   white-space: nowrap;
   list-style-type: none;
-  color: #727272;
+  color: {{template "silver"}};
   cursor: pointer;
 }
 
@@ -156,7 +164,7 @@ div.table > div > div:last-child {
 }
 
 #nav-bar li.active {
-  color: #93242B;
+  color: {{template "red"}};
 }
 
 .subheader {
@@ -228,7 +236,7 @@ div.table > div > div:last-child {
 #rsvp-info-element {
   width: 398px;
   padding: .4em .8em;
-  color: #FFFFF0;
+  color: {{template "ivory"}};
   transition: opacity 500ms;
   -moz-transition: opacity 500ms; /* Firefox 4 */
   -webkit-transition: opacity 500ms; /* Safari and Chrome */
@@ -252,11 +260,11 @@ div.table > div > div:last-child {
 }
 
 .cancel-button {
-  background-color: #727272;
+  background-color: {{template "silver"}};
 }
 
 input[type="text"] {
-  border: #93242B 2px solid;
+  border: {{template "red"}} 2px solid;
   font-family: "Didact Gothic", sans-serif;
   font-size: 14pt;
   padding: 2px 8px;
@@ -264,7 +272,7 @@ input[type="text"] {
 }
 
 textarea {
-  border: #93242B 2px solid;
+  border: {{template "red"}} 2px solid;
   font-family: "Didact Gothic", sans-serif;
   font-size: 12pt;
   width: 272px;
@@ -299,12 +307,7 @@ textarea {
   -moz-transition: left 500ms; /* Firefox 4 */
   -webkit-transition: left 500ms; /* Safari and Chrome */
   -o-transition: left 500ms; /* Opera */
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  {{template "no-user-select"}}
 }
 
 .gallery-image-img {
@@ -318,7 +321,7 @@ textarea {
 
 .gallery-image-loading-message {
   position: absolute;
-  color: #FFFFF0;
+  color: {{template "ivory"}};
 }
 
 #light-box-close-button, .light-box-nav-button {
@@ -327,12 +330,7 @@ textarea {
   z-index: 3;
   background-color: rgba(0,0,0,0.4);
   cursor: pointer;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  {{template "no-user-select"}}
 }
 
 #light-box-close-button {
@@ -346,11 +344,11 @@ textarea {
 }
 
 #light-box-close-button:hover {
-  color: #FFFFF0;
+  color: {{template "ivory"}};
 }
 
 .light-box-nav-button:hover {
-  color: #FFFFF0;
+  color: {{template "ivory"}};
 }
 
 #light-box-left-button {
@@ -402,7 +400,7 @@ textarea {
 }
 
 #honey-moon-expense-table > div:last-child > div {
-  border-top: 1px solid #727272;
+  border-top: 1px solid {{template "silver"}};
   font-weight: bold;
 }
 

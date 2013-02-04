@@ -18,11 +18,10 @@ var Messages = make(map[string]map[string]string)
 var EMAIL_REGEXP = "^[\\w\\.=-_]+@[\\w\\.-_]+\\.[\\w]{2,4}$"
 
 func init() {
-  http.Handle(
-      "/", http.RedirectHandler("/client/main", http.StatusMovedPermanently))
   http.HandleFunc("/api/rsvp/create", handleApiRsvpCreate);
-  http.HandleFunc("/client/main", handleClientMain)
-      
+  http.HandleFunc("/ie", handleIe)
+  http.HandleFunc("/", handleRoot)
+
   messagesByIdBytes, err := ioutil.ReadFile("messages.json")
   if err != nil {
     panic("Could not read messages.json" + err.Error())
@@ -33,7 +32,7 @@ func init() {
   if err != nil {
     panic("Could not unmarshall messages.json" + err.Error())
   }
-  
+
   for id, msgs := range messagesById {
     for locale, msg := range msgs {
       localeMap, ok := Messages[locale]
@@ -87,7 +86,7 @@ func handleApiRsvpCreate(w http.ResponseWriter, r *http.Request) {
   c.Infof("Stored RSVP for %s", rsvp.Id)
 
   var tpl *template.Template
-  if tpl, err = template.ParseFiles("rsvp-email.html"); err != nil {
+  if tpl, err = template.ParseFiles("template/rsvp-email.html"); err != nil {
     http.Error(w, err.Error(), http.StatusInternalServerError)
     c.Errorf("Couldn't parse email template.", err.Error())
     return
@@ -149,24 +148,42 @@ type MainData struct {
   Messages map[string]string
 }
 
-func handleClientMain(w http.ResponseWriter, r *http.Request) {
+func handleRoot(w http.ResponseWriter, r *http.Request) {
+  if strings.Contains(r.UserAgent(), "MSIE") {
+    http.Redirect(w, r, "/ie", http.StatusFound)
+    return
+  }
+  if r.URL.Path != "/" {
+    http.Redirect(w, r, "/", http.StatusFound)
+    return
+  }
   w.Header().Set("Content-type", "text/html; charset=utf-8")
   c := appengine.NewContext(r)
   mainData := MainData{
     Messages: GetLocaleMap(r),
   }
-  if strings.Contains(r.Header.Get("User-Agent"), "MSIE") {
-    tpl, err := template.ParseFiles("ie.html", "main.css")
-    if err != nil {
-      c.Errorf("Couldn't parse ie.html template: %s", err.Error());
-      http.Error(w, err.Error(), http.StatusInternalServerError)
-      return
-    }
-    tpl.ExecuteTemplate(w, "ie", mainData)
-  } else {
-    tpl, _ := template.ParseFiles("client/main.html", "main.css")
-    tpl.ExecuteTemplate(w, "main", mainData)
+  tpl, err := template.ParseFiles("template/main.html", "template/main.css")
+  if err != nil {
+    c.Errorf("Couldn't parse main.html template: %s", err.Error());
+    http.Error(w, err.Error(), http.StatusInternalServerError)
+    return
   }
+  tpl.ExecuteTemplate(w, "main", mainData)
+}
+
+func handleIe(w http.ResponseWriter, r *http.Request) {
+  w.Header().Set("Content-type", "text/html; charset=utf-8")
+  c := appengine.NewContext(r)
+  mainData := MainData{
+    Messages: GetLocaleMap(r),
+  }
+  tpl, err := template.ParseFiles("template/ie.html", "template/main.css")
+  if err != nil {
+    c.Errorf("Couldn't parse ie.html template: %s", err.Error());
+    http.Error(w, err.Error(), http.StatusInternalServerError)
+    return
+  }
+  tpl.ExecuteTemplate(w, "ie", mainData)
 }
 
 func GetLocaleMap(r *http.Request) map[string]string {

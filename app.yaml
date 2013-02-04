@@ -4,8 +4,10 @@ runtime: go
 api_version: go1
 
 handlers:
-- url: /client/static/
-  static_dir: client/static
+- url: /static/
+  static_dir: static
+- url: /client/
+  static_dir: client
 - url: /.*
   script: _go_app
 
