@@ -180,10 +180,12 @@ div.table > div > div:last-child {
   display: inline-block;
   text-align: left;
   height: 314px;
+  position: relative;
 }
 
 .page {
   position: absolute;
+  top: 0px;
   width: 604px;
   opacity: 1;
   transition: opacity 500ms;

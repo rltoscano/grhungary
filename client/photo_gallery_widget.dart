@@ -27,7 +27,7 @@ class PhotoGalleryWidget {
   void decorate() {
     _lightBox = query("#photo-gallery-light-box");
     _lightBox.on.transitionEnd.add(_onLightBoxTransitionEnd);
-    queryAll("#photo-gallery-page img").forEach((Element img) {
+    queryAll("#photo-gallery img").forEach((Element img) {
       img.on.click.add(_onThumbClick);
     });
     query("#light-box-close-button").on.click.add((Event _) {
