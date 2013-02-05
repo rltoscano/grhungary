@@ -1,0 +1,80 @@
+{{define "rsvp"}}
+<div id="rsvp" class="page transparent" hidden>
+  <h1>respond</h1>
+  <div class="table">
+    <div>
+      <div>
+        Contact Email<br/>
+        <span style="font-size: 10pt">(or phone number)</span>
+      </div>
+      <div>
+        <input id="rsvp-id" type="text"
+          placeholder="myemail@example.com"/>
+      </div>
+    </div>
+  </div>
+  <div id="rsvp-more-info" class="height-transition" hidden>
+    <div id="rsvp-more-info-height-wrapper">
+      <div class="table">
+        <div>
+          <div>
+            Names of Party Members<br/>
+            <span style="font-size: 10pt">(including yourself)</span></div>
+          <div>
+            <div id="rsvp-names">
+              <input class="rsvp-name" type="text"
+                  placeholder="ex. Robert Toscano"/>
+            </div>
+            <button id="rsvp-add-name-button">Add Another Member</button>
+          </div>
+        </div>
+        <div>
+          <div>Dietary Restrictions</div>
+          <div><textarea id="rsvp-dietary-restrictions"></textarea></div>
+        </div>
+        <div>
+          <div>Will you be staying at the mansion hotel overnight?</div>
+          <div><input type="checkbox" id="rsvp-is-staying-overnight"/></div>
+        </div>
+        <div>
+          <div>
+            Are you interested in a daytrip in Hungary on Sunday, the 28th?
+          </div>
+          <div>
+            <select id="rsvp-interested-in-sightseeing">
+              <option selected data-value="No">No</option>
+              <option data-value="Maybe">Maybe</option>
+              <option data-value="Yes">Yes</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div>
+    <button id="accept-button">Happily Accept</button>
+    <button
+        id="reject-button"
+        data-label-in-progress="Declining..."
+        data-label="Regretfully Decline">Regretfully Decline</button>
+    <button
+        hidden
+        id="rsvp-send-button"
+        data-label-in-progress="Responding..."
+        data-label="Respond">Respond</button>
+    <button class="cancel-button" hidden id="rsvp-cancel-button">Cancel</button>
+  </div>
+  <div
+      id="rsvp-info-element"
+      class="transparent"
+      hidden
+      data-success-message="Your response has been submitted and a confirmation has been sent to your email address."
+      data-fail-message="There was a problem submitting your response. Please <a href=&quot;mailto:contact@grhungary.com&quot;>email us</a> for further assistance."
+      data-success-reject-message="We're sorry you can't make it. We'll keep you updated when we add new photos and videos of the wedding.">
+  </div>
+
+  <img class="humotif" src="/static/images/humotif.png" />
+</div>
+{{end}}
+

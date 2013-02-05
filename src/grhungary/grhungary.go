@@ -162,7 +162,7 @@ func handleRoot(w http.ResponseWriter, r *http.Request) {
   mainData := MainData{
     Messages: GetLocaleMap(r),
   }
-  tpl, err := template.ParseFiles("template/main.html", "template/main.css")
+  tpl, err := template.ParseGlob("template/*")
   if err != nil {
     c.Errorf("Couldn't parse main.html template: %s", err.Error());
     http.Error(w, err.Error(), http.StatusInternalServerError)
