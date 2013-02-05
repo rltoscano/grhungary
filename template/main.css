@@ -185,7 +185,6 @@ div.table > div > div:last-child {
 
 .page {
   position: absolute;
-  top: 0px;
   width: 604px;
   opacity: 1;
   transition: opacity 500ms;
