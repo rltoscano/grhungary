@@ -246,7 +246,10 @@ div.table > div > div:last-child {
 }
 
 .height-transition {
-  {{template "opacity-transition-500"}}
+  transition: height 500ms;
+  -moz-transition: height 500ms; /* Firefox 4 */
+  -webkit-transition: height 500ms; /* Safari and Chrome */
+  -o-transition: height 500ms; /* Opera */
 }
 
 #rsvp-info-element {
