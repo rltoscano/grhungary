@@ -5488,7 +5488,7 @@ $$.PhotoGalleryWidget = {"": "PageWidget;_lightBox>,_keyboardEventController,_pr
     this._lightBox = document.query$1("#photo-gallery-light-box");
     this._lightBox.get$onTransitionEnd().listen$1(this.get$_onLightBoxTransitionEnd());
     $.forEach(document.queryAll$1(".gallery-thumb > div"), new $.PhotoGalleryWidget_decorate_anon(this));
-    document.query$1("#light-box-close-button").get$onClick().listen$1(new $.PhotoGalleryWidget_decorate_anon0(this));
+    document.query$1("#light-box-close-button").get$onClick().listen$1(new $.PhotoGalleryWidget_decorate_anon0());
     document.query$1("#light-box-right-button").get$onClick().listen$1(new $.PhotoGalleryWidget_decorate_anon1(this));
     document.query$1("#light-box-left-button").get$onClick().listen$1(new $.PhotoGalleryWidget_decorate_anon2(this));
     window.get$onResize().listen$1(this.get$_onWindowResize());
@@ -5637,7 +5637,7 @@ $$.PhotoGalleryWidget = {"": "PageWidget;_lightBox>,_keyboardEventController,_pr
       return;
     switch (e.get$keyCode()) {
       case 27:
-        this._setLightBoxVisible$1(false);
+        window.get$location().set$hash("photo-gallery");
         break;
       case 37:
         this.showImage$1($.$$sub(this._currImg.get$id(), 1));
@@ -10155,22 +10155,23 @@ $$.PhotoGalleryWidget_decorate_anon = {"": "Closure;this_0",
   }
 };
 
-$$.PhotoGalleryWidget_decorate_anon0 = {"": "Closure;this_1",
+$$.PhotoGalleryWidget_decorate_anon0 = {"": "Closure;",
   call$1: function(_) {
-    return this.this_1._setLightBoxVisible$1(false);
+    window.get$location().set$hash("photo-gallery");
+    return "photo-gallery";
   }
 };
 
-$$.PhotoGalleryWidget_decorate_anon1 = {"": "Closure;this_2",
+$$.PhotoGalleryWidget_decorate_anon1 = {"": "Closure;this_1",
   call$1: function(_) {
-    var t1 = this.this_2;
+    var t1 = this.this_1;
     return t1.showImage$1($.$$add(t1.get$_currImg().get$id(), 1));
   }
 };
 
-$$.PhotoGalleryWidget_decorate_anon2 = {"": "Closure;this_3",
+$$.PhotoGalleryWidget_decorate_anon2 = {"": "Closure;this_2",
   call$1: function(_) {
-    var t1 = this.this_3;
+    var t1 = this.this_2;
     return t1.showImage$1($.$$sub(t1.get$_currImg().get$id(), 1));
   }
 };

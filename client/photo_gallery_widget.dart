@@ -31,7 +31,7 @@ class PhotoGalleryWidget extends PageWidget {
       img.onClick.listen(_onThumbClick);
     });
     query("#light-box-close-button").onClick.listen(
-        (_) =>_setLightBoxVisible(false));
+        (_) => window.location.hash = "photo-gallery");
     query("#light-box-right-button").onClick.listen(
         (_) => showImage(_currImg.id + 1));
     query("#light-box-left-button").onClick.listen(
@@ -170,7 +170,7 @@ class PhotoGalleryWidget extends PageWidget {
     }
     switch (e.keyCode) {
       case KeyCode.ESC:
-        _setLightBoxVisible(false);
+        window.location.hash = "photo-gallery";
         break;
       case KeyCode.LEFT:
         showImage(_currImg.id - 1);
