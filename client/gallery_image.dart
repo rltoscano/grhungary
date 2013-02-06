@@ -1,18 +1,21 @@
 part of grhungary;
 
 class GalleryImage {
+  static const EventStreamProvider<Event> loadEvent =
+      const EventStreamProvider<Event>("load");
   const int _PADDING = 40; // Pixels.
 
-  ElementEvents get on => _img.on;
+  Stream<Event> get onLoad => loadEvent.forTarget(_img);
 
   Element _container;
   Element _loadingMessage;
   Element _loadingDotsContainer;
   ImageElement _img;
+  int _imgId;
   bool _isImgLoaded;
   bool _isDisposed;
 
-  GalleryImage(String url, int leftPosition) {
+  GalleryImage(int imgId, int leftPosition) : _imgId = imgId {
     _isImgLoaded = false;
     _isDisposed = false;
 
@@ -21,29 +24,30 @@ class GalleryImage {
     _container.style.left = "${leftPosition}px";
 
     _loadingMessage = query("#loading-message").clone(true);
-    _loadingMessage.hidden = false;
+    _loadingMessage.hidden = true;
     _loadingMessage.classes.add("gallery-image-loading-message");
     _loadingDotsContainer = _loadingMessage.query("span");
-    _loadingDotsContainer.classes.add("dots");
     _container.children.add(_loadingMessage);
 
-    _img = new ImageElement(src: url);
+    _img = new ImageElement();
     _img.hidden = true;
     _img.classes.add("gallery-image-img transparent");
-    _img.on.load.add(_onImgLoad);
+    _img.onLoad.listen(_onImgLoad);
     _container.children.add(_img);
   }
 
-  String getSrc() {
-    return _img.src;
+  ImageElement get img => _img;
+
+  int get id => _imgId;
+
+  void load() {
+    _loadingMessage.hidden = false;
+    _loadingDotsContainer.classes.add("dots");
+    _img.src = "/static/images/${_imgId}_original.jpg";
   }
 
   Element getElement() {
     return _container;
-  }
-
-  ImageElement getImg() {
-    return _img;
   }
 
   void dispose() {

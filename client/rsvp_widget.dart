@@ -20,21 +20,22 @@ class RsvpInsertRequest {
   }
 }
 
-class RsvpWidget {
+class RsvpWidget extends PageWidget {
   HttpRequest _reqInProgress;
   Element _infoEl;
   Element _moreInfo;
 
-  void decorate() {
-    query("#rsvp-send-button").on.click.add(_onSendClick);
-    query("#rsvp-add-name-button").on.click.add(_onAddNameClick);
-    query("#accept-button").on.click.add(_onAcceptClick);
-    query("#reject-button").on.click.add(_onRejectClick);
-    query("#rsvp-cancel-button").on.click.add(_onCancelClick);
+  void decorate(Element e) {
+    super.decorate(e);
+    query("#rsvp-send-button").onClick.listen(_onSendClick);
+    query("#rsvp-add-name-button").onClick.listen(_onAddNameClick);
+    query("#accept-button").onClick.listen(_onAcceptClick);
+    query("#reject-button").onClick.listen(_onRejectClick);
+    query("#rsvp-cancel-button").onClick.listen(_onCancelClick);
     _moreInfo = query("#rsvp-more-info");
-    _moreInfo.on.transitionEnd.add(_onMoreInfoTransitionEnd);
+    _moreInfo.onTransitionEnd.listen(_onMoreInfoTransitionEnd);
     _infoEl = query("#rsvp-info-element");
-    _infoEl.on.transitionEnd.add(_onInfoElTransitionEnd);
+    _infoEl.onTransitionEnd.listen(_onInfoElTransitionEnd);
   }
 
   void _showMessage(String type, String msg, [int duration = 10000]) {
@@ -92,8 +93,8 @@ class RsvpWidget {
     rsvp.isAccepted = query("#reject-button").hidden;
 
     _reqInProgress = new HttpRequest();
-    _reqInProgress.on.load.add(_onRsvpUpsertSuccess);
-    _reqInProgress.on.error.add(_onRsvpUpsertFail);
+    _reqInProgress.onLoad.listen(_onRsvpUpsertSuccess);
+    _reqInProgress.onError.listen(_onRsvpUpsertFail);
     _reqInProgress.open("POST", "/api/rsvp/create");
     _reqInProgress.send(json.stringify(rsvp));
     js.scoped(() {

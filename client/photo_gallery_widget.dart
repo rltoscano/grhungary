@@ -1,8 +1,8 @@
 part of grhungary;
 
-class PhotoGalleryWidget {
-  static RegExp _IMAGE_IDX_REGEXP =
-      new RegExp(r"images/(\d+)_original\.jpg");
+class PhotoGalleryWidget extends PageWidget {
+  static RegExp _HASH_IMG_ID_REGEXP = new RegExp(r"#photo-gallery/(\d+)");
+  static const int _TOTAL_IMAGES = 69;
 
   Element _lightBox;
   KeyboardEventController _keyboardEventController;
@@ -10,35 +10,75 @@ class PhotoGalleryWidget {
   GalleryImage _currImg;
   GalleryImage _nextImg;
 
-  static String _getImageUrl(String currentUrl, int offset) {
-    Iterator<Match> matchesIt =
-        _IMAGE_IDX_REGEXP.allMatches(currentUrl).iterator;
-    matchesIt.moveNext();
-    int currentIdx = int.parse(matchesIt.current.group(1));
-    int newIdx = (currentIdx+ offset) % 69;
-    String newIdxStr = "$newIdx";
-    if (newIdxStr.length < 2) {
-      newIdxStr = "0$newIdx";
+  void set isVisible(bool isVisible) {
+    super.isVisible = isVisible;
+    if (isVisible) {
+      Iterable<Match> matches =
+          _HASH_IMG_ID_REGEXP.allMatches(window.location.hash);
+      if (matches.length == 0) {
+        return;
+      }
+      int activatedImgId = int.parse(matches.first.group(1));
+      showImage(activatedImgId);
     }
-    return currentUrl.replaceAll(
-        _IMAGE_IDX_REGEXP, "images/${newIdxStr}_original.jpg");
   }
 
-  void decorate() {
+  void decorate(Element e) {
+    super.decorate(e);
     _lightBox = query("#photo-gallery-light-box");
-    _lightBox.on.transitionEnd.add(_onLightBoxTransitionEnd);
+    _lightBox.onTransitionEnd.listen(_onLightBoxTransitionEnd);
     queryAll(".gallery-thumb > div").forEach((Element img) {
-      img.on.click.add(_onThumbClick);
+      img.onClick.listen(_onThumbClick);
     });
-    query("#light-box-close-button").on.click.add((Event _) {
-      _setLightBoxVisible(false);
-    });
-    query("#light-box-right-button").on.click.add((Event _) { _navNext(); });
-    query("#light-box-left-button").on.click.add((Event _) { _navPrev(); });
-    window.on.resize.add(_onWindowResize);
+    query("#light-box-close-button").onClick.listen(
+        (_) =>_setLightBoxVisible(false));
+    query("#light-box-right-button").onClick.listen(
+        (_) => showImage(_currImg.id + 1));
+    query("#light-box-left-button").onClick.listen(
+        (_) => showImage(_currImg.id - 1));
+    window.onResize.listen(_onWindowResize);
+    window.onHashChange.listen(_onHashChange);
     _onWindowResize(null);
     _keyboardEventController = new KeyboardEventController.keydown(window);
     _keyboardEventController.add(_onWindowKeyPress);
+  }
+
+  void showImage(int imgId) {
+    if (imgId < 0 || imgId >= _TOTAL_IMAGES) {
+      imgId = imgId % _TOTAL_IMAGES;
+    }
+    if (_lightBox.hidden || _lightBox.classes.contains("transparent")) {
+      _setLightBoxVisible(true);
+    }
+    if (_currImg == null) {
+      _currImg = _createLightBoxImage(imgId, 0);
+      _currImg.load();
+      _prevImg = _createLightBoxImage(imgId - 1, -_lightBox.offsetWidth);
+      _nextImg = _createLightBoxImage(imgId + 1, _lightBox.offsetWidth);
+    } else if (_nextImg.id == imgId) {
+      _prevImg.dispose();
+      _prevImg = _currImg;
+      _currImg = _nextImg;
+      _nextImg = _createLightBoxImage(imgId + 1, _lightBox.offsetWidth);
+      _nextImg.load();
+      _prevImg.setLeftPosition(-_lightBox.offsetWidth);
+      _currImg.setLeftPosition(0);
+    } else if (_prevImg.id == imgId) {
+      _nextImg.dispose();
+      _nextImg = _currImg;
+      _currImg = _prevImg;
+      _prevImg = _createLightBoxImage(imgId - 1, -_lightBox.offsetWidth);
+      _prevImg.load();
+      _currImg.setLeftPosition(0);
+      _nextImg.setLeftPosition(_lightBox.offsetWidth);
+    } else if (_currImg.id != imgId) {
+      _clearCache();
+      _currImg = _createLightBoxImage(imgId, 0);
+      _currImg.load();
+      _prevImg = _createLightBoxImage(imgId - 1, -_lightBox.offsetWidth);
+      _nextImg = _createLightBoxImage(imgId + 1, _lightBox.offsetWidth);
+    }
+    window.location.hash = "photo-gallery/$imgId";
   }
 
   void _setLightBoxVisible(bool isVisible) {
@@ -50,26 +90,19 @@ class PhotoGalleryWidget {
     }
   }
 
-  GalleryImage _createLightBoxImage(String src, int leftPosition) {
+  GalleryImage _createLightBoxImage(int imgId, int leftPosition) {
+    if (imgId < 0 || imgId >= _TOTAL_IMAGES) {
+      imgId = imgId % _TOTAL_IMAGES;
+    }
     js.scoped(() {
-      js.context["_gaq"].push(js.array(["_trackEvent", "Gallery", "LoadOriginal", src]));
+      js.context["_gaq"].push(js.array(
+          ["_trackEvent", "Gallery", "LoadOriginal", imgId]));
     });
-    GalleryImage img = new GalleryImage(src, leftPosition);
-    img.on.load.add(_onImgLoad);
+    GalleryImage img = new GalleryImage(imgId, leftPosition);
+    img.onLoad.listen(_onImgLoad);
     img.resize(_lightBox.offsetWidth, _lightBox.offsetHeight);
     _lightBox.children.add(img.getElement());
     return img;
-  }
-
-  void _loadProxImages() {
-    String nextUrl = _getImageUrl(_currImg.getSrc(), 1);
-    String prevUrl = _getImageUrl(_currImg.getSrc(), -1);
-    if (_nextImg == null) {
-      _nextImg = _createLightBoxImage(nextUrl, _lightBox.offsetWidth);
-    }
-    if (_prevImg == null) {
-      _prevImg = _createLightBoxImage(prevUrl, -_lightBox.offsetWidth);
-    }
   }
 
   void _clearCache() {
@@ -88,19 +121,18 @@ class PhotoGalleryWidget {
   }
 
   void _onThumbClick(Event e) {
-    String originalSrc = (e.target as Element).dataAttributes["gallery-id"];
-    originalSrc = "/static/images/${originalSrc}_original.jpg";
-    _setLightBoxVisible(true);
-    _currImg = _createLightBoxImage(originalSrc, 0);
+    int imgId = int.parse((e.target as Element).dataAttributes["gallery-id"]);
+    showImage(imgId);
     js.scoped(() {
       js.context["_gaq"].push(
-          js.array(["_trackEvent", "Gallery", "ThumbnailClick", originalSrc]));
+          js.array(["_trackEvent", "Gallery", "ThumbnailClick", imgId]));
     });
   }
 
   void _onImgLoad(Event e) {
-    if (e.target as ImageElement == _currImg.getImg()) {
-      _loadProxImages();
+    if (e.target == _currImg.img) {
+      _prevImg.load();
+      _nextImg.load();
     }
   }
 
@@ -141,31 +173,24 @@ class PhotoGalleryWidget {
         _setLightBoxVisible(false);
         break;
       case KeyCode.LEFT:
-        _navPrev();
+        showImage(_currImg.id - 1);
         break;
       case KeyCode.RIGHT:
-        _navNext();
+        showImage(_currImg.id + 1);
         break;
     }
   }
 
-  void _navNext() {
-    _prevImg.dispose();
-    _prevImg = _currImg;
-    _currImg = _nextImg;
-    _nextImg = null;
-    _prevImg.setLeftPosition(-_lightBox.offsetWidth);
-    _currImg.setLeftPosition(0);
-    _loadProxImages();
-  }
-
-  void _navPrev() {
-    _nextImg.dispose();
-    _nextImg = _currImg;
-    _currImg = _prevImg;
-    _prevImg = null;
-    _currImg.setLeftPosition(0);
-    _nextImg.setLeftPosition(_lightBox.offsetWidth);
-    _loadProxImages();
+  _onHashChange(_) {
+    Iterable<Match> matches =
+        _HASH_IMG_ID_REGEXP.allMatches(window.location.hash);
+    if (matches.length == 0) {
+      _setLightBoxVisible(false);
+      return;
+    }
+    int activatedImgId = int.parse(matches.first.group(1));
+    if (_currImg == null || _currImg.id != activatedImgId) {
+      showImage(activatedImgId);
+    }
   }
 }
