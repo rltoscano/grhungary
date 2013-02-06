@@ -11,6 +11,19 @@
 {{define "silver"}}#727272{{end}}
 {{define "red"}}#93242B{{end}}
 
+{{define "drop-shadow"}}
+  -moz-box-shadow: 0px 1px 4px rgba(0,0,0,.6);
+  -webkit-box-shadow: 0px 1px 4px rgba(0,0,0,.6);
+  box-shadow: 0px 1px 4px rgba(0,0,0,.6);
+{{end}}
+
+{{define "opacity-transition-500"}}
+  transition: opacity 500ms;
+  -moz-transition: opacity 500ms; /* Firefox 4 */
+  -webkit-transition: opacity 500ms; /* Safari and Chrome */
+  -o-transition: opacity 500ms; /* Opera */
+{{end}}
+
 {{define "main-css"}}
 body {
   background-color: {{template "ivory"}};
@@ -51,17 +64,13 @@ button {
   margin: 0;
   border-radius: 2px;
   border: 0;
-  -moz-box-shadow: 0px 1px 3px rgba(0,0,0,.5);
-  -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,.5);
-  box-shadow: 0px 1px 3px rgba(0,0,0,.5);
+  {{template "drop-shadow"}}
   {{template "no-user-select"}}
 }
 
 button:active {
   color: white;
-  -moz-box-shadow: 0px 1px 3px rgba(0,0,0,.5) inset;
-  -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,.5) inset;
-  box-shadow: 0px 1px 3px rgba(0,0,0,.5) inset;
+  {{template "drop-shadow"}}
 }
 
 button:disabled {
@@ -87,9 +96,7 @@ div.table > div > div:last-child {
 }
 
 .map {
-  -moz-box-shadow: 0px 2px 2px rgba(0,0,0,.3);
-  -webkit-box-shadow: 0px 2px 2px rgba(0,0,0,.3);
-  box-shadow: 0px 2px 2px rgba(0,0,0,.3);
+  {{template "drop-shadow"}}
 }
 
 #decoration-canvas {
@@ -187,10 +194,7 @@ div.table > div > div:last-child {
   position: absolute;
   width: 604px;
   opacity: 1;
-  transition: opacity 500ms;
-  -moz-transition: opacity 500ms; /* Firefox 4 */
-  -webkit-transition: opacity 500ms; /* Safari and Chrome */
-  -o-transition: opacity 500ms; /* Opera */
+  {{template "opacity-transition-500"}}
   padding-bottom: 24px;
 }
 
@@ -216,9 +220,7 @@ div.table > div > div:last-child {
   background-image: url('/static/images/welcome-sprite.jpg');
   height: 132px;
   width: 181px;
-  -moz-box-shadow: 0px 2px 2px rgba(0,0,0,.5);
-  -webkit-box-shadow: 0px 2px 2px rgba(0,0,0,.5);
-  box-shadow: 0px 2px 2px rgba(0,0,0,.5);
+  {{template "drop-shadow"}}
 }
 
 #mansion-images > div:nth-child(2) > div {
@@ -244,23 +246,15 @@ div.table > div > div:last-child {
 }
 
 .height-transition {
-  transition: height 500ms;
-  -moz-transition: height 500ms; /* Firefox 4 */
-  -webkit-transition: height 500ms; /* Safari and Chrome */
-  -o-transition: height 500ms; /* Opera */
+  {{template "opacity-transition-500"}}
 }
 
 #rsvp-info-element {
   width: 398px;
   padding: .4em .8em;
   color: {{template "ivory"}};
-  transition: opacity 500ms;
-  -moz-transition: opacity 500ms; /* Firefox 4 */
-  -webkit-transition: opacity 500ms; /* Safari and Chrome */
-  -o-transition: opacity 500ms; /* Opera */
-  -moz-box-shadow: 0px 2px 2px rgba(0,0,0,.3);
-  -webkit-box-shadow: 0px 2px 2px rgba(0,0,0,.3);
-  box-shadow: 0px 2px 2px rgba(0,0,0,.3);
+  {{template "opacity-transition-500"}}
+  {{template "drop-shadow"}}
   margin-top: 1em;
 }
 
@@ -304,10 +298,7 @@ textarea {
   position: fixed;
   top: 0;
   left: 0;
-  transition: opacity 500ms;
-  -moz-transition: opacity 500ms; /* Firefox 4 */
-  -webkit-transition: opacity 500ms; /* Safari and Chrome */
-  -o-transition: opacity 500ms; /* Opera */
+  {{template "opacity-transition-500"}}
   background-color: rgba(0,0,0,0.8);
   z-index: 2;
   overflow: hidden;
@@ -355,10 +346,7 @@ textarea {
 
 .gallery-image-img {
   position: absolute;
-  transition: opacity 500ms;
-  -moz-transition: opacity 500ms; /* Firefox 4 */
-  -webkit-transition: opacity 500ms; /* Safari and Chrome */
-  -o-transition: opacity 500ms; /* Opera */
+  {{template "opacity-transition-500"}}
   background-color: rgba(0,0,0,0.8);
 }
 
@@ -415,9 +403,7 @@ textarea {
   margin-right: 18px;
   background-color: rgba(0,0,0,0.1);
   padding: 20px;
-  -moz-box-shadow: 0px 2px 2px rgba(0,0,0,.3);
-  -webkit-box-shadow: 0px 2px 2px rgba(0,0,0,.3);
-  box-shadow: 0px 2px 2px rgba(0,0,0,.3);
+  {{template "drop-shadow"}}
 }
 
 .postcard img {
