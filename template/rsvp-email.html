@@ -5,13 +5,13 @@
     <b>{{.Messages.PartyMembers}}</b>
     <ul>
     {{range .Rsvp.PartyMembers}}
-      <li>{{js html .}}</li>
+      <li>{{.}}</li>
     {{end}}
     </ul>
   </p>
   <p>
     <b>{{.Messages.DietaryRestrictions}}</b><br/>
-    {{js html .Rsvp.DietaryRestrictions}}
+    {{.Rsvp.DietaryRestrictions}}
   </p>
   <p>
     <b>{{.Messages.EmailStayingOvernight}}</b>:
@@ -19,7 +19,7 @@
   </p>
   <p>
     <b>{{.Messages.InterestedInSightseeing}}</b>:
-    {{js html .Rsvp.InterestedInSightseeing}}
+    {{.Rsvp.InterestedInSightseeing}}
   </p>
   <p><b>Important details to keep in mind:</b></p>
   <ul>
@@ -36,16 +36,16 @@
 {{end}}
 
 {{define "rsvp-feedback-accept-email"}}
-  <p>Received RSVP from {{js html .Id}}</p>
+  <p>Received RSVP from {{.Id}}</p>
   <p>Party Members:<p>
   <ul>
     {{range .PartyMembers}}
-      <li>{{js html .}}</li>
+      <li>{{.}}</li>
     {{end}}
   </ul>
-  <p>Dietary Restrictions: {{js html .DietaryRestrictions}}</p>
+  <p>Dietary Restrictions: {{.DietaryRestrictions}}</p>
   <p>Staying overnight at hotel: {{if .IsStayingOvernight}}Yes{{else}}No{{end}}</p>
-  <p>Interested in daytrip: {{js html .InterestedInSightseeing}}</p>  
+  <p>Interested in daytrip: {{.InterestedInSightseeing}}</p>  
 {{end}}
 
 {{define "rsvp-feedback-reject-email"}}

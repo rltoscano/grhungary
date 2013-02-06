@@ -10,7 +10,7 @@ import (
   "net/http"
   "regexp"
   "strings"
-  "text/template"
+  "html/template"
   "time"
 )
 
