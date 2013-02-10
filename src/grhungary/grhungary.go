@@ -6,7 +6,6 @@ import (
   "appengine/mail"
   "bytes"
   "encoding/json"
-  "io/ioutil"
   "net/http"
   "regexp"
   "strings"
@@ -14,35 +13,12 @@ import (
   "time"
 )
 
-var Messages = make(map[string]map[string]string)
 var EMAIL_REGEXP = "^[\\w\\.=-_]+@[\\w\\.-_]+\\.[\\w]{2,4}$"
 
 func init() {
   http.HandleFunc("/api/rsvp/create", handleApiRsvpCreate);
   http.HandleFunc("/ie", handleIe)
   http.HandleFunc("/", handleRoot)
-
-  messagesByIdBytes, err := ioutil.ReadFile("messages.json")
-  if err != nil {
-    panic("Could not read messages.json" + err.Error())
-  }
-
-  messagesById := make(map[string]map[string]string)
-  err = json.Unmarshal(messagesByIdBytes, &messagesById)
-  if err != nil {
-    panic("Could not unmarshall messages.json" + err.Error())
-  }
-
-  for id, msgs := range messagesById {
-    for locale, msg := range msgs {
-      localeMap, ok := Messages[locale]
-      if !ok {
-        localeMap = make(map[string]string)
-        Messages[locale] = localeMap
-      }
-      localeMap[id] = msg
-    }
-  }
 }
 
 type Rsvp struct {
@@ -57,7 +33,7 @@ type Rsvp struct {
 
 type EmailBody struct {
   Rsvp Rsvp
-  Messages map[string]string
+  IsHu bool
 }
 
 func handleApiRsvpCreate(w http.ResponseWriter, r *http.Request) {
@@ -91,18 +67,19 @@ func handleApiRsvpCreate(w http.ResponseWriter, r *http.Request) {
     c.Errorf("Couldn't parse email template.", err.Error())
     return
   }
+  tpl.Funcs(FUNC_MAP)
 
   isEmail, _ := regexp.MatchString(EMAIL_REGEXP, rsvp.Id);  
   if rsvp.IsAccepted && isEmail {
-    localeMap := GetLocaleMap(r)
+    isHu := GetIsHu(r)
 
     emailBodyBuf := bytes.Buffer{}
     tpl.ExecuteTemplate(&emailBodyBuf, "rsvp-email-body", EmailBody{
-      Messages: localeMap,
+      IsHu: isHu,
       Rsvp: rsvp,
     })
     emailSubjectBuf := bytes.Buffer{}
-    tpl.ExecuteTemplate(&emailSubjectBuf, "rsvp-email-subject", localeMap)
+    tpl.ExecuteTemplate(&emailSubjectBuf, "rsvp-email-subject", isHu)
 
     msg := mail.Message{
       Sender: "Gyöngyi & Robert <contact@grhungary.com>",
@@ -145,7 +122,7 @@ func handleApiRsvpCreate(w http.ResponseWriter, r *http.Request) {
 }
 
 type MainData struct {
-  Messages map[string]string
+  IsHu bool
 }
 
 func handleRoot(w http.ResponseWriter, r *http.Request) {
@@ -160,7 +137,7 @@ func handleRoot(w http.ResponseWriter, r *http.Request) {
   w.Header().Set("Content-type", "text/html; charset=utf-8")
   c := appengine.NewContext(r)
   mainData := MainData{
-    Messages: GetLocaleMap(r),
+    IsHu: GetIsHu(r),
   }
   tpl, err := template.ParseGlob("template/*")
   if err != nil {
@@ -168,32 +145,40 @@ func handleRoot(w http.ResponseWriter, r *http.Request) {
     http.Error(w, err.Error(), http.StatusInternalServerError)
     return
   }
+  tpl.Funcs(FUNC_MAP)
   tpl.ExecuteTemplate(w, "main", mainData)
 }
 
 func handleIe(w http.ResponseWriter, r *http.Request) {
   w.Header().Set("Content-type", "text/html; charset=utf-8")
   c := appengine.NewContext(r)
-  mainData := MainData{
-    Messages: GetLocaleMap(r),
-  }
-  tpl, err := template.ParseFiles("template/ie.html", "template/main.css")
+  tpl, err := template.ParseFiles(
+      "template/ie.html", "template/main.html", "template/main.css")
   if err != nil {
     c.Errorf("Couldn't parse ie.html template: %s", err.Error());
     http.Error(w, err.Error(), http.StatusInternalServerError)
     return
   }
-  tpl.ExecuteTemplate(w, "ie", mainData)
+  tpl.Funcs(FUNC_MAP)
+  tpl.ExecuteTemplate(w, "ie", MainData{
+    IsHu: GetIsHu(r),
+  })
 }
 
-func GetLocaleMap(r *http.Request) map[string]string {
+func GetIsHu(r *http.Request) bool {
   var hasHu bool
   locales := strings.Split(r.Header.Get("Accept-Language"), ",")
   for idx := range locales {
     hasHu = hasHu || strings.ToLower(locales[idx]) == "hu"
   }
-  if hasHu {
-    return Messages["hu"]
-  }
-  return Messages["en_US"]
+  return hasHu
 }
+
+func StringEquals(arg1 string, arg2 string) bool {
+  return arg1 == arg2
+}
+
+var FUNC_MAP = template.FuncMap{
+  "StringEquals": StringEquals,
+}
+

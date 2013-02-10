@@ -2,14 +2,28 @@
   <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
     <input type="hidden" name="cmd" value="_s-xclick">
     <input type="hidden" name="hosted_button_id" value="38XY6UKN22Z4E">
-    <button type="submit" name="submit"
-        alt="PayPal - The safer, easier way to pay online!">Donate</button>
+    <button type="submit" name="submit" alt="PayPal">
+      {{if .IsHu}}Ajándékozz{{else}}Donate{{end}}
+    </button>
   </form>
 {{end}}
 
 {{define "gift-registry"}}
 <div id="gift-registry" class="page transparent" hidden>
-  <h1>gift registry</h1>
+  <h1>{{if .IsHu}}nászajándék{{else}}gift registry{{end}}</h1>
+
+  {{if .IsHu}}
+  <p>A legjobban természetesen annak örülnénk, ha eljönnél az esküvőnkre.
+  Azonban ha ez nem lehetséges, hozzájárulhatsz a nászutunkhoz, ha módodban
+  áll. Mivel már több, mint három éve együtt élünk, mindenünk megvan a
+  háztartásunkban, amire csak szükségünk lehet. Így arra kérünk, hogyha meg
+  szeretnél ajándékozni minket, akkor a nászutunk költségeihez járulj hozzá.</p>
+
+  <p>Szerencsésnek mondhatjuk magunkat, amiért rengeteg gyönyörű helyre
+  eljutottunk a világon, azonban még soha nem voltunk tengerarti nyaraláson.
+  Izgatottan várjuk, hogy eltöltsünk egy hetet (július 31-augusztus 7)
+  Kefalonia-ban, a gyönyörű görög szigeten.</p>
+  {{else}}
   <p>The best gift you could give us is to come to our wedding. However,
   if this is not feasible, you can choose to contribute to our honeymoon
   fund through this website. We do not have a gift registry, since after
@@ -20,8 +34,9 @@
   the world, but we have never been on a beach vacation. We are very
   excited about spending a week (July 31 - August 7) on the beautiful Greek
   island of Kefalonia!</p>
+  {{end}}
 
-  {{template "donate-button"}}
+  {{template "donate-button" .}}
 
   <p>
     <a href="http://goo.gl/qA58H">
@@ -30,63 +45,116 @@
     </a>
   </p>
 
-  <p>Kefalonia is the most westerly island of
-  Greece lies in the Ionian Sea, in the channel leading into the Gulf
-  of Patras. With its circa 780 square kilometres, the island is the
-  largest of the Eptanissos (the Seven Islands). Turquoise seas, lush
-  green vegetation, wild and sheer mountain scenery and a fascinating
-  variety of geological profiles have given Kefalonia a special
-  atmosphere and beauty. Kefalonia is characterized by the creative
-  forces of nature and three thousand years of cultural history.</p>
+  {{if .IsHu}}
+  <p>Kefalonia Görögország legnyugatibb fekvésű szigete. Csaknem 780 km2-es
+  területével ez a legnagyobb a hét Jón-sziget közül. Kristálytiszta tenger,
+  buja növényzet, lankás hegyvidék és 3000 éves kultúrális történet teszi ezt az
+  üdülőparadicsomot lenyűgözővé.</p>
+  {{else}}
+  <p>Kefalonia is the most westerly island of Greece and lies in the Ionian Sea,
+  in the channel leading into the Gulf of Patras. With its circa 780 square
+  kilometres, the island is the largest of the Eptanissos (the Seven Islands).
+  Turquoise seas, lush green vegetation, wild and sheer mountain scenery and a
+  fascinating variety of geological profiles have given Kefalonia a special
+  atmosphere and beauty. Kefalonia is characterized by the creative forces of
+  nature and three thousand years of cultural history.</p>
+  {{end}}
+
+  <div id="greece-images">
+    <div><div style="background-position: 0 0"></div></div>
+    <div><div style="background-position: -300px 0"></div></div>
+  </div>
 
   <div id="honey-moon-expense-table" class="table">
     <div>
-      <div>Two roundtrip airplane tickets from Budapest to Zakynthos</div>
-      <div>$990</div>
+      <div>
+        {{if .IsHu}}
+        Két retúr repülőjegy Budapestről Zakynthos-ba
+        {{else}}
+        Two roundtrip airplane tickets from Budapest to Zakynthos
+        {{end}}
+      </div>
+      <div>{{if .IsHu}}210 000 Ft{{else}}$990{{end}}</div>
     </div>
     <div>
-      <div>Two round trip ferry tickets from Zakynthos to Killini</div>
-      <div>$36</div>
+      <div>
+        {{if .IsHu}}
+        Két retúr kompjegy Zakynthos-ból Killini-be
+        {{else}}
+        Two round trip ferry tickets from Zakynthos to Killini
+        {{end}}
+      </div>
+      <div>{{if .IsHu}}7 800 Ft{{else}}$36{{end}}</div>
     </div>
     <div>
-      <div>Two round trip ferry tickets from Killini to Argostoli</div>
-      <div>$50</div>
+      <div>
+        {{if .IsHu}}
+        Két retúr kompjegy Killini-ből Argostoli-ba
+        {{else}}
+        Two round trip ferry tickets from Killini to Argostoli
+        {{end}}
+      </div>
+      <div>{{if .IsHu}}10 000 Ft{{else}}$50{{end}}</div>
     </div>
     <div>
-      <div>Car rental for seven days</div>
-      <div>$320</div>
+      <div>
+        {{if .IsHu}}Autóbérlés hét napra{{else}}Car rental for seven days{{end}}
+      </div>
+      <div>{{if .IsHu}}70 000 Ft{{else}}$320{{end}}</div>
     </div>
     <div>
-      <div>Accommodation at Dionysos Village Resort for seven nights</div>
-      <div>$1600</div>
+      <div>
+        {{if .IsHu}}
+        Szállás a Dionysos Village Resort-ban hét éjszakára
+        {{else}}
+        Accommodation at Dionysos Village Resort for seven nights
+        {{end}}
+      </div>
+      <div>{{if .IsHu}}350 000 Ft{{else}}$1600{{end}}</div>
     </div>
     <div>
-      <div>Food and drinks for seven days</div>
-      <div>$550</div>
+      <div>
+        {{if .IsHu}}
+        Étel és italfogyasztás hét napra
+        {{else}}
+        Food and drinks for seven days
+        {{end}}
+      </div>
+      <div>{{if .IsHu}}120 000 Ft{{else}}$550{{end}}</div>
     </div>
     <div>
-      <div>Sea Kayaking</div>
-      <div>$160</div>
+      <div>{{if .IsHu}}Tengeri kajakozás{{else}}Sea Kayaking{{end}}</div>
+      <div>{{if .IsHu}}35 000 Ft{{else}}$160{{end}}</div>
     </div>
     <div>
-      <div>Guided hiking tour</div>
-      <div>$160</div>
+      <div>
+        {{if .IsHu}}Hegymászás túravezetővel{{else}}Guided hiking tour{{end}}
+      </div>
+      <div>{{if .IsHu}}35 000 Ft{{else}}$160{{end}}</div>
     </div>
     <div>
-      <div>Horseback riding tour</div>
-      <div>$200</div>
+      <div>
+        {{if .IsHu}}Lovaglás túravezetővel{{else}}Horseback riding tour{{end}}
+      </div>
+      <div>{{if .IsHu}}43 500 Ft{{else}}$200{{end}}</div>
     </div>
     <div>
-      <div>Ice-cream, cocktails, baklava, and the rest</div>
-      <div>$200</div>
+      <div>
+        {{if .IsHu}}
+        Fagylalt, koktél, baklava stb.
+        {{else}}
+        Ice-cream, cocktails, baklava, and the rest
+        {{end}}
+      </div>
+      <div>{{if .IsHu}}45 000 Ft{{else}}$200{{end}}</div>
     </div>
     <div>
-      <div>Total</div>
-      <div>$4266</div>
+      <div>{{if .IsHu}}Összesen{{else}}Total{{end}}</div>
+      <div>{{if .IsHu}}926 300 Ft{{else}}$4266{{end}}</div>
     </div>
   </div>
 
-  {{template "donate-button"}}
+  {{template "donate-button" .}}
 
   <img class="humotif" src="/static/images/humotif.png" />
 </div>

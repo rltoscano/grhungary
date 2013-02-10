@@ -1,24 +1,37 @@
 {{define "contact"}}
-<div id="contact" class="page transparent table" hidden>
-  <h1>contact</h1>
-  <div id="contact-table">
+<div id="contact" class="page transparent" hidden>
+  <h1>{{if .IsHu}}kapcsolat{{else}}contact{{end}}</h1>
+  <div id="contact-table" class="table">
     <div>
       <div>Email</div>
       <div>
         <a href="mailto:contact@grhungary.com">contact@grhungary.com</a>
       </div>
     </div>
-    <div>
-      <div>Robert</div>
-      <div>415 891 9661</div>
-    </div>
-    <div>
-      <div>Gyöngyi</div>
-      <div>415 231 9331</div>
-    </div>
+    {{if .IsHu}}
+    {{template "gyongyi-contact" .}}
+    {{template "robert-contact" .}}
+    {{else}}
+    {{template "robert-contact" .}}
+    {{template "gyongyi-contact" .}}
+    {{end}}
   </div>
 
   <img class="humotif" src="/static/images/humotif.png" />
 </div>
+{{end}}
+
+{{define "robert-contact"}}
+    <div>
+      <div>Robert</div>
+      <div>+1 415 891 9661</div>
+    </div>
+{{end}}
+
+{{define "gyongyi-contact"}}
+    <div>
+      <div>Gyöngyi</div>
+      <div>+1 415 231 9331</div>
+    </div>
 {{end}}
 

@@ -1,7 +1,21 @@
 {{define "welcome"}}
 <div id="welcome" class="page transparent" hidden>
-  <h1>welcome</h1>
+  <h1>{{if .IsHu}}köszöntünk{{else}}welcome{{end}}</h1>
 
+  {{if .IsHu}}
+  <p>Köszöntünk esküvői weboldalunkon! Nagy örömünkre szolgál, hogy megoszthatjuk
+  Veletek házasságunk ünneplését. Itt minden információt megtalálhattok az
+  esküvőnkkel kapcsolatban. Azok, akik pedig sajnos nem lesznek jelen, itt nyomon
+  tudják követni a lakodalommal kapcsolatos történéseket. A következő oldalakon
+  azt is megtudhatjátok, hogy hogyan ismerkedtünk meg, valamint a nászúttal
+  kapcsolatos terveinkről is beszámolunk.</p>
+
+  <p>Miután 2010. március 1-jén házasságot kötöttünk egy hangulatos kis ceremónia
+  körében a San Francisco-i Polgármesteri Hivatalban, most elérkeztünk oda, hogy
+  mindekettőnk családjának és barátainak jelenlétében az álomesküvőnket is
+  megünnepeljük. Helyszínül a gyönyörű környezetben lévő ráckevei Savoyai
+  Kastélyszállót választottuk.</p>
+  {{else}}
   <p>Welcome to our wedding website! We are delighted to be able to
   share the celebration of our marriage with you. For all of you who
   will be attending, all of the information you could ever want to know
@@ -18,6 +32,7 @@
   Hotel, a beautiful landmark just six miles away from Gyöngyi’s
   hometown. It's absolutely beautiful there and we know you will love
   it.</p>
+  {{end}}
 
   <div id="mansion-images">
     <div><div style="background-position: 0 0"></div></div>
@@ -25,6 +40,17 @@
     <div><div style="background-position: -417px 0"></div></div>
   </div>
 
+  {{if .IsHu}}
+  <p>Mivel a nagy távolság miatt családjaink és barátaink nehezen találnak
+  lehetőséget a találkozásra, úgy gondoljuk, hogy az esküvőnk tökéletes alkalmat
+  biztosít arra, hogy megismerjétek egymást.</p>
+
+  <p>Izgatottan várjuk, hogy néhány hónap múlva mindnyájatokkal együtt ünnepeljük
+  elkötelezettségünket. Köszönjük minden barátunknak és családtagunknak, hogy az
+  évek során támogatásukkal és szeretetükkel elhalmoztak minket.</p>
+
+  <p>Szeretettel:<br/>Gyöngyi és Robert</p>
+  {{else}}
   <p>Our goal is to create an experience that allows you to discover
   each others’ cultures through excellent food, drinks, and fun times.
   We think that the celebration of our union provides the perfect
@@ -44,6 +70,7 @@
   loving us over the years.</p>
 
   <p>Love,<br/>Gyöngyi and Robert</p>
+  {{end}}
 
   <img class="humotif" src="/static/images/humotif.png" />
 </div>

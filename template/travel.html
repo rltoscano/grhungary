@@ -1,12 +1,35 @@
 {{define "travel"}}
 <div id="travel" class="page transparent" hidden>
-  <h1>travel</h1>
+  <h1>{{if .IsHu}}szállás{{else}}travel{{end}}</h1>
   <p>
     <a href="http://goo.gl/ijCRJ">
       <img class="map" id="mansion-map"
+          {{if .IsHu}}
+          src="http://maps.googleapis.com/maps/api/staticmap?center=47.33739,18.986809&language=hu&zoom=9&size=600x300&sensor=false&maptype=terrain&markers=size:mid%7Ccolor:red%7CSavoyai Kast%C3%A9ly Sz%C3%A1ll%C3%B3, R%C3%A1ckeve, Kossuth Lajos Street, Hungary">
+          {{else}}
           src="http://maps.googleapis.com/maps/api/staticmap?center=Savoyai Kastély Szálló, Ráckeve, Kossuth Lajos Street, Hungary&language=en&zoom=5&size=600x300&sensor=false&maptype=terrain&markers=size:mid%7Ccolor:red%7CSavoyai Kastély Szálló, Ráckeve, Kossuth Lajos Street, Hungary">
+          {{end}}
     </a>
   </p>
+
+  {{if .IsHu}}
+
+  <section>
+    <p>Mivel a ceremónia és a vacsora is a Savoyai Kastélyszállóban
+    lesz megtartva, azt javasoljuk, hogy amennyiben csak másnap indultok haza,
+    itt töltsétek az éjszakát. A szobaárak 9 000 Ft és 18 500 Ft között mozognak
+    a szoba nagyságától és az ágyak számától függően. További részleteket a
+    foglalással kapcsolatban <a href="http://goo.gl/3uGXo">itt</a> találhattok
+    meg.</p>
+
+    <p>Egyéb szálláslehetőségek Ráckevén:</p>
+     <ul>
+      <li><a href="http://goo.gl/hJ1Jr">Hotel Termálkristály Aqualand</a></li>
+      <li><a href="http://wellnesshotel.hu/">Kék Duna Wellness Hotel</a></li>
+    </ul>
+  </section>
+
+  {{else}}
 
   <section>
     <h2>airfare</h2>
@@ -150,6 +173,8 @@
     <li><a href="http://goo.gl/qHEJ0">Eurostar</a></li>
     </ul>
   </section>
+
+  {{end}}
 
   <img class="humotif" src="/static/images/humotif.png" />
 </div>

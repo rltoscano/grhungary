@@ -1,15 +1,17 @@
 {{define "rsvp"}}
 <div id="rsvp" class="page transparent" hidden>
-  <h1>respond</h1>
+  <h1>{{if .IsHu}}visszajelzés{{else}}respond{{end}}</h1>
   <div class="table">
     <div>
       <div>
-        Contact Email<br/>
-        <span style="font-size: 10pt">(or phone number)</span>
+        {{if .IsHu}}Email Cím{{else}}Contact Email{{end}}<br/>
+        <span style="font-size: 10pt">
+          ({{if .IsHu}}vagy telefonszám{{else}}or phone number{{end}})
+        </span>
       </div>
       <div>
         <input id="rsvp-id" type="text"
-          placeholder="myemail@example.com"/>
+          placeholder="{{if .IsHu}}xy@gmail.com{{else}}myemail@example.com{{end}}"/>
       </div>
     </div>
   </div>
@@ -18,33 +20,58 @@
       <div class="table">
         <div>
           <div>
-            Names of Party Members<br/>
-            <span style="font-size: 10pt">(including yourself)</span></div>
+            {{if .IsHu}}Résztvevők Neve{{else}}Names of Party Members{{end}}<br/>
+            <span style="font-size: 10pt">
+              ({{if .IsHu}}magadat beleszámítva{{else}}including yourself{{end}})
+            </span>
+          </div>
           <div>
             <div id="rsvp-names">
               <input class="rsvp-name" type="text"
-                  placeholder="ex. Robert Toscano"/>
+                  placeholder="{{if .IsHu}}pl. Gózon Gyöngyi{{else}}ex. Robert Toscano{{end}}"/>
             </div>
-            <button id="rsvp-add-name-button">Add Another Member</button>
+            <button id="rsvp-add-name-button">
+              {{if .IsHu}}
+              További Résztvevők Hozzáadása
+              {{else}}
+              Add Another Member
+              {{end}}
+            </button>
           </div>
         </div>
         <div>
-          <div>Dietary Restrictions</div>
+          <div>{{if .IsHu}}Étrendi Megszorítás{{else}}Dietary Restrictions{{end}}</div>
           <div><textarea id="rsvp-dietary-restrictions"></textarea></div>
         </div>
         <div>
-          <div>Will you be staying at the mansion hotel overnight?</div>
+          <div>
+            {{if .IsHu}}
+            A Savoyai Kastélyszállóban töltöd majd az éjszakát?
+            {{else}}
+            Will you be staying at the mansion hotel overnight?
+            {{end}}
+          </div>
           <div><input type="checkbox" id="rsvp-is-staying-overnight"/></div>
         </div>
         <div>
           <div>
+            {{if .IsHu}}
+            Lenne kedved részt venni a 28-i városnéző kiránduláson?
+            {{else}}
             Are you interested in a daytrip in Hungary on Sunday, the 28th?
+            {{end}}
           </div>
           <div>
             <select id="rsvp-interested-in-sightseeing">
-              <option selected data-value="No">No</option>
-              <option data-value="Maybe">Maybe</option>
-              <option data-value="Yes">Yes</option>
+              <option selected data-value="No">
+                {{if .IsHu}}Nem{{else}}No{{end}}
+              </option>
+              <option data-value="Maybe">
+                {{if .IsHu}}Talán{{else}}Maybe{{end}}
+              </option>
+              <option data-value="Yes">
+                {{if .IsHu}}Igen{{else}}Yes{{end}}
+              </option>
             </select>
           </div>
         </div>
@@ -53,25 +80,33 @@
     </div>
   </div>
   <div>
-    <button id="accept-button">Happily Accept</button>
+    <button id="accept-button">
+      {{if .IsHu}}Boldogan Elfogadom{{else}}Happily Accept{{end}}
+    </button>
     <button
         id="reject-button"
-        data-label-in-progress="Declining..."
-        data-label="Regretfully Decline">Regretfully Decline</button>
+        data-label-in-progress="{{if .IsHu}}Küldés{{else}}Declining...{{end}}"
+        data-label="{{if .IsHu}}Sajnálattal Visszautasítom{{else}}Regretfully Decline{{end}}">
+      {{if .IsHu}}Sajnálattal Visszautasítom{{else}}Regretfully Decline{{end}}
+    </button>
     <button
         hidden
         id="rsvp-send-button"
-        data-label-in-progress="Responding..."
-        data-label="Respond">Respond</button>
-    <button class="cancel-button" hidden id="rsvp-cancel-button">Cancel</button>
+        data-label-in-progress="{{if .IsHu}}Küldés{{else}}Responding...{{end}}"
+        data-label="{{if .IsHu}}Kész{{else}}Respond{{end}}">
+      {{if .IsHu}}Kész{{else}}Respond{{end}}
+    </button>
+    <button class="cancel-button" hidden id="rsvp-cancel-button">
+      {{if .IsHu}}Mégsem{{else}}Cancel{{end}}
+    </button>
   </div>
   <div
       id="rsvp-info-element"
       class="transparent"
       hidden
-      data-success-message="Your response has been submitted and a confirmation has been sent to your email address."
-      data-fail-message="There was a problem submitting your response. Please <a href=&quot;mailto:contact@grhungary.com&quot;>email us</a> for further assistance."
-      data-success-reject-message="We're sorry you can't make it. We'll keep you updated when we add new photos and videos of the wedding.">
+      data-success-message="{{if .IsHu}}Visszajelzésedet megkaptuk és a megadott email címedre egy megerősítést küldtünk.{{else}}Your response has been submitted and a confirmation has been sent to your email address.{{end}}"
+      data-fail-message="{{if .IsHu}}Sajnos visszajelzésedet nem sikerült elküldeni. Kérünk értesíts minket a problémáról a <a href=&quot;mailto:contact@grhungary.com&quot;>iuho</a> email címen.{{else}}There was a problem submitting your response. Please <a href=&quot;mailto:contact@grhungary.com&quot;>email us</a> for further assistance.{{end}}"
+      data-success-reject-message="{{if .IsHu}}Nagyon sajnáljuk, hogy nem tudsz eljönni az esküvőnkre. Email-ben értesíteni fogunk, amint feltöltöttük a képeket és a videókat.{{else}}We're sorry you can't make it. We'll keep you updated when we add new photos and videos of the wedding.{{end}}">
   </div>
 
   <img class="humotif" src="/static/images/humotif.png" />

@@ -1,3 +1,15 @@
+{{define "site-header"}}
+    <div id="site-header">
+      <img id="bird" src="/static/images/bird.png"/>
+      <div id="site-title">
+        {{if .IsHu}}Gyöngyi és Robert{{else}}Gyöngyi and Robert{{end}}
+      </div>
+      <div style="padding-bottom: 20px; font-weight: bold">
+        {{if .IsHu}}2013. július 27.{{else}}July 27th, 2013{{end}}
+      </div>
+    </div>
+{{end}}
+
 {{define "main"}}
 <!DOCTYPE html>
 
@@ -27,40 +39,50 @@
   </head>
   <body>
 
+    {{template "site-header" .}}
+
     <div id="photo-gallery-light-box" class="transparent" hidden>
       <div id="light-box-close-button">x</div>
       <div id="light-box-left-button" class="light-box-nav-button">&lt;</div>
       <div id="light-box-right-button" class="light-box-nav-button">&gt;</div>
     </div>
 
-    <div id="site-header">
-      <img id="bird" src="/static/images/bird.png"/>
-      <div id="site-title">{{.Messages.NamesHeader}}</div>
-      <div style="padding-bottom: 20px; font-weight: bold">July 27th, 2013</div>
+    <div id="loading-overlay"><span id="loading-message">
+      {{if .IsHu}}Betöltés{{else}}Loading{{end}}<span class="dots"><span>.</span><span>.</span><span>.</span></span></span>
     </div>
-
-    <div id="loading-overlay"><span id="loading-message">Loading<span class="dots"><span>.</span><span>.</span><span>.</span></span></span></div>
 
     <div id="main-content" class="transparent" hidden>
 
       <ul id="nav-bar">
-        <li data-page-id="welcome">welcome</li>
-        <li data-page-id="our-story">our story</li>
-        <li data-page-id="photo-gallery">photo gallery</li>
-        <li data-page-id="travel">travel</li>
-        <li data-page-id="rsvp">respond</li>
-        <li data-page-id="gift-registry">gift registry</li>
-        <li data-page-id="contact">contact</li>
+        <li data-page-id="welcome">
+          {{if .IsHu}}köszöntünk{{else}}welcome{{end}}
+        </li>
+        <li data-page-id="our-story">
+          {{if .IsHu}}történetünk{{else}}our story{{end}}
+        </li>
+        <li data-page-id="photo-gallery">
+          {{if .IsHu}}fényképalbum{{else}}photo gallery{{end}}
+        </li>
+        <li data-page-id="travel">{{if .IsHu}}szállás{{else}}travel{{end}}</li>
+        <li data-page-id="rsvp">
+          {{if .IsHu}}visszajelzés{{else}}respond{{end}}
+        </li>
+        <li data-page-id="gift-registry">
+          {{if .IsHu}}nászajándék{{else}}gift registry{{end}}
+        </li>
+        <li data-page-id="contact">
+          {{if .IsHu}}kapcsolat{{else}}contact{{end}}
+        </li>
       </ul>
 
       <div id="page-container">
-        {{template "welcome"}}
-        {{template "our-story"}}
-        {{template "photo-gallery"}}
-        {{template "travel"}}
-        {{template "rsvp"}}
-        {{template "gift-registry"}}
-        {{template "contact"}}
+        {{template "welcome" .}}
+        {{template "our-story" .}}
+        {{template "photo-gallery" .}}
+        {{template "travel" .}}
+        {{template "rsvp" .}}
+        {{template "gift-registry" .}}
+        {{template "contact" .}}
       </div>
 
     </div>

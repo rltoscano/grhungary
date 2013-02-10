@@ -64,8 +64,12 @@ button {
   margin: 0;
   border-radius: 2px;
   border: 0;
-  {{template "drop-shadow"}}
   {{template "no-user-select"}}
+}
+
+button:hover {
+  background-color: #AF2831;
+  {{template "drop-shadow"}}
 }
 
 button:active {
@@ -225,6 +229,27 @@ div.table > div > div:last-child {
 
 #mansion-images > div:nth-child(2) > div {
   width: 236px;
+}
+
+#greece-images {
+  display: table;
+  border-collapse: collapse;
+}
+
+#greece-images > div {
+  display: table-cell;
+  padding-right: 4px;
+}
+
+#greece-images > div:last-child {
+  padding-right: 0;
+}
+
+#greece-images > div > div {
+  background-image: url('/static/images/greece.jpg');
+  height: 196px;
+  width: 300px;
+  {{template "drop-shadow"}}
 }
 
 #rsvp .table {

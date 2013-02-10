@@ -1,8 +1,20 @@
 {{define "rsvp-email-body"}}
-  <p>{{.Messages.EmailHeader}}</p>
-  <p>{{.Messages.WhatWeveGot}}:</p>
   <p>
-    <b>{{.Messages.PartyMembers}}</b>
+    {{if .IsHu}}
+    Köszönjük, hogy visszajeleztél esküvői meghívásunkra!
+    {{else}}
+    Thank you for responding to our invitation!
+    {{end}}
+  </p>
+  <p>
+    {{if .IsHu}}
+    Az alábbi adatokat kaptuk:
+    {{else}}
+    Here's what we've got:
+    {{end}}
+  </p>
+  <p>
+    <b>{{if .IsHu}}Résztvevők Neve{{else}}Party Members{{end}}</b>
     <ul>
     {{range .Rsvp.PartyMembers}}
       <li>{{.}}</li>
@@ -10,17 +22,43 @@
     </ul>
   </p>
   <p>
-    <b>{{.Messages.DietaryRestrictions}}</b><br/>
+    <b>{{if .IsHu}}Étrendi Megszorítás{{else}}Dietary Restrictions{{end}}</b>
+    <br/>
     {{.Rsvp.DietaryRestrictions}}
   </p>
   <p>
-    <b>{{.Messages.EmailStayingOvernight}}</b>:
-    {{if .Rsvp.IsStayingOvernight}}{{.Messages.Yes}}{{else}}{{.Messages.No}}{{end}}
+    <b>
+    {{if .IsHu}}
+    A Savoyai Kastélyszállóban töltöd majd az éjszakát
+    {{else}}
+    Staying overnight at the Mansion Hotel{{end}}
+    </b>:
+    {{if .Rsvp.IsStayingOvernight}}
+      {{if .IsHu}}Igen{{else}}Yes{{end}}
+    {{else}}
+      {{if .IsHu}}Nem{{else}}No{{end}}
+    {{end}}
   </p>
   <p>
-    <b>{{.Messages.InterestedInSightseeing}}</b>:
-    {{.Rsvp.InterestedInSightseeing}}
+    <b>
+      {{if .IsHu}}
+      Lenne kedved részt venni a 28-i városnéző kiránduláson
+      {{else}}
+      Interested in a daytrip
+      {{end}}
+    </b>:
+    {{if call .StringEquals .Rsvp.InterestedInSightseeing "Yes"}}
+      {{if .IsHu}}Igen{{else}}Yes{{end}}
+    {{else}}{{if call .StringEquals .Rsvp.InterestedInSightseeing "Maybe"}}
+      {{if .IsHu}}Talán{{else}}Maybe{{end}}
+    {{else}}
+      {{if .IsHu}}Nem{{else}}No{{end}}
+    {{end}}{{end}}
   </p>
+  {{if .IsHu}}
+  <p>Ha a fent említett információk közül valamelyik hibás, küldd el a
+     helyesbített adatokat a contact@grhungary.com email címre.</p>
+  {{else}}
   <p><b>Important details to keep in mind:</b></p>
   <ul>
     <li>Wedding Date: Saturday, July 27th, 2013</li>
@@ -29,10 +67,12 @@
         flight schedule. Also, you might want to allow yourself enough time to
         adjust to the time difference.</li>
     <li>Make sure your passport is up to date!</li>
+    <li>Consider getting travel insurance.</li>
     <li>Reserve your accommodation as soon as possible.</li>
     <li>Keep in mind that we are leaving for our honeymoon on Wednesday, July
         31st.</li>
   </ul>
+  {{end}}
 {{end}}
 
 {{define "rsvp-feedback-accept-email"}}
@@ -45,7 +85,7 @@
   </ul>
   <p>Dietary Restrictions: {{.DietaryRestrictions}}</p>
   <p>Staying overnight at hotel: {{if .IsStayingOvernight}}Yes{{else}}No{{end}}</p>
-  <p>Interested in daytrip: {{.InterestedInSightseeing}}</p>  
+  <p>Interested in daytrip: {{.InterestedInSightseeing}}</p>
 {{end}}
 
 {{define "rsvp-feedback-reject-email"}}
@@ -53,5 +93,5 @@
 {{end}}
 
 {{define "rsvp-email-subject"}}
-{{.EmailSubject}}
+{{if .}}Visszajelzés Kézbesítve{{else}}Wedding Response Received{{end}}
 {{end}}

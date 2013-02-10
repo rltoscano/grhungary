@@ -1,7 +1,7 @@
 {{define "our-story"}}
 <div id="our-story" class="page transparent" hidden>
-  <h1>our story</h1>
-  Coming soon March 31st.
+  <h1>{{if .IsHu}}történetünk{{else}}our story{{end}}</h1>
+  {{if .IsHu}}Elérhető március 31-től.{{else}}Coming soon March 31st.{{end}}
   <img class="humotif" src="/static/images/humotif.png" />
 </div>
 {{end}}

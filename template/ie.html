@@ -1,6 +1,12 @@
 {{define "ie"}}
+<!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8"/>
+    <link rel="icon" href="/static/images/bird-face-right.png" type="image/png"/>
+    <title>grhungary</title>
+    <link href="http://fonts.googleapis.com/css?family=Great+Vibes|Didact+Gothic&subset=latin,latin-ext"
+        rel="stylesheet" type="text/css">
     <style type="text/css">
       {{template "main-css"}}
     </style>
@@ -14,16 +20,17 @@
   </head>
   <body>
 
-    <div id="site-header">
-      <img id="bird" src="static/images/bird.png"/>
-      <div id="site-title">{{.Messages.NamesHeader}}</div>
-      <div style="padding-bottom: 20px; font-weight: bold">July 27th, 2013</div>
-    </div>
-
+    {{template "site-header" .}}
 
     <div id="main-content">
       <div id="ie-info-el">
-        <p>This website doesn't work on Internet Explorer. Please download a modern, standards-compliant browser. Here are a few:</p>
+        {{if .IsHu}}
+        <p>Ez a weboldal nem érhető el Internet Explorer-en keresztül. Kérünk
+        tölts le egy modern, szabványokkal kompatibilis böngészőt, például:</p>
+        {{else}}
+        <p>This website doesn't work on Internet Explorer. Please download a
+        modern, standards-compliant browser. Here are a few:</p>
+        {{end}}
         <ul>
           <li><a href="https://www.google.com/chrome">Google Chrome</a></li>
           <li><a href="https://www.mozilla.org/firefox">Firefox</a></li>
@@ -36,3 +43,4 @@
   </body>
 </html>
 {{end}}
+
