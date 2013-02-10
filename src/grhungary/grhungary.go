@@ -6,6 +6,7 @@ import (
   "appengine/mail"
   "bytes"
   "encoding/json"
+  "log"
   "net/http"
   "regexp"
   "strings"
@@ -15,10 +16,25 @@ import (
 
 var EMAIL_REGEXP = "^[\\w\\.=-_]+@[\\w\\.-_]+\\.[\\w]{2,4}$"
 
+var tpl *template.Template
+
+func stringEquals(arg1 string, arg2 string) bool {
+  return arg1 == arg2
+}
+
 func init() {
   http.HandleFunc("/api/rsvp/create", handleApiRsvpCreate);
   http.HandleFunc("/ie", handleIe)
   http.HandleFunc("/", handleRoot)
+
+  var err error
+  tpl, err = template.New("tpl").
+      Funcs(template.FuncMap{"stringEquals": stringEquals}).
+      ParseGlob("template/*")
+  if err != nil {
+    log.Fatal("Couldn't parse templates: ", err.Error())
+    return
+  }
 }
 
 type Rsvp struct {
@@ -60,14 +76,6 @@ func handleApiRsvpCreate(w http.ResponseWriter, r *http.Request) {
     return
   }
   c.Infof("Stored RSVP for %s", rsvp.Id)
-
-  var tpl *template.Template
-  if tpl, err = template.ParseFiles("template/rsvp-email.html"); err != nil {
-    http.Error(w, err.Error(), http.StatusInternalServerError)
-    c.Errorf("Couldn't parse email template.", err.Error())
-    return
-  }
-  tpl.Funcs(FUNC_MAP)
 
   isEmail, _ := regexp.MatchString(EMAIL_REGEXP, rsvp.Id);  
   if rsvp.IsAccepted && isEmail {
@@ -135,34 +143,12 @@ func handleRoot(w http.ResponseWriter, r *http.Request) {
     return
   }
   w.Header().Set("Content-type", "text/html; charset=utf-8")
-  c := appengine.NewContext(r)
-  mainData := MainData{
-    IsHu: GetIsHu(r),
-  }
-  tpl, err := template.ParseGlob("template/*")
-  if err != nil {
-    c.Errorf("Couldn't parse main.html template: %s", err.Error());
-    http.Error(w, err.Error(), http.StatusInternalServerError)
-    return
-  }
-  tpl.Funcs(FUNC_MAP)
-  tpl.ExecuteTemplate(w, "main", mainData)
+  tpl.ExecuteTemplate(w, "main", MainData{IsHu: GetIsHu(r)})
 }
 
 func handleIe(w http.ResponseWriter, r *http.Request) {
   w.Header().Set("Content-type", "text/html; charset=utf-8")
-  c := appengine.NewContext(r)
-  tpl, err := template.ParseFiles(
-      "template/ie.html", "template/main.html", "template/main.css")
-  if err != nil {
-    c.Errorf("Couldn't parse ie.html template: %s", err.Error());
-    http.Error(w, err.Error(), http.StatusInternalServerError)
-    return
-  }
-  tpl.Funcs(FUNC_MAP)
-  tpl.ExecuteTemplate(w, "ie", MainData{
-    IsHu: GetIsHu(r),
-  })
+  tpl.ExecuteTemplate(w, "ie", MainData{IsHu: GetIsHu(r)})
 }
 
 func GetIsHu(r *http.Request) bool {
@@ -173,12 +159,3 @@ func GetIsHu(r *http.Request) bool {
   }
   return hasHu
 }
-
-func StringEquals(arg1 string, arg2 string) bool {
-  return arg1 == arg2
-}
-
-var FUNC_MAP = template.FuncMap{
-  "StringEquals": StringEquals,
-}
-
