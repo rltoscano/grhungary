@@ -118,13 +118,32 @@ div.table > div > div:last-child {
   text-align: center;
   padding-top: 20px;
   margin-top: 24px;
+  position: relative;
 }
 
 #bird {
   width: 100px;
   position: absolute;
   right: 6em;
-  top: 77px;
+  bottom: -11px;
+}
+
+#langs {
+  position: absolute;
+  bottom: 16px;
+  left: 6em;
+}
+
+#langs > a {
+  display: inline-block;
+  margin-right: 16px;
+}
+
+#langs > a > img {
+  width: 40px;
+  height: 26px;
+  border: none;
+  {{template "drop-shadow"}}
 }
 
 .humotif {

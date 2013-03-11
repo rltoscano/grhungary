@@ -1,0 +1,16 @@
+{{define "site-header"}}
+  <div id="site-header">
+    <img id="bird" src="/static/images/bird.png"/>
+    <div id="langs">
+      <a href="/?lang=en"><img src="/static/images/us-flag.png"/></a>
+      <a href="/?lang=hu"><img src="/static/images/hu-flag.png"/></a>
+    </div>
+    <div id="site-title">
+      {{if .IsHu}}Gyöngyi és Robert{{else}}Gyöngyi and Robert{{end}}
+    </div>
+    <div style="padding-bottom: 20px; font-weight: bold">
+      {{if .IsHu}}2013. július 27.{{else}}July 27th, 2013{{end}}
+    </div>
+  </div>
+{{end}}
+

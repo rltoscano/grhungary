@@ -2,6 +2,7 @@ part of grhungary;
 
 class MainWidget {
   static RegExp _PAGE_ID_REGEXP = new RegExp(r"#([^/]+)");
+  static Pattern _LANG_PATTERN = new RegExp(r"lang\=[a-zA-Z]+");
 
   Map<String, PageWidget> _pageWidgets;
   String _defaultPageId;
