@@ -88,7 +88,7 @@ class GalleryImage {
     _isImgLoaded = true;
     resize(_container.offsetWidth, _container.offsetHeight);
     _img.hidden = false;
-    window.setTimeout(() => _img.classes.remove("transparent"), 0);
+    window.setImmediate(() => _img.classes.remove("transparent"));
     _loadingMessage.hidden = true;
     _loadingDotsContainer.classes.remove("dots");
   }

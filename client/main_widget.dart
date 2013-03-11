@@ -19,7 +19,7 @@ class MainWidget {
   }
 
   void decorate() {
-    _defaultPageId = query("#nav-bar").children[0].dataAttributes["page-id"];
+    _defaultPageId = query("#nav-bar").children[0].dataset["page-id"];
     queryAll("#nav-bar li").forEach((Element el) {
       el.onClick.listen(_onLinkClick);
     });
@@ -35,7 +35,7 @@ class MainWidget {
 
     Element mainContent = query("#main-content");
     mainContent.hidden = false;
-    window.setTimeout(() { mainContent.classes.remove("transparent"); }, 0);
+    window.setImmediate(() { mainContent.classes.remove("transparent"); });
 
     window.onHashChange.listen(_navigateToHash);
     _navigateToHash(null);
@@ -84,7 +84,7 @@ class MainWidget {
 
     // Activate selected link and page.
     queryAll("#nav-bar li").forEach((Element el) {
-      if (el.dataAttributes["page-id"] == pageId) {
+      if (el.dataset["page-id"] == pageId) {
         el.classes.add("active");
       }
     });
@@ -94,6 +94,6 @@ class MainWidget {
 
   void _onLinkClick(Event e) {
     Element clickedLink = e.target as Element;
-    window.location.hash = clickedLink.dataAttributes["page-id"];
+    window.location.hash = clickedLink.dataset["page-id"];
   }
 }

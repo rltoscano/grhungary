@@ -44,27 +44,27 @@ class RsvpWidget extends PageWidget {
     _infoEl.classes.remove("error");
     _infoEl.classes.add(type);
     _infoEl.hidden = false;
-    window.setTimeout(() { _infoEl.classes.remove("transparent"); }, 0);
+    window.setImmediate(() { _infoEl.classes.remove("transparent"); });
     if (type == "info") {
-      window.setTimeout(() {
-        _infoEl.classes.add("transparent");
-      }, duration);
+      new Timer(
+          new Duration(milliseconds: duration),
+          () { _infoEl.classes.add("transparent"); });
     }
   }
 
   void _setSendButtonState(bool isInProgress) {
     ButtonElement sendButton = query("#rsvp-send-button");
     if (isInProgress) {
-      sendButton.text = sendButton.dataAttributes["label-in-progress"];
+      sendButton.text = sendButton.dataset["label-in-progress"];
     } else {
-      sendButton.text = sendButton.dataAttributes["label"];
+      sendButton.text = sendButton.dataset["label"];
     }
 
     ButtonElement rejectButton = query("#reject-button");
     if (isInProgress) {
-      rejectButton.text = rejectButton.dataAttributes["label-in-progress"];
+      rejectButton.text = rejectButton.dataset["label-in-progress"];
     } else {
-      rejectButton.text = rejectButton.dataAttributes["label"];
+      rejectButton.text = rejectButton.dataset["label"];
     }
 
     sendButton.disabled = isInProgress;
@@ -89,7 +89,7 @@ class RsvpWidget extends PageWidget {
         (query("#rsvp-is-staying-overnight") as CheckboxInputElement).checked;
     rsvp.interestedInSightseeing =
         (query("#rsvp-interested-in-sightseeing") as SelectElement)
-        .selectedOptions[0].dataAttributes["value"];
+        .selectedOptions[0].dataset["value"];
     rsvp.isAccepted = query("#reject-button").hidden;
 
     _reqInProgress = new HttpRequest();
@@ -112,12 +112,12 @@ class RsvpWidget extends PageWidget {
       if (query("#reject-button").hidden) {
         _showMessage(
             "info",
-            query("#rsvp-info-element").dataAttributes["success-message"]);
+            query("#rsvp-info-element").dataset["success-message"]);
       } else {
         _showMessage(
             "info",
             query("#rsvp-info-element")
-                .dataAttributes["success-reject-message"],
+                .dataset["success-reject-message"],
             12000);
       }
       js.scoped(() {
@@ -134,7 +134,7 @@ class RsvpWidget extends PageWidget {
       js.context["_gaq"].push(js.array(["_trackEvent", "Rsvp", "error"]));
     });
     _showMessage(
-        "error", query("#rsvp-info-element").dataAttributes["fail-message"]);
+        "error", query("#rsvp-info-element").dataset["fail-message"]);
     _setSendButtonState(false);
   }
 
@@ -170,10 +170,10 @@ class RsvpWidget extends PageWidget {
   void _onCancelClick(Event _) {
     int height = query("#rsvp-more-info-height-wrapper").offsetHeight;
     _moreInfo.style.height = "${height}px";
-    window.setTimeout(() {
+    window.setImmediate(() {
       _moreInfo.classes.add("height-transition");
       _moreInfo.style.height = "0";
-    }, 0);
+    });
     query("#accept-button").hidden = false;
     query("#reject-button").hidden = false;
     query("#rsvp-send-button").hidden = true;
