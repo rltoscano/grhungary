@@ -8,6 +8,7 @@ import (
   "encoding/json"
   "log"
   "net/http"
+  "net/url"
   "regexp"
   "strings"
   "html/template"
@@ -135,11 +136,15 @@ type MainData struct {
 
 func handleRoot(w http.ResponseWriter, r *http.Request) {
   if strings.Contains(r.UserAgent(), "MSIE") {
-    http.Redirect(w, r, "/ie", http.StatusFound)
+    newUrl, _ := url.Parse(r.URL.String())
+    newUrl.Path = "/ie"
+    http.Redirect(w, r, newUrl.String(), http.StatusFound)
     return
   }
   if r.URL.Path != "/" {
-    http.Redirect(w, r, "/", http.StatusFound)
+    newUrl, _ := url.Parse(r.URL.String())
+    newUrl.Path = "/"
+    http.Redirect(w, r, newUrl.String(), http.StatusFound)
     return
   }
   w.Header().Set("Content-type", "text/html; charset=utf-8")
@@ -153,6 +158,9 @@ func handleIe(w http.ResponseWriter, r *http.Request) {
 
 func GetIsHu(r *http.Request) bool {
   var hasHu bool
+  if r.FormValue("lang") != "" {
+    return r.FormValue("lang") == "hu"
+  }
   locales := strings.Split(r.Header.Get("Accept-Language"), ",")
   for idx := range locales {
     hasHu = hasHu || strings.ToLower(locales[idx]) == "hu"
