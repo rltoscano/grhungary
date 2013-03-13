@@ -19,6 +19,20 @@ class MainWidget {
   }
 
   void decorate() {
+    query("#bird").onClick.listen((_) {
+      AudioElement audio = query("#hu-theme-song");
+      if (audio.ended || audio.paused) {
+        if (audio.ended) {
+          audio.load();
+        }
+        audio.play();
+        query("#bird-link").classes.remove("transparent");
+      } else {
+        audio.pause();
+        query("#bird-link").classes.add("transparent");
+      }
+    });
+
     _defaultPageId = query("#nav-bar").children[0].dataset["page-id"];
     queryAll("#nav-bar li").forEach((Element el) {
       el.onClick.listen(_onLinkClick);

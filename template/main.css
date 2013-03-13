@@ -126,6 +126,14 @@ div.table > div > div:last-child {
   position: absolute;
   right: 6em;
   bottom: -11px;
+  cursor: pointer;
+}
+
+#bird-link {
+  position: absolute;
+  right: 140px;
+  bottom: -30px;
+  {{template "opacity-transition-500"}}
 }
 
 #langs {

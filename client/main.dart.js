@@ -756,6 +756,9 @@ $$.Object = {"": ";",
   allMatches$1: function($receiver, $0) {
     return this.noSuchMethod$1(this, $.createInvocationMirror("allMatches", "allMatches$1", 0, [$0], []));
   },
+  load$0: function() {
+    return this.noSuchMethod$1(this, $.createInvocationMirror("load", "load$0", 0, [], []));
+  },
   codeUnitAt$1: function($receiver, $0) {
     return this.noSuchMethod$1(this, $.createInvocationMirror("codeUnitAt", "codeUnitAt$1", 0, [$0], []));
   },
@@ -882,6 +885,9 @@ $$.Object = {"": ";",
   then$1: function($0) {
     return this.noSuchMethod$1(this, $.createInvocationMirror("then", "then$1", 0, [$0], []));
   },
+  then$2$onError: function($0, $1) {
+    return this.noSuchMethod$1(this, $.createInvocationMirror("then", "then$2$onError", 0, [$0, $1], ["onError"]));
+  },
   indexOf$2: function($receiver, $0, $1) {
     return this.noSuchMethod$1(this, $.createInvocationMirror("indexOf", "indexOf$2", 0, [$0, $1], []));
   },
@@ -905,6 +911,9 @@ $$.Object = {"": ";",
   },
   $and: function($receiver, $0) {
     return this.noSuchMethod$1(this, $.createInvocationMirror("&", "$and", 0, [$0], []));
+  },
+  whenComplete$1: function($0) {
+    return this.noSuchMethod$1(this, $.createInvocationMirror("whenComplete", "whenComplete$1", 0, [$0], []));
   },
   send$1: function($0) {
     return this.noSuchMethod$1(this, $.createInvocationMirror("send", "send$1", 0, [$0], []));
@@ -1062,6 +1071,12 @@ $$.Object = {"": ";",
   $add: function($receiver, $0) {
     return this.noSuchMethod$1(this, $.createInvocationMirror("+", "$add", 0, [$0], []));
   },
+  pause$0: function() {
+    return this.noSuchMethod$1(this, $.createInvocationMirror("pause", "pause$0", 0, [], []));
+  },
+  pause$1: function($0) {
+    return this.noSuchMethod$1(this, $.createInvocationMirror("pause", "pause$1", 0, [$0], []));
+  },
   _liblib2$_setValue$1: function($0) {
     return this.noSuchMethod$1(this, $.createInvocationMirror("_setValue", "_liblib2$_setValue$1", 0, [$0], []));
   },
@@ -1115,6 +1130,9 @@ $$.Object = {"": ";",
   },
   eval$1: function($0) {
     return this.noSuchMethod$1(this, $.createInvocationMirror("eval", "eval$1", 0, [$0], []));
+  },
+  play$0: function() {
+    return this.noSuchMethod$1(this, $.createInvocationMirror("play", "play$0", 0, [], []));
   },
   removeLast$0: function($receiver) {
     return this.noSuchMethod$1(this, $.createInvocationMirror("removeLast", "removeLast$0", 0, [], []));
@@ -1230,6 +1248,9 @@ $$.Object = {"": ";",
   get$partyMembers: function() {
     return this.noSuchMethod$1(this, $.createInvocationMirror("partyMembers", "get$partyMembers", 1, [], []));
   },
+  get$paused: function() {
+    return this.noSuchMethod$1(this, $.createInvocationMirror("paused", "get$paused", 1, [], []));
+  },
   get$type: function() {
     return this.noSuchMethod$1(this, $.createInvocationMirror("type", "get$type", 1, [], []));
   },
@@ -1247,6 +1268,9 @@ $$.Object = {"": ";",
   },
   get$onClick: function() {
     return this.noSuchMethod$1(this, $.createInvocationMirror("onClick", "get$onClick", 1, [], []));
+  },
+  get$ended: function() {
+    return this.noSuchMethod$1(this, $.createInvocationMirror("ended", "get$ended", 1, [], []));
   },
   get$onLoad: function() {
     return this.noSuchMethod$1(this, $.createInvocationMirror("onLoad", "get$onLoad", 1, [], []));
@@ -1341,14 +1365,14 @@ $$.Object = {"": ";",
   get$propertyName: function() {
     return this.noSuchMethod$1(this, $.createInvocationMirror("propertyName", "get$propertyName", 1, [], []));
   },
-  get$location: function() {
-    return this.noSuchMethod$1(this, $.createInvocationMirror("location", "get$location", 1, [], []));
-  },
   get$$$dom_lastElementChild: function() {
     return this.noSuchMethod$1(this, $.createInvocationMirror("$dom_lastElementChild", "get$$$dom_lastElementChild", 1, [], []));
   },
-  get$$$dom_firstElementChild: function() {
-    return this.noSuchMethod$1(this, $.createInvocationMirror("$dom_firstElementChild", "get$$$dom_firstElementChild", 1, [], []));
+  get$location: function() {
+    return this.noSuchMethod$1(this, $.createInvocationMirror("location", "get$location", 1, [], []));
+  },
+  get$_liblib7$_callback: function() {
+    return this.noSuchMethod$1(this, $.createInvocationMirror("_callback", "get$_liblib7$_callback", 1, [], []));
   },
   get$_nextListener: function() {
     return this.noSuchMethod$1(this, $.createInvocationMirror("_nextListener", "get$_nextListener", 1, [], []));
@@ -1356,8 +1380,8 @@ $$.Object = {"": ";",
   get$$$dom_body: function() {
     return this.noSuchMethod$1(this, $.createInvocationMirror("$dom_body", "get$$$dom_body", 1, [], []));
   },
-  get$_liblib7$_callback: function() {
-    return this.noSuchMethod$1(this, $.createInvocationMirror("_callback", "get$_liblib7$_callback", 1, [], []));
+  get$$$dom_firstElementChild: function() {
+    return this.noSuchMethod$1(this, $.createInvocationMirror("$dom_firstElementChild", "get$$$dom_firstElementChild", 1, [], []));
   },
   get$_tag: function() {
     return this.noSuchMethod$1(this, $.createInvocationMirror("_tag", "get$_tag", 1, [], []));
@@ -4665,6 +4689,18 @@ $$._FutureImpl = {"": "Object;_state=,_resultOrListeners>",
   catchError$1: function(f) {
     return this.catchError$2$test(f, null);
   },
+  whenComplete$1: function(action) {
+    var whenFuture = $._WhenFuture$(action);
+    if (this.get$_isComplete() !== true)
+      this._addListener$1(whenFuture);
+    else if (this.get$_hasValue() === true)
+      $.Timer_run(new $._FutureImpl_whenComplete_anon(whenFuture, this._resultOrListeners));
+    else {
+      this._state = $.$$and$n(this._state, 4294967291);
+      $.Timer_run(new $._FutureImpl_whenComplete_anon0(whenFuture, this._resultOrListeners));
+    }
+    return whenFuture;
+  },
   _handleValue$1: function(onValue) {
     var thenFuture = $._ThenFuture$(onValue);
     $.Timer_run(new $._FutureImpl__handleValue_anon(thenFuture, this._resultOrListeners));
@@ -4894,6 +4930,66 @@ $$._SubscribeFuture = {"": "_ThenFuture;_onError,_onValue,_nextListener,_state,_
   $asFuture: function (S, T) { return [T]; }
 };
 
+$$._WhenFuture = {"": "_TransformFuture;_action,_nextListener,_state,_resultOrListeners",
+  _action$0: function() {
+    return this._action.call$0();
+  },
+  _sendValue$1: function(value) {
+    var result, resultFuture, e, e0, s, t1, exception;
+    try {
+      result = this._action$0();
+      t1 = result;
+      if (typeof t1 === "object" && t1 !== null && !!t1.$isFuture) {
+        resultFuture = result;
+        resultFuture.then$2$onError(new $._WhenFuture__sendValue_anon(this, value), this.get$_setError());
+        return;
+      }
+    } catch (exception) {
+      t1 = $.unwrapException(exception);
+      if (typeof t1 === "object" && t1 !== null && !!t1.$isAsyncError) {
+        e = t1;
+        this._setError$1(e);
+        return;
+      } else {
+        e0 = t1;
+        s = $.getTraceFromException(exception);
+        this._setError$1($.AsyncError$(e0, s));
+        return;
+      }
+    }
+
+    this._liblib2$_setValue$1(value);
+  },
+  _sendError$1: function(error) {
+    var t1, result, resultFuture, e, e0, s, t2, exception;
+    t1 = {};
+    t1.error_0 = error;
+    try {
+      result = this._action$0();
+      t2 = result;
+      if (typeof t2 === "object" && t2 !== null && !!t2.$isFuture) {
+        resultFuture = result;
+        resultFuture.then$2$onError(new $._WhenFuture__sendError_anon(t1, this), this.get$_setError());
+        return;
+      }
+    } catch (exception) {
+      t2 = $.unwrapException(exception);
+      if (typeof t2 === "object" && t2 !== null && !!t2.$isAsyncError) {
+        e = t2;
+        t1.error_0 = e;
+      } else {
+        e0 = t2;
+        s = $.getTraceFromException(exception);
+        t1.error_0 = $.AsyncError$withCause(e0, s, t1.error_0);
+      }
+    }
+
+    this._setError$1(t1.error_0);
+  },
+  $as_FutureImpl: null,
+  $asFuture: null
+};
+
 $$._FutureWrapper = {"": "Object;_future",
   then$2$onError: function($function, onError) {
     return this._future.then$2$onError($function, onError);
@@ -4906,6 +5002,9 @@ $$._FutureWrapper = {"": "Object;_future",
   },
   catchError$1: function($function) {
     return this.catchError$2$test($function, null);
+  },
+  whenComplete$1: function(action) {
+    return this._future.whenComplete$1(action);
   },
   $isFuture: true
 };
@@ -5041,6 +5140,15 @@ $$._BaseStreamSubscription = {"": "Object;",
 };
 
 $$._ForwardingStreamSubscription = {"": "_BaseStreamSubscription;_stream,_unsubscribeOnError,_subscription,_onData,_onError,_onDone",
+  pause$1: function(resumeSignal) {
+    var t1 = this._subscription;
+    if (t1 == null)
+      throw $.$$throw($.StateError$("Subscription has been unsubscribed"));
+    t1.pause$1(resumeSignal);
+  },
+  pause$0: function() {
+    return this.pause$1(null);
+  },
   cancel$0: function() {
     var t1 = this._subscription;
     if (t1 == null)
@@ -5632,17 +5740,18 @@ $$.PhotoGalleryWidget = {"": "PageWidget;_lightBox>,_keyboardEventController,_pr
 $$.MainWidget = {"": "Object;_pageWidgets,_defaultPageId",
   decorate$0: function() {
     var t1, t2, loadingOverlay, mainContent;
+    document.query$1("#bird").get$onClick().listen$1(new $.MainWidget_decorate_anon());
     t1 = $.$$index$as(document.query$1("#nav-bar").get$children(), 0).get$dataset();
     this._defaultPageId = t1.$index(t1, "page-id");
     t2 = document.queryAll$1("#nav-bar li");
-    t2.forEach$1(t2, new $.MainWidget_decorate_anon(this));
-    $.forEach$1$a(this._pageWidgets, new $.MainWidget_decorate_anon0());
+    t2.forEach$1(t2, new $.MainWidget_decorate_anon0(this));
+    $.forEach$1$a(this._pageWidgets, new $.MainWidget_decorate_anon1());
     loadingOverlay = document.query$1("#loading-overlay");
     loadingOverlay.set$hidden(true);
     $.remove$1$a(loadingOverlay.query$1(".dots").get$classes(), "dots");
     mainContent = document.query$1("#main-content");
     mainContent.set$hidden(false);
-    window.setImmediate$1(new $.MainWidget_decorate_anon1(mainContent));
+    window.setImmediate$1(new $.MainWidget_decorate_anon2(mainContent));
     window.get$onHashChange().listen$1(this.get$_navigateToHash());
     this._navigateToHash$1(null);
   },
@@ -6408,8 +6517,33 @@ $$._EventStreamSubscription = {"": "StreamSubscription;_pauseCount,_target,_even
   get$onError: function() {
     return new $.BoundClosure$1(this, "onError$1");
   },
+  pause$1: function(resumeSignal) {
+    var t1;
+    if (this.get$_canceled() === true)
+      throw $.$$throw($.StateError$("Subscription has been canceled."));
+    this._pauseCount = this._pauseCount + 1;
+    t1 = this._liblib3$_onData;
+    if (t1 != null)
+      this._target.$$dom_removeEventListener$3(this._eventType, t1, this._useCapture);
+    if (resumeSignal != null)
+      resumeSignal.whenComplete$1(this.get$resume());
+  },
+  pause$0: function() {
+    return this.pause$1(null);
+  },
   get$_paused: function() {
     return this._pauseCount > 0;
+  },
+  resume$0: function() {
+    if (this.get$_canceled() === true)
+      throw $.$$throw($.StateError$("Subscription has been canceled."));
+    if (this.get$_paused() !== true)
+      throw $.$$throw($.StateError$("Subscription is not paused."));
+    this._pauseCount = this._pauseCount - 1;
+    this._tryResume$0();
+  },
+  get$resume: function() {
+    return new $.BoundClosure$0(this, "resume$0");
   },
   _tryResume$0: function() {
     if (this._liblib3$_onData != null && this.get$_paused() !== true)
@@ -7755,18 +7889,6 @@ $$._ProxiedObjectTable = {"": "Object;_name,_nextId,_liblib4$_deletedCount,_regi
   }
 };
 
-$$.CssClassSet_addAll_anon = {"": "Closure;iterable_0",
-  call$1: function(s) {
-    return $.addAll$1$a(s, this.iterable_0);
-  }
-};
-
-$$.CssClassSet_add_anon = {"": "Closure;value_0",
-  call$1: function(s) {
-    return $.add$1$a(s, this.value_0);
-  }
-};
-
 $$.FilteredElementList__filtered_anon = {"": "Closure;",
   call$1: function(n) {
     return typeof n === "object" && n !== null && n.$isElement();
@@ -7776,6 +7898,18 @@ $$.FilteredElementList__filtered_anon = {"": "Closure;",
 $$.ConstantMap_values_anon = {"": "Closure;this_0",
   call$1: function(key) {
     return $.$$index$as(this.this_0, key);
+  }
+};
+
+$$.CssClassSet_addAll_anon = {"": "Closure;iterable_0",
+  call$1: function(s) {
+    return $.addAll$1$a(s, this.iterable_0);
+  }
+};
+
+$$.CssClassSet_add_anon = {"": "Closure;value_0",
+  call$1: function(s) {
+    return $.add$1$a(s, this.value_0);
   }
 };
 
@@ -7798,15 +7932,15 @@ $$._cancelAndError_anon = {"": "Closure;subscription_0,future_1",
   }
 };
 
-$$.SelectElement_options_anon = {"": "Closure;",
-  call$1: function(e) {
-    return typeof e === "object" && e !== null && e.$isOptionElement();
-  }
-};
-
 $$.ConstantMap_forEach_anon = {"": "Closure;this_0,f_1",
   call$1: function(key) {
     return this.f_1.call$2(key, $.$$index$as(this.this_0, key));
+  }
+};
+
+$$.SelectElement_options_anon = {"": "Closure;",
+  call$1: function(e) {
+    return typeof e === "object" && e !== null && e.$isOptionElement();
   }
 };
 
@@ -7816,19 +7950,19 @@ $$.KeyboardEventController__capsLockOn_anon = {"": "Closure;",
   }
 };
 
-$$._EventLoop__runHelper_next = {"": "Closure;this_0",
-  call$0: function() {
-    if (!this.this_0.runIteration$0())
-      return;
-    $.Timer_run(this);
-  }
-};
-
 $$._DataAttributeMap_forEach_anon = {"": "Closure;this_0,f_1",
   call$2: function(key, value) {
     var t1 = $.getInterceptor$s(key);
     if (t1.startsWith$1(key, "data-"))
       this.f_1.call$2(t1.substring$1(key, 5), value);
+  }
+};
+
+$$._EventLoop__runHelper_next = {"": "Closure;this_0",
+  call$0: function() {
+    if (!this.this_0.runIteration$0())
+      return;
+    $.Timer_run(this);
   }
 };
 
@@ -7862,6 +7996,12 @@ $$.Stream_toList_anon = {"": "Closure;result_0",
 $$.Stream_toList_anon0 = {"": "Closure;result_1,future_2",
   call$0: function() {
     this.future_2._liblib2$_setValue$1(this.result_1);
+  }
+};
+
+$$.PhotoGalleryWidget__setLightBoxVisible_anon = {"": "Closure;this_0",
+  call$0: function() {
+    $.remove$1$a(this.this_0.get$_lightBox().get$classes(), "transparent");
   }
 };
 
@@ -7933,12 +8073,6 @@ $$._FutureImpl__handleValue_anon = {"": "Closure;thenFuture_0,value_1",
   }
 };
 
-$$.PhotoGalleryWidget__setLightBoxVisible_anon = {"": "Closure;this_0",
-  call$0: function() {
-    $.remove$1$a(this.this_0.get$_lightBox().get$classes(), "transparent");
-  }
-};
-
 $$._PendingSendPortFinder_visitList_anon = {"": "Closure;this_0",
   call$1: function(e) {
     return this.this_0._liblib7$_dispatch$1(e);
@@ -7990,6 +8124,12 @@ $$.Stream_first_anon0 = {"": "Closure;future_2",
   }
 };
 
+$$._WhenFuture__sendValue_anon = {"": "Closure;this_0,value_1",
+  call$1: function(_) {
+    this.this_0._liblib2$_setValue$1(this.value_1);
+  }
+};
+
 $$._completeRequest_anon = {"": "Closure;request_0,completer_1",
   call$1: function(e) {
     this.completer_1.complete$1(this.request_0.get$result());
@@ -8005,6 +8145,24 @@ $$._completeRequest_anon0 = {"": "Closure;completer_2",
 $$.PhotoGalleryWidget__onThumbClick_anon = {"": "Closure;imgId_0",
   call$0: function() {
     $.$$index$as($.context(), "_gaq").push$1($.Proxy_Proxy$_json(["_trackEvent", "Gallery", "ThumbnailClick", this.imgId_0]));
+  }
+};
+
+$$._WhenFuture__sendError_anon = {"": "Closure;box_0,this_1",
+  call$1: function(_) {
+    this.this_1._setError$1(this.box_0.error_0);
+  }
+};
+
+$$._BaseSendPort_call_anon = {"": "Closure;completer_0,port_1",
+  call$2: function(value, ignoreReplyTo) {
+    var t1;
+    this.port_1.close$0();
+    t1 = this.completer_0;
+    if (typeof value === "object" && value !== null && !!value.$isException)
+      t1.completeError$1(value);
+    else
+      t1.complete$1(value);
   }
 };
 
@@ -8026,6 +8184,12 @@ $$.invokeClosure_anon1 = {"": "Closure;closure_3,arg1_4,arg2_5",
   }
 };
 
+$$.GalleryImage__onImgLoad_anon = {"": "Closure;this_0",
+  call$0: function() {
+    return $.remove$1$a(this.this_0.get$_img().get$classes(), "transparent");
+  }
+};
+
 $$._RemoteSendPortSync__call_anon = {"": "Closure;box_0",
   call$1: function(e) {
     var result = $.parse(e.get$detail(), null);
@@ -8033,21 +8197,19 @@ $$._RemoteSendPortSync__call_anon = {"": "Closure;box_0",
   }
 };
 
-$$._BaseSendPort_call_anon = {"": "Closure;completer_0,port_1",
-  call$2: function(value, ignoreReplyTo) {
-    var t1;
-    this.port_1.close$0();
-    t1 = this.completer_0;
-    if (typeof value === "object" && value !== null && !!value.$isException)
-      t1.completeError$1(value);
-    else
-      t1.complete$1(value);
-  }
-};
-
-$$.GalleryImage__onImgLoad_anon = {"": "Closure;this_0",
+$$._FutureImpl__scheduleUnhandledError_anon = {"": "Closure;this_0",
   call$0: function() {
-    return $.remove$1$a(this.this_0.get$_img().get$classes(), "transparent");
+    var t1, error;
+    t1 = this.this_0;
+    if (t1.get$_hasUnhandledError() === true) {
+      t1.set$_state($.$$and$n(t1.get$_state(), 4294967291));
+      error = t1.get$_resultOrListeners();
+      $.Primitives_printString("Uncaught Error: " + $.S(error.get$error()));
+      t1 = error.get$stackTrace();
+      if (t1 != null)
+        $.Primitives_printString("Stack Trace:\n" + $.S(t1) + "\n");
+      throw $.$$throw(error.get$error());
+    }
   }
 };
 
@@ -8082,28 +8244,24 @@ $$.Stream_contains_anon0 = {"": "Closure;future_6",
   }
 };
 
-$$._FutureImpl__scheduleUnhandledError_anon = {"": "Closure;this_0",
-  call$0: function() {
-    var t1, error;
-    t1 = this.this_0;
-    if (t1.get$_hasUnhandledError() === true) {
-      t1.set$_state($.$$and$n(t1.get$_state(), 4294967291));
-      error = t1.get$_resultOrListeners();
-      $.Primitives_printString("Uncaught Error: " + $.S(error.get$error()));
-      t1 = error.get$stackTrace();
-      if (t1 != null)
-        $.Primitives_printString("Stack Trace:\n" + $.S(t1) + "\n");
-      throw $.$$throw(error.get$error());
-    }
-  }
-};
-
 $$._Copier_visitMap_anon = {"": "Closure;box_0,this_1",
   call$2: function(key, val) {
     var t1, t2;
     t1 = this.box_0.copy_0;
     t2 = this.this_1;
     $.$$indexSet$a(t1, t2._liblib7$_dispatch$1(key), t2._liblib7$_dispatch$1(val));
+  }
+};
+
+$$._FutureImpl_whenComplete_anon = {"": "Closure;whenFuture_0,value_1",
+  call$0: function() {
+    this.whenFuture_0._sendValue$1(this.value_1);
+  }
+};
+
+$$._FutureImpl_whenComplete_anon0 = {"": "Closure;whenFuture_2,error_3",
+  call$0: function() {
+    this.whenFuture_2._sendError$1(this.error_3);
   }
 };
 
@@ -8160,19 +8318,6 @@ $$.anon = {"": "Closure;this_0",
   }
 };
 
-$$.ReceivePortSync_receive_anon = {"": "Closure;this_0",
-  call$1: function(e) {
-    var data, t1, replyTo, message, result;
-    data = $.parse(e.get$detail(), null);
-    t1 = $.getInterceptor$as(data);
-    replyTo = t1.$index(data, 0);
-    t1 = t1.$index(data, 1);
-    message = $._JsDeserializer$().deserialize$1(t1);
-    result = this.this_0._callback$1(message);
-    $._dispatchEvent(replyTo, $._JsSerializer$().traverse$1(result));
-  }
-};
-
 $$.Stream_elementAt_anon = {"": "Closure;box_0,future_1",
   call$1: function(value) {
     var t1 = this.box_0;
@@ -8203,6 +8348,19 @@ $$.ToString__emitMap_anon = {"": "Closure;box_0,result_1,visiting_2",
     $.ToString__emitObject(k, t1, t2);
     $.add$1$a(t1, ": ");
     $.ToString__emitObject(v, t1, t2);
+  }
+};
+
+$$.ReceivePortSync_receive_anon = {"": "Closure;this_0",
+  call$1: function(e) {
+    var data, t1, replyTo, message, result;
+    data = $.parse(e.get$detail(), null);
+    t1 = $.getInterceptor$as(data);
+    replyTo = t1.$index(data, 0);
+    t1 = t1.$index(data, 1);
+    message = $._JsDeserializer$().deserialize$1(t1);
+    result = this.this_0._callback$1(message);
+    $._dispatchEvent(replyTo, $._JsSerializer$().traverse$1(result));
   }
 };
 
@@ -8258,25 +8416,6 @@ $$.internalCallback = {"": "Closure;this_0,callback_1",
 $$.PhotoGalleryWidget__createLightBoxImage_anon = {"": "Closure;box_0",
   call$0: function() {
     $.$$index$as($.context(), "_gaq").push$1($.Proxy_Proxy$_json(["_trackEvent", "Gallery", "LoadOriginal", this.box_0.imgId_0]));
-  }
-};
-
-$$.MainWidget_decorate_anon = {"": "Closure;this_0",
-  call$1: function(el) {
-    el.get$onClick().listen$1(this.this_0.get$_onLinkClick());
-  }
-};
-
-$$.MainWidget_decorate_anon0 = {"": "Closure;",
-  call$2: function(id, pageWidget) {
-    var t1 = "#" + $.S(id);
-    pageWidget.decorate$1(document.query$1(t1));
-  }
-};
-
-$$.MainWidget_decorate_anon1 = {"": "Closure;mainContent_1",
-  call$0: function() {
-    $.remove$1$a(this.mainContent_1.get$classes(), "transparent");
   }
 };
 
@@ -8484,6 +8623,42 @@ $$._initialize_anon = {"": "Closure;",
 $$._initialize_anon0 = {"": "Closure;",
   call$1: function(args) {
     return $._exitScope($.$$index$as(args, 0));
+  }
+};
+
+$$.MainWidget_decorate_anon = {"": "Closure;",
+  call$1: function(_) {
+    var audio, t1;
+    audio = document.query$1("#hu-theme-song");
+    t1 = audio.get$ended() === true;
+    if (t1 || audio.get$paused() === true) {
+      if (t1)
+        audio.load$0();
+      audio.play$0();
+      $.remove$1$a(document.query$1("#bird-link").get$classes(), "transparent");
+    } else {
+      audio.pause$0();
+      $.add$1$a(document.query$1("#bird-link").get$classes(), "transparent");
+    }
+  }
+};
+
+$$.MainWidget_decorate_anon0 = {"": "Closure;this_0",
+  call$1: function(el) {
+    el.get$onClick().listen$1(this.this_0.get$_onLinkClick());
+  }
+};
+
+$$.MainWidget_decorate_anon1 = {"": "Closure;",
+  call$2: function(id, pageWidget) {
+    var t1 = "#" + $.S(id);
+    pageWidget.decorate$1(document.query$1(t1));
+  }
+};
+
+$$.MainWidget_decorate_anon2 = {"": "Closure;mainContent_1",
+  call$0: function() {
+    $.remove$1$a(this.mainContent_1.get$classes(), "transparent");
   }
 };
 
@@ -10256,6 +10431,10 @@ $._CatchErrorFuture$ = function(_onError, _test) {
 
 $._SubscribeFuture$ = function(onValue, _onError) {
   return new $._SubscribeFuture(_onError, onValue, null, 0, null);
+};
+
+$._WhenFuture$ = function(_action) {
+  return new $._WhenFuture(_action, null, 0, null);
 };
 
 $._FutureWrapper$ = function(_future) {
@@ -13475,16 +13654,32 @@ $.$defineNativeClass("Location", {"": "hash=",
   }
 });
 
-$.$defineNativeClass("MediaController", {
+$.$defineNativeClass("MediaController", {"": "paused>",
   $$dom_addEventListener$3: function(type, listener, useCapture) {
     return this.addEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture);
+  },
+  pause$0: function() {
+    return this.pause();
+  },
+  play$0: function() {
+    return this.play();
   },
   $$dom_removeEventListener$3: function(type, listener, useCapture) {
     return this.removeEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture);
   }
 });
 
-$.$defineNativeClass("HTMLMediaElement", {"": "error>,src<"});
+$.$defineNativeClass("HTMLMediaElement", {"": "ended>,error>,paused>,src<",
+  load$0: function() {
+    return this.load();
+  },
+  pause$0: function() {
+    return this.pause();
+  },
+  play$0: function() {
+    return this.play();
+  }
+});
 
 $.$defineNativeClass("MediaList", {"": "length>"});
 
@@ -13497,7 +13692,7 @@ $.$defineNativeClass("MediaSource", {
   }
 });
 
-$.$defineNativeClass("MediaStream", {"": "id>",
+$.$defineNativeClass("MediaStream", {"": "ended>,id>",
   $$dom_addEventListener$3: function(type, listener, useCapture) {
     return this.addEventListener(type,$.convertDartClosureToJS(listener, 1),useCapture);
   },
