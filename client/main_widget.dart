@@ -2,6 +2,7 @@ part of grhungary;
 
 class MainWidget {
   static RegExp _PAGE_ID_REGEXP = new RegExp(r"#([^/]+)");
+  static Pattern _LANG_PATTERN = new RegExp(r"lang\=[a-zA-Z]+");
 
   Map<String, PageWidget> _pageWidgets;
   String _defaultPageId;
@@ -18,7 +19,21 @@ class MainWidget {
   }
 
   void decorate() {
-    _defaultPageId = query("#nav-bar").children[0].dataAttributes["page-id"];
+    query("#bird").onClick.listen((_) {
+      AudioElement audio = query("#hu-theme-song");
+      if (audio.ended || audio.paused) {
+        if (audio.ended) {
+          audio.load();
+        }
+        audio.play();
+        query("#bird-link").classes.remove("transparent");
+      } else {
+        audio.pause();
+        query("#bird-link").classes.add("transparent");
+      }
+    });
+
+    _defaultPageId = query("#nav-bar").children[0].dataset["page-id"];
     queryAll("#nav-bar li").forEach((Element el) {
       el.onClick.listen(_onLinkClick);
     });
@@ -34,7 +49,7 @@ class MainWidget {
 
     Element mainContent = query("#main-content");
     mainContent.hidden = false;
-    window.setTimeout(() { mainContent.classes.remove("transparent"); }, 0);
+    window.setImmediate(() { mainContent.classes.remove("transparent"); });
 
     window.onHashChange.listen(_navigateToHash);
     _navigateToHash(null);
@@ -83,7 +98,7 @@ class MainWidget {
 
     // Activate selected link and page.
     queryAll("#nav-bar li").forEach((Element el) {
-      if (el.dataAttributes["page-id"] == pageId) {
+      if (el.dataset["page-id"] == pageId) {
         el.classes.add("active");
       }
     });
@@ -93,6 +108,6 @@ class MainWidget {
 
   void _onLinkClick(Event e) {
     Element clickedLink = e.target as Element;
-    window.location.hash = clickedLink.dataAttributes["page-id"];
+    window.location.hash = clickedLink.dataset["page-id"];
   }
 }

@@ -732,8 +732,7 @@ void release(Proxy proxy) {
  * Check if [proxy] is instance of [type].
  */
 bool instanceof(Proxy proxy, type) {
-  return _jsPortInstanceof.callSync([proxy, type].mappedBy(_serialize).
-      toList());
+  return _jsPortInstanceof.callSync([proxy, type].map(_serialize).toList());
 }
 
 /**
@@ -786,21 +785,10 @@ class Callback {
    * Creates a single-fire [Callback] that invokes [f].  The callback is
    * automatically disposed after the first invocation.
    */
-  // TODO(vsm): Is there a better way to handle varargs?
   Callback.once(Function f) {
-    _callback = ([arg1, arg2, arg3, arg4]) {
+    _callback = (args) {
       try {
-        if (!?arg1) {
-          return f();
-        } else if (!?arg2) {
-          return f(arg1);
-        } else if (!?arg3) {
-          return f(arg1, arg2);
-        } else if (!?arg4) {
-          return f(arg1, arg2, arg3);
-        } else {
-          return f(arg1, arg2, arg3, arg4);
-        }
+        return Function.apply(f, args);
       } finally {
         _dispose();
       }
@@ -813,7 +801,7 @@ class Callback {
    * explicitly disposed to avoid memory leaks.
    */
   Callback.many(Function f) {
-    _callback = f;
+    _callback = (args) => Function.apply(f, args);
     _initialize(true);
   }
 }
@@ -853,7 +841,7 @@ class Proxy {
    */
   factory Proxy.withArgList(FunctionProxy constructor, List arguments) {
     if (_depth == 0) throw 'Cannot create Proxy out of scope.';
-    final serialized = ([constructor]..addAll(arguments)).mappedBy(_serialize).
+    final serialized = ([constructor]..addAll(arguments)).map(_serialize).
         toList();
     final result = _jsPortCreate.callSync(serialized);
     return _deserialize(result);
@@ -880,7 +868,7 @@ class Proxy {
       }
       return ['map', entries];
     } else if (data is List) {
-      return ['list', data.mappedBy((e) => _serializeDataTree(e)).toList()];
+      return ['list', data.map((e) => _serializeDataTree(e)).toList()];
     } else {
       return ['simple', _serialize(data)];
     }
@@ -944,7 +932,7 @@ class Proxy {
   static _forward(Proxy receiver, String member, String kind, List args) {
     if (_depth == 0) throw 'Cannot access a JavaScript proxy out of scope.';
     var result = receiver._port.callSync([receiver._id, member, kind,
-                                          args.mappedBy(_serialize).toList()]);
+                                          args.map(_serialize).toList()]);
     switch (result[0]) {
       case 'return': return _deserialize(result[1]);
       case 'throws': throw _deserialize(result[1]);
@@ -962,8 +950,7 @@ class FunctionProxy extends Proxy /*implements Function*/ {
   noSuchMethod(InvocationMirror invocation) {
     if (invocation.isMethod && invocation.memberName == 'call') {
       var message = [_id, '', 'apply',
-                     invocation.positionalArguments.mappedBy(_serialize).
-                     toList()];
+                     invocation.positionalArguments.map(_serialize).toList()];
       var result = _port.callSync(message);
       if (result[0] == 'throws') throw result[1];
       return _deserialize(result[1]);
@@ -971,6 +958,13 @@ class FunctionProxy extends Proxy /*implements Function*/ {
       return super.noSuchMethod(invocation);
     }
   }
+}
+
+/// Marker class used to indicate it is serializable to js. If a class is a
+/// [Serializable] the "toJs" method will be called and the result will be used
+/// as value.
+abstract class Serializable {
+  dynamic toJs();
 }
 
 // A table to managed local Dart objects that are proxied in JavaScript.
@@ -1003,7 +997,7 @@ class _ProxiedObjectTable {
 
   // Enters a new scope.
   enterScope() {
-    _scopeIndices.addLast(_handleStack.length);
+    _scopeIndices.add(_handleStack.length);
   }
 
   // Invalidates non-global IDs created in the current scope and
@@ -1050,28 +1044,9 @@ class _ProxiedObjectTable {
           try {
             final receiver = _registry[msg[0]];
             final method = msg[1];
-            final args = msg[2].mappedBy(_deserialize).toList();
+            final args = msg[2].map(_deserialize).toList();
             if (method == '#call') {
-              var result;
-              switch (args.length) {
-                case 0:
-                  result = _serialize(receiver());
-                  break;
-                case 1:
-                  result = _serialize(receiver(args[0]));
-                  break;
-                case 2:
-                  result = _serialize(receiver(args[0], args[1]));
-                  break;
-                case 3:
-                  result = _serialize(receiver(args[0], args[1], args[2]));
-                  break;
-                case 4:
-                  result =
-                  _serialize(receiver(args[0], args[1], args[2], args[3]));
-                  break;
-                default: throw 'Unsupported number of arguments.';
-              }
+              var result = _serialize(receiver(args));
               return ['return', result];
             } else {
               // TODO(vsm): Support a mechanism to register a handler here.
@@ -1092,7 +1067,7 @@ class _ProxiedObjectTable {
     // TODO(vsm): Cache x and reuse id.
     final id = '$_name-${_nextId++}';
     _registry[id] = x;
-    _handleStack.addLast(id);
+    _handleStack.add(id);
     return id;
   }
 
@@ -1137,6 +1112,9 @@ _serialize(var message) {
   } else if (message is Proxy) {
     // Remote object proxy.
     return [ 'objref', message._id, message._port ];
+  } else if (message is Serializable) {
+    // use of result of toJs()
+    return _serialize(message.toJs());
   } else {
     // Local object proxy.
     return [ 'objref',

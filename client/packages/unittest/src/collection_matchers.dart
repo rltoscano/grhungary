@@ -2,13 +2,12 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+part of matcher;
+
 /**
  * Returns a matcher which matches [Collection]s in which all elements
  * match the given [matcher].
  */
-
-part of matcher;
-
 Matcher everyElement(matcher) => new _EveryElement(wrapMatcher(matcher));
 
 class _EveryElement extends _CollectionMatcher {
@@ -143,7 +142,7 @@ class _UnorderedEquals extends BaseMatcher {
     } else if (expectedLength < actualLength) {
       return 'has too many elements (${actualLength} > ${expectedLength})';
     }
-    List<bool> matched = new List<bool>.fixedLength(actualLength);
+    List<bool> matched = new List<bool>(actualLength);
     for (var i = 0; i < actualLength; i++) {
       matched[i] = false;
     }

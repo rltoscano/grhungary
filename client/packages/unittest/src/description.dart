@@ -1,14 +1,14 @@
 // Copyright (c) 2012, the Dart project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
+
+part of matcher;
+
 /**
  * The default implementation of IDescription. This should rarely need
  * substitution, although conceivably it is a place where other languages
  * could be supported.
  */
-
-part of matcher;
-
 class StringDescription implements Description {
   var _out;
 
@@ -47,6 +47,12 @@ class StringDescription implements Description {
       String description = (value == null) ? "null" : value.toString();
       if (description.startsWith('<') && description.endsWith('>')) {
           add(description);
+      } else if (description.startsWith("Instance of")) {
+        add('<');
+        add(description);
+        add(':');
+        add(value.hashCode.toString());
+        add('>');
       } else {
         add('<');
         add(description);

@@ -2,13 +2,12 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+part of matcher;
+
 /**
  * Returns a matcher which matches if the match argument is a string and
  * is equal to [value] when compared case-insensitively.
  */
-
-part of matcher;
-
 Matcher equalsIgnoringCase(String value) => new _IsEqualIgnoringCase(value);
 
 class _IsEqualIgnoringCase extends _StringMatcher {
@@ -75,11 +74,11 @@ String collapseWhitespace(_string) {
     var character = _string[i];
     if (isWhitespace(character)) {
       if (!skipSpace) {
-        result.add(' ');
+        result.write(' ');
         skipSpace = true;
       }
     } else {
-      result.add(character);
+      result.write(character);
       skipSpace = false;
     }
   }

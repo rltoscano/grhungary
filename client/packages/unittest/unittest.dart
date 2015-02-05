@@ -9,8 +9,7 @@
  * Create a pubspec.yaml file in your project and add
  * a dependency on unittest with the following lines:
  *     dependencies:
- *       unittest:
- *         sdk: unittest
+ *       unittest: any
  *
  * Then run 'pub install' from your project directory or using
  * the DartEditor.
@@ -90,19 +89,19 @@
  *       test('callback is executed once', () {
  *         // wrap the callback of an asynchronous call with [expectAsync0] if
  *         // the callback takes 0 arguments...
- *         var timer = new Timer(0, (_) => expectAsync0(() {
+ *         var timer = Timer.run(expectAsync0(() {
  *           int x = 2 + 3;
  *           expect(x, equals(5));
  *         }));
  *       });
  *
  *       test('callback is executed twice', () {
- *         var callback = (_) => expectAsync0(() {
+ *         var callback = expectAsync0(() {
  *           int x = 2 + 3;
  *           expect(x, equals(5));
  *         }, count: 2); // <-- we can indicate multiplicity to [expectAsync0]
- *         new Timer(0, callback);
- *         new Timer(0, callback);
+ *         Timer.run(callback);
+ *         Timer.run(callback);
  *       });
  *     }
  *
@@ -113,6 +112,19 @@
  * the real callback when it is finally complete. In this case the body of the
  * callback should be protected within a call to guardAsync(); this will ensure
  * that exceptions are properly handled.
+ *
+ * A variation on this is expectAsyncUntilX(), which takes a callback as the
+ * first parameter and a predicate function as the second parameter; after each
+ * time * the callback is called, the predicate function will be called; if it
+ * returns false the test will still be considered incomplete.
+ *
+ * Test functions can return [Future]s, which provide another way of doing
+ * asynchronous tests. The test framework will handle exceptions thrown by
+ * the Future, and will advance to the next test when the Future is complete.
+ * It is still important to use expectAsync/guardAsync with any parts of the
+ * test that may be invoked from a top level context (for example, with
+ * Timer.run()], as the Future exception handler may not capture exceptions
+ * in such code.
  *
  * Note: due to some language limitations we have to use different functions
  * depending on the number of positional arguments of the callback. In the
@@ -131,7 +143,7 @@
  *       test('callback is executed', () {
  *         // indicate ahead of time that an async callback is expected.
  *         var async = startAsync();
- *         new Timer(0, (_) {
+ *         Timer.run(() {
  *           // Guard the body of the callback, so errors are propagated
  *           // correctly.
  *           guardAsync(() {
@@ -190,7 +202,7 @@ String groupSep = ' ';
 List<TestCase> _tests;
 
 /** Get the list of tests. */
-get testCases => _tests;
+List<TestCase> get testCases => _tests;
 
 /**
  * Callback used to run tests. Entrypoints can replace this with their own
@@ -206,6 +218,12 @@ Function _testTeardown;
 
 /** Current test being executed. */
 int _currentTest = 0;
+TestCase _currentTestCase;
+
+TestCase get currentTestCase =>
+    (_currentTest >= 0 && _currentTest < _tests.length)
+        ? _tests[_currentTest]
+        : null;
 
 /** Whether the framework is in an initialized state. */
 bool _initialized = false;
@@ -234,34 +252,6 @@ TestCase _soloTest;
 Map testState = {};
 
 /**
- * (Deprecated) Evaluates the [function] and validates that it throws an
- * exception. If [callback] is provided, then it will be invoked with the
- * thrown exception. The callback may do any validation it wants. In addition,
- * if it returns `false`, that also indicates an expectation failure.
- */
-void expectThrow(function, [bool callback(exception)]) {
-  bool threw = false;
-  try {
-    function();
-  } catch (e) {
-    threw = true;
-
-    // Also let the callback look at it.
-    if (callback != null) {
-      var result = callback(e);
-
-      // If the callback explicitly returned false, treat that like an
-      // expectation too. (If it returns null, though, don't.)
-      if (result == false) {
-        fail('Exception:\n$e\ndid not match expectation.');
-      }
-    }
-  }
-
-  if (threw != true) fail('An expected exception was not thrown.');
-}
-
-/**
  * Creates a new test case with the given description and body. The
  * description will include the descriptions of any surrounding group()
  * calls.
@@ -269,25 +259,6 @@ void expectThrow(function, [bool callback(exception)]) {
 void test(String spec, TestFunction body) {
   ensureInitialized();
   _tests.add(new TestCase(_tests.length + 1, _fullSpec(spec), body, 0));
-}
-
-/**
- * (Deprecated) Creates a new async test case with the given description
- * and body. The description will include the descriptions of any surrounding
- * group() calls.
- */
-// TODO(sigmund): deprecate this API
-void asyncTest(String spec, int callbacks, TestFunction body) {
-  ensureInitialized();
-
-  final testCase = new TestCase(
-      _tests.length + 1, _fullSpec(spec), body, callbacks);
-  _tests.add(testCase);
-
-  if (callbacks < 1) {
-    testCase.error(
-        'Async tests must wait for at least one callback ', '');
-  }
 }
 
 /**
@@ -322,17 +293,27 @@ class _Sentinel {
 // TODO(sigmund): remove this class and simply use a closure with named
 // arguments (if still applicable).
 class _SpreadArgsHelper {
-  Function _callback;
-  int _expectedCalls;
-  int _actualCalls = 0;
-  int _testNum;
-  TestCase _testCase;
-  Function _shouldCallBack;
-  Function _isDone;
-  static const _sentinel = const _Sentinel();
+  final Function callback;
+  final int minExpectedCalls;
+  final int maxExpectedCalls;
+  final Function isDone;
+  final int testNum;
+  final String id;
+  int actualCalls = 0;
+  TestCase testCase;
+  bool complete;
+  static const sentinel = const _Sentinel();
 
-  _init(Function callback, Function shouldCallBack, Function isDone,
-       [expectedCalls = 0]) {
+  _SpreadArgsHelper(Function callback, int minExpected, int maxExpected,
+      Function isDone, String id)
+      : this.callback = callback,
+        minExpectedCalls = minExpected,
+        maxExpectedCalls = (maxExpected == 0 && minExpected > 0)
+            ? minExpected
+            : maxExpected,
+        this.isDone = isDone,
+        testNum = _currentTest,
+        this.id = _makeCallbackId(id, callback) {
     ensureInitialized();
     if (!(_currentTest >= 0 &&
            _currentTest < _tests.length &&
@@ -343,120 +324,121 @@ class _SpreadArgsHelper {
     assert(_currentTest >= 0 &&
            _currentTest < _tests.length &&
            _tests[_currentTest] != null);
-    _callback = callback;
-    _shouldCallBack = shouldCallBack;
-    _isDone = isDone;
-    _expectedCalls = expectedCalls;
-    _testNum = _currentTest;
-    _testCase = _tests[_currentTest];
-    if (expectedCalls > 0) {
-      _testCase.callbackFunctionsOutstanding++;
-    }
-  }
-
-  _SpreadArgsHelper(callback, shouldCallBack, isDone) {
-    _init(callback, shouldCallBack, isDone);
-  }
-
-  _SpreadArgsHelper.fixedCallCount(callback, expectedCalls) {
-    _init(callback, _checkCallCount, _allCallsDone, expectedCalls);
-  }
-
-  _SpreadArgsHelper.variableCallCount(callback, isDone) {
-    _init(callback, _always, isDone, 1);
-   }
-
-  _SpreadArgsHelper.optionalCalls(callback) {
-    _init(callback, _always, () => false, 0);
-   }
-
-  _after() {
-    if (_isDone()) {
-      _handleCallbackFunctionComplete(_testNum);
-    }
-  }
-
-  _allCallsDone() => _actualCalls == _expectedCalls;
-
-  _always() {
-    // Always run except if the test is done.
-    if (_testCase.isComplete) {
-      _testCase.error(
-          'Callback called after already being marked as done ($_actualCalls).',
-          '');
-      return false;
+    testCase = _tests[_currentTest];
+    if (isDone != null || minExpected > 0) {
+      testCase.callbackFunctionsOutstanding++;
+      complete = false;
     } else {
-      return true;
+      complete = true;
     }
   }
 
-  invoke([arg0 = _sentinel, arg1 = _sentinel, arg2 = _sentinel,
-          arg3 = _sentinel, arg4 = _sentinel]) {
-    return guardAsync(() {
-      ++_actualCalls;
-      if (!_shouldCallBack()) {
+  static _makeCallbackId(String id, Function callback) {
+    // Try to create a reasonable id.
+    if (id != null) {
+      return "$id ";
+    } else {
+      // If the callback is not an anonymous closure, try to get the
+      // name.
+      var fname = callback.toString();
+      var prefix = "Function '";
+      var pos = fname.indexOf(prefix);
+      if (pos > 0) {
+        pos += prefix.length;
+        var epos = fname.indexOf("'", pos);
+        if (epos > 0) {
+          return "${fname.substring(pos, epos)} ";
+        }
+      }
+    }
+    return '';
+  }
+
+  shouldCallBack() {
+    ++actualCalls;
+    if (testCase.isComplete) {
+      // Don't run if the test is done. We don't throw here as this is not
+      // the current test, but we do mark the old test as having an error
+      // if it previously passed.
+      if (testCase.result == PASS) {
+        testCase.error(
+            'Callback ${id}called ($actualCalls) after test case '
+            '${testCase.description} has already been marked as '
+            '${testCase.result}.', '');
+      }
+      return false;
+    } else if (maxExpectedCalls >= 0 && actualCalls > maxExpectedCalls) {
+      throw new TestFailure('Callback ${id}called more times than expected '
+                            '($maxExpectedCalls).');
+    }
+    return true;
+  }
+
+  after() {
+    if (!complete) {
+      if (minExpectedCalls > 0 && actualCalls < minExpectedCalls) return;
+      if (isDone != null && !isDone()) return;
+
+      // Mark this callback as complete and remove it from the testcase
+      // oustanding callback count; if that hits zero the testcase is done.
+      complete = true;
+      testCase.markCallbackComplete();
+    }
+  }
+
+  invoke([arg0 = sentinel, arg1 = sentinel, arg2 = sentinel,
+          arg3 = sentinel, arg4 = sentinel]) {
+    return _guardAsync(() {
+      if (!shouldCallBack()) {
         return;
-      } else if (arg0 == _sentinel) {
-        return _callback();
-      } else if (arg1 == _sentinel) {
-        return _callback(arg0);
-      } else if (arg2 == _sentinel) {
-        return _callback(arg0, arg1);
-      } else if (arg3 == _sentinel) {
-        return _callback(arg0, arg1, arg2);
-      } else if (arg4 == _sentinel) {
-        return _callback(arg0, arg1, arg2, arg3);
+      } else if (arg0 == sentinel) {
+        return callback();
+      } else if (arg1 == sentinel) {
+        return callback(arg0);
+      } else if (arg2 == sentinel) {
+        return callback(arg0, arg1);
+      } else if (arg3 == sentinel) {
+        return callback(arg0, arg1, arg2);
+      } else if (arg4 == sentinel) {
+        return callback(arg0, arg1, arg2, arg3);
       } else {
-        _testCase.error(
+        testCase.error(
            'unittest lib does not support callbacks with more than'
               ' 4 arguments.',
            '');
       }
     },
-    _after, _testNum);
+    after, testNum);
   }
 
   invoke0() {
-    return guardAsync(
+    return _guardAsync(
         () {
-          ++_actualCalls;
-          if (_shouldCallBack()) {
-            return _callback();
+          if (shouldCallBack()) {
+            return callback();
           }
         },
-        _after, _testNum);
+        after, testNum);
   }
 
   invoke1(arg1) {
-    return guardAsync(
+    return _guardAsync(
         () {
-          ++_actualCalls;
-          if (_shouldCallBack()) {
-            return _callback(arg1);
+          if (shouldCallBack()) {
+            return callback(arg1);
           }
         },
-        _after, _testNum);
+        after, testNum);
   }
 
   invoke2(arg1, arg2) {
-    return guardAsync(
+    return _guardAsync(
         () {
-          ++_actualCalls;
-          if (_shouldCallBack()) {
-            return _callback(arg1, arg2);
+          if (shouldCallBack()) {
+            return callback(arg1, arg2);
           }
         },
-        _after, _testNum);
-  }
-
-  /** Returns false if we exceded the number of expected calls. */
-  bool _checkCallCount() {
-    if (_actualCalls > _expectedCalls) {
-      _testCase.error('Callback called more times than expected '
-             '($_actualCalls > $_expectedCalls).', '');
-      return false;
-    }
-    return true;
+        after, testNum);
   }
 }
 
@@ -466,10 +448,13 @@ class _SpreadArgsHelper {
  * specified [count] times before it continues with the following test.  Using
  * [_expectAsync] will also ensure that errors that occur within [callback] are
  * tracked and reported. [callback] should take between 0 and 4 positional
- * arguments (named arguments are not supported here).
+ * arguments (named arguments are not supported here). [id] can be used
+ * to provide more descriptive error messages if the callback is called more
+ * often than expected.
  */
-Function _expectAsync(Function callback, [int count = 1]) {
-  return new _SpreadArgsHelper.fixedCallCount(callback, count).invoke;
+Function _expectAsync(Function callback,
+                     {int count: 1, int max: 0, String id}) {
+  return new _SpreadArgsHelper(callback, count, max, null, id).invoke;
 }
 
 /**
@@ -478,23 +463,33 @@ Function _expectAsync(Function callback, [int count = 1]) {
  * specified [count] times before it continues with the following test.  Using
  * [expectAsync0] will also ensure that errors that occur within [callback] are
  * tracked and reported. [callback] should take 0 positional arguments (named
- * arguments are not supported).
+ * arguments are not supported). [id] can be used to provide more
+ * descriptive error messages if the callback is called more often than
+ * expected. [max] can be used to specify an upper bound on the number of
+ * calls; if this is exceeded the test will fail (or be marked as in error if
+ * it was already complete). A value of 0 for [max] (the default) will set
+ * the upper bound to the same value as [count]; i.e. the callback should be
+ * called exactly [count] times. A value of -1 for [max] will mean no upper
+ * bound.
  */
 // TODO(sigmund): deprecate this API when issue 2706 is fixed.
-Function expectAsync0(Function callback, [int count = 1]) {
-  return new _SpreadArgsHelper.fixedCallCount(callback, count).invoke0;
+Function expectAsync0(Function callback,
+                     {int count: 1, int max: 0, String id}) {
+  return new _SpreadArgsHelper(callback, count, max, null, id).invoke0;
 }
 
 /** Like [expectAsync0] but [callback] should take 1 positional argument. */
 // TODO(sigmund): deprecate this API when issue 2706 is fixed.
-Function expectAsync1(Function callback, {int count: 1}) {
-  return new _SpreadArgsHelper.fixedCallCount(callback, count).invoke1;
+Function expectAsync1(Function callback,
+                     {int count: 1, int max: 0, String id}) {
+  return new _SpreadArgsHelper(callback, count, max, null, id).invoke1;
 }
 
 /** Like [expectAsync0] but [callback] should take 2 positional arguments. */
 // TODO(sigmund): deprecate this API when issue 2706 is fixed.
-Function expectAsync2(Function callback, [int count = 1]) {
-  return new _SpreadArgsHelper.fixedCallCount(callback, count).invoke2;
+Function expectAsync2(Function callback,
+                     {int count: 1, int max: 0, String id}) {
+  return new _SpreadArgsHelper(callback, count, max, null, id).invoke2;
 }
 
 /**
@@ -503,10 +498,12 @@ Function expectAsync2(Function callback, [int count = 1]) {
  * when it returns true will it continue with the following test. Using
  * [expectAsyncUntil] will also ensure that errors that occur within
  * [callback] are tracked and reported. [callback] should take between 0 and
- * 4 positional arguments (named arguments are not supported).
+ * 4 positional arguments (named arguments are not supported). [id] can be
+ * used to identify the callback in error messages (for example if it is called
+ * after the test case is complete).
  */
-Function _expectAsyncUntil(Function callback, Function isDone) {
-  return new _SpreadArgsHelper.variableCallCount(callback, isDone).invoke;
+Function _expectAsyncUntil(Function callback, Function isDone, {String id}) {
+  return new _SpreadArgsHelper(callback, 0, -1, isDone, id).invoke;
 }
 
 /**
@@ -515,27 +512,29 @@ Function _expectAsyncUntil(Function callback, Function isDone) {
  * when it returns true will it continue with the following test. Using
  * [expectAsyncUntil0] will also ensure that errors that occur within
  * [callback] are tracked and reported. [callback] should take 0 positional
- * arguments (named arguments are not supported).
+ * arguments (named arguments are not supported). [id] can be used to
+ * identify the callback in error messages (for example if it is called
+ * after the test case is complete).
  */
 // TODO(sigmund): deprecate this API when issue 2706 is fixed.
-Function expectAsyncUntil0(Function callback, Function isDone) {
-  return new _SpreadArgsHelper.variableCallCount(callback, isDone).invoke0;
+Function expectAsyncUntil0(Function callback, Function isDone, {String id}) {
+  return new _SpreadArgsHelper(callback, 0, -1, isDone, id).invoke0;
 }
 
 /**
  * Like [expectAsyncUntil0] but [callback] should take 1 positional argument.
  */
 // TODO(sigmund): deprecate this API when issue 2706 is fixed.
-Function expectAsyncUntil1(Function callback, Function isDone) {
-  return new _SpreadArgsHelper.variableCallCount(callback, isDone).invoke1;
+Function expectAsyncUntil1(Function callback, Function isDone, {String id}) {
+  return new _SpreadArgsHelper(callback, 0, -1, isDone, id).invoke1;
 }
 
 /**
  * Like [expectAsyncUntil0] but [callback] should take 2 positional arguments.
  */
 // TODO(sigmund): deprecate this API when issue 2706 is fixed.
-Function expectAsyncUntil2(Function callback, Function isDone) {
-  return new _SpreadArgsHelper.variableCallCount(callback, isDone).invoke2;
+Function expectAsyncUntil2(Function callback, Function isDone, {String id}) {
+  return new _SpreadArgsHelper(callback, 0, -1, isDone, id).invoke2;
 }
 
 /**
@@ -544,10 +543,11 @@ Function expectAsyncUntil2(Function callback, Function isDone) {
  * test. This is thus similar to expectAsync0. Use it to wrap any callbacks that
  * might optionally be called but may never be called during the test.
  * [callback] should take between 0 and 4 positional arguments (named arguments
- * are not supported).
+ * are not supported). [id] can be used to identify the callback in error
+ * messages (for example if it is called after the test case is complete).
  */
-Function _protectAsync(Function callback) {
-  return new _SpreadArgsHelper.optionalCalls(callback).invoke;
+Function _protectAsync(Function callback, {String id}) {
+  return new _SpreadArgsHelper(callback, 0, -1, null, id).invoke;
 }
 
 /**
@@ -556,27 +556,28 @@ Function _protectAsync(Function callback) {
  * test. This is thus similar to expectAsync0. Use it to wrap any callbacks that
  * might optionally be called but may never be called during the test.
  * [callback] should take 0 positional arguments (named arguments are not
- * supported).
+ * supported). [id] can be used to identify the callback in error
+ * messages (for example if it is called after the test case is complete).
  */
 // TODO(sigmund): deprecate this API when issue 2706 is fixed.
-Function protectAsync0(Function callback) {
-  return new _SpreadArgsHelper.optionalCalls(callback).invoke0;
+Function protectAsync0(Function callback, {String id}) {
+  return new _SpreadArgsHelper(callback, 0, -1, null, id).invoke0;
 }
 
 /**
  * Like [protectAsync0] but [callback] should take 1 positional argument.
  */
 // TODO(sigmund): deprecate this API when issue 2706 is fixed.
-Function protectAsync1(Function callback) {
-  return new _SpreadArgsHelper.optionalCalls(callback).invoke1;
+Function protectAsync1(Function callback, {String id}) {
+  return new _SpreadArgsHelper(callback, 0, -1, null, id).invoke1;
 }
 
 /**
  * Like [protectAsync0] but [callback] should take 2 positional arguments.
  */
 // TODO(sigmund): deprecate this API when issue 2706 is fixed.
-Function protectAsync2(Function callback) {
-  return new _SpreadArgsHelper.optionalCalls(callback).invoke2;
+Function protectAsync2(Function callback, {String id}) {
+  return new _SpreadArgsHelper(callback, 0, -1, null, id).invoke2;
 }
 
 /**
@@ -618,9 +619,10 @@ void group(String description, void body()) {
 /**
  * Register a [setUp] function for a test [group]. This function will
  * be called before each test in the group is run. Note that if groups
- * are nested only the most locally scoped [setUp] function will be run.
+ * are nested only the most locally scoped [setUpTest] function will be run.
  * [setUp] and [tearDown] should be called within the [group] before any
- * calls to [test].
+ * calls to [test]. The [setupTest] function can be asynchronous; in this
+ * case it must return a [Future].
  */
 void setUp(Function setupTest) {
   _testSetup = setupTest;
@@ -629,62 +631,21 @@ void setUp(Function setupTest) {
 /**
  * Register a [tearDown] function for a test [group]. This function will
  * be called after each test in the group is run. Note that if groups
- * are nested only the most locally scoped [tearDown] function will be run.
+ * are nested only the most locally scoped [teardownTest] function will be run.
  * [setUp] and [tearDown] should be called within the [group] before any
- * calls to [test].
+ * calls to [test]. The [teardownTest] function can be asynchronous; in this
+ * case it must return a [Future].
  */
 void tearDown(Function teardownTest) {
   _testTeardown = teardownTest;
 }
 
-/**
- * Called when one of the callback functions is done with all expected
- * calls.
- */
-void _handleCallbackFunctionComplete(testNum) {
-  // TODO (gram): we defer this to give the nextBatch recursive
-  // stack a chance to unwind. This is a temporary hack but
-  // really a bunch of code here needs to be fixed. We have a
-  // single array that is being iterated through by nextBatch(),
-  // which is recursively invoked in the case of async tests that
-  // run synchronously. Bad things can then happen.
-  _defer(() {
-    if (_currentTest != testNum) {
-      if (_tests[testNum].result == PASS) {
-        _tests[testNum].error("Unexpected extra callbacks", '');
-      }
-      return; // Extraneous callback.
-    }
-    if (_currentTest < _tests.length) {
-      final testCase = _tests[_currentTest];
-      --testCase.callbackFunctionsOutstanding;
-      if (testCase.callbackFunctionsOutstanding < 0) {
-        // TODO(gram): Check: Can this even happen?
-        testCase.error(
-            'More calls to _handleCallbackFunctionComplete() than expected.',
-             '');
-      } else if (testCase.callbackFunctionsOutstanding == 0) {
-        if (!testCase.isComplete) {
-          testCase.pass();
-        }
-        _nextTestCase();
-      }
-    }
-  });
-}
-
 /** Advance to the next test case. */
 void _nextTestCase() {
-  _currentTest++;
-  _testRunner();
-}
-
-/**
- * Temporary hack: expose old API.
- * TODO(gram) remove this when WebKit tests are working with new framework
- */
-void callbackDone() {
-  _handleCallbackFunctionComplete(_currentTest);
+  _defer(() {
+    _currentTest++;
+    _testRunner();
+  });
 }
 
 /**
@@ -695,28 +656,25 @@ void _reportTestError(String msg, String trace) {
  if (_currentTest < _tests.length) {
     final testCase = _tests[_currentTest];
     testCase.error(msg, trace);
-    if (testCase.callbackFunctionsOutstanding > 0) {
-      _nextTestCase();
-    }
   } else {
     _uncaughtErrorMessage = "$msg: $trace";
   }
 }
 
-/** Runs [callback] at the end of the event loop. */
+/**
+ * Runs [callback] at the end of the event loop. Note that we don't wrap
+ * the callback in guardAsync; this is for test framework functions which
+ * should not be throwing unexpected exceptions that end up failing test
+ * cases! Furthermore, we need the final exception to be thrown but not
+ * caught by the test framework if any test cases failed. However, tests
+ * that make use of a similar defer function *should* wrap the callback
+ * (as we do in unitttest_test.dart).
+ */
 _defer(void callback()) {
-  // Exploit isolate ports as a platform-independent mechanism to queue a
-  // message at the end of the event loop.
-  // TODO(sigmund): expose this functionality somewhere in our libraries.
-  final port = new ReceivePort();
-  port.receive((msg, reply) {
-    callback();
-    port.close();
-  });
-  port.toSendPort().send(null, null);
+  (new Future.immediate(null)).then((_) => callback());
 }
 
-rerunTests() {
+void rerunTests() {
   _uncaughtErrorMessage = null;
   _initialized = true; // We don't want to reset the test array.
   runTests();
@@ -737,11 +695,11 @@ void filterTests(testFilter) {
   } else if (testFilter is Function) {
     filterFunction = testFilter;
   }
-  _tests = _tests.where(filterFunction).toList();
+  _tests.retainMatching(filterFunction);
 }
 
 /** Runs all queued tests, one at a time. */
-runTests() {
+void runTests() {
   _currentTest = 0;
   _currentGroup = '';
 
@@ -758,11 +716,17 @@ runTests() {
 }
 
 /**
- * Run [tryBody] guarded in a try-catch block. If an exception is thrown, update
- * the [_currentTest] status accordingly.
+ * Run [tryBody] guarded in a try-catch block. If an exception is thrown, it is
+ * passed to the corresponding test.
+ *
+ * The value returned by [tryBody] (if any) is returned by [guardAsync].
  */
-guardAsync(tryBody, [finallyBody, testNum = -1]) {
-  if (testNum < 0) testNum = _currentTest;
+guardAsync(Function tryBody) {
+  return _guardAsync(tryBody, null, _currentTest);
+}
+
+_guardAsync(Function tryBody, Function finallyBody, int testNum) {
+  assert(testNum >= 0);
   try {
     return tryBody();
   } catch (e, trace) {
@@ -775,7 +739,7 @@ guardAsync(tryBody, [finallyBody, testNum = -1]) {
 /**
  * Registers that an exception was caught for the current test.
  */
-registerException(e, [trace]) {
+void registerException(e, [trace]) {
   _registerException(_currentTest, e, trace);
 }
 
@@ -784,15 +748,11 @@ registerException(e, [trace]) {
  */
 _registerException(testNum, e, [trace]) {
   trace = trace == null ? '' : trace.toString();
+  String message = (e is TestFailure) ? e.message : 'Caught $e';
   if (_tests[testNum].result == null) {
-    String message = (e is ExpectException) ? e.message : 'Caught $e';
     _tests[testNum].fail(message, trace);
   } else {
-    _tests[testNum].error('Caught $e', trace);
-  }
-  if (testNum == _currentTest &&
-      _tests[testNum].callbackFunctionsOutstanding > 0) {
-    _nextTestCase();
+    _tests[testNum].error(message, trace);
   }
 }
 
@@ -802,21 +762,21 @@ _registerException(testNum, e, [trace]) {
  * [done] or if it fails with an exception.
  */
 _nextBatch() {
-  while (_currentTest < _tests.length) {
+  while (true) {
+    if (_currentTest >= _tests.length) {
+      _completeTests();
+      break;
+    }
     final testCase = _tests[_currentTest];
-    guardAsync(() {
-      testCase.run();
-      if (!testCase.isComplete && testCase.callbackFunctionsOutstanding == 0) {
-        testCase.pass();
-      }
-    }, null, _currentTest);
-
-    if (!testCase.isComplete &&
-        testCase.callbackFunctionsOutstanding > 0) return;
+    var f = _guardAsync(testCase.run, null, _currentTest);
+    if (f != null) {
+      f.whenComplete(() {
+        _nextTestCase(); // Schedule the next test.
+      });
+      break;
+    }
     _currentTest++;
   }
-
-  _completeTests();
 }
 
 /** Publish results on the page and notify controller. */
@@ -844,20 +804,16 @@ String _fullSpec(String spec) {
   return _currentGroup != '' ? '$_currentGroup$groupSep$spec' : spec;
 }
 
-void fail(String message) {
-  throw new ExpectException(message);
-}
-
 /**
  * Lazily initializes the test library if not already initialized.
  */
-ensureInitialized() {
+void ensureInitialized() {
   if (_initialized) {
     return;
   }
   _initialized = true;
   // Hook our async guard into the matcher library.
-  wrapAsync = expectAsync1;
+  wrapAsync = (f, [id]) => expectAsync1(f, id: id);
 
   _tests = <TestCase>[];
   _testRunner = _nextBatch;
@@ -907,4 +863,4 @@ void enableTest(int testId) => _setTestEnabledState(testId, true);
 void disableTest(int testId) => _setTestEnabledState(testId, false);
 
 /** Signature for a test function. */
-typedef void TestFunction();
+typedef dynamic TestFunction();

@@ -7,6 +7,7 @@
  */
 library unittest_html_config;
 
+import 'dart:async';
 import 'dart:html';
 import 'unittest.dart';
 
@@ -17,17 +18,17 @@ void _showResultsInPage(int passed, int failed, int errors,
     document.body.innerHtml = "PASS";
   } else {
     var newBody = new StringBuffer();
-    newBody.add("<table class='unittest-table'><tbody>");
-    newBody.add(passed == results.length && uncaughtError == null
+    newBody.write("<table class='unittest-table'><tbody>");
+    newBody.write(passed == results.length && uncaughtError == null
         ? "<tr><td colspan='3' class='unittest-pass'>PASS</td></tr>"
         : "<tr><td colspan='3' class='unittest-fail'>FAIL</td></tr>");
 
     for (final test_ in results) {
-      newBody.add(_toHtml(test_));
+      newBody.write(_toHtml(test_));
     }
 
     if (uncaughtError != null) {
-        newBody.add('''<tr>
+        newBody.write('''<tr>
           <td>--</td>
           <td class="unittest-error">ERROR</td>
           <td>Uncaught error: $uncaughtError</td>
@@ -35,12 +36,12 @@ void _showResultsInPage(int passed, int failed, int errors,
     }
 
     if (passed == results.length && uncaughtError == null) {
-      newBody.add("""
+      newBody.write("""
           <tr><td colspan='3' class='unittest-pass'>
             All ${passed} tests passed
           </td></tr>""");
     } else {
-      newBody.add("""
+      newBody.write("""
           <tr><td colspan='3'>Total
             <span class='unittest-pass'>${passed} passed</span>,
             <span class='unittest-fail'>${failed} failed</span>
@@ -48,7 +49,7 @@ void _showResultsInPage(int passed, int failed, int errors,
             ${errors + (uncaughtError == null ? 0 : 1)} errors</span>
           </td></tr>""");
     }
-    newBody.add("</tbody></table>");
+    newBody.write("</tbody></table>");
     document.body.innerHtml = newBody.toString();
   }
 }
@@ -89,32 +90,28 @@ class HtmlConfiguration extends Configuration {
   final bool _isLayoutTest;
   HtmlConfiguration(this._isLayoutTest);
 
-  // TODO(rnystrom): Get rid of this if we get canonical closures for methods.
-  EventListener _onErrorClosure;
-  EventListener _onMessageClosure;
+  StreamSubscription<Event> _onErrorSubscription;
+  StreamSubscription<Event> _onMessageSubscription;
 
   void _installHandlers() {
-    if (_onErrorClosure == null) {
-      _onErrorClosure =
-          (e) => handleExternalError(e, '(DOM callback has errors)');
-      // Listen for uncaught errors.
-      window.on.error.add(_onErrorClosure);
+    if (_onErrorSubscription == null) {
+      _onErrorSubscription = window.onError.listen(
+        (e) => handleExternalError(e, '(DOM callback has errors)'));
     }
-    if (_onMessageClosure == null) {
-      _onMessageClosure = (e) => processMessage(e);
-      // Listen for errors from JS.
-      window.on.message.add(_onMessageClosure);
+    if (_onMessageSubscription == null) {
+      _onMessageSubscription = window.onMessage.listen(
+        (e) => processMessage(e));
     }
   }
 
   void _uninstallHandlers() {
-    if (_onErrorClosure != null) {
-      window.on.error.remove(_onErrorClosure);
-      _onErrorClosure = null;
+    if (_onErrorSubscription != null) {
+      _onErrorSubscription.cancel();
+      _onErrorSubscription = null;
     }
-    if (_onMessageClosure != null) {
-      window.on.message.remove(_onMessageClosure);
-      _onMessageClosure = null;
+    if (_onMessageSubscription != null) {
+      _onMessageSubscription.cancel();
+      _onMessageSubscription = null;
     }
   }
 
@@ -128,8 +125,6 @@ class HtmlConfiguration extends Configuration {
     _installHandlers();
     window.postMessage('unittest-suite-wait-for-done', '*');
   }
-
-  void onTestResult(TestCase testCase) {}
 
   void onSummary(int passed, int failed, int errors, List<TestCase> results,
       String uncaughtError) {

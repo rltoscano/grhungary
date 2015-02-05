@@ -7,7 +7,7 @@ class PageWidget {
   void set isVisible(bool isVisible) {
     if (isVisible) {
       _element.hidden = false;
-      window.setTimeout(() => _element.classes.remove("transparent"), 0);
+      window.setImmediate(() => _element.classes.remove("transparent"));
     } else {
       _element.classes.add("transparent");
     }

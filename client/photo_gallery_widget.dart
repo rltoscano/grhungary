@@ -84,7 +84,7 @@ class PhotoGalleryWidget extends PageWidget {
   void _setLightBoxVisible(bool isVisible) {
     if (isVisible) {
       _lightBox.hidden = false;
-      window.setTimeout(() {_lightBox.classes.remove("transparent");}, 0);
+      window.setImmediate(() {_lightBox.classes.remove("transparent");});
     } else {
       _lightBox.classes.add("transparent");
     }
@@ -121,7 +121,7 @@ class PhotoGalleryWidget extends PageWidget {
   }
 
   void _onThumbClick(Event e) {
-    int imgId = int.parse((e.target as Element).dataAttributes["gallery-id"]);
+    int imgId = int.parse((e.target as Element).dataset["gallery-id"]);
     showImage(imgId);
     js.scoped(() {
       js.context["_gaq"].push(
