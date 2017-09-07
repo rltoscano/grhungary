@@ -10,7 +10,6 @@ class MainWidget {
   MainWidget() {
     _pageWidgets = new Map<String, PageWidget>();
     _pageWidgets["welcome"] = new PageWidget();
-    _pageWidgets["our-story"] = new PageWidget();
     _pageWidgets["photo-gallery"] = new PhotoGalleryWidget();
     _pageWidgets["travel"] = new PageWidget();
     _pageWidgets["rsvp"] = new RsvpWidget();
